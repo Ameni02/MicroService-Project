@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="evaluations" />
+        <module name="documents" />
+        <module name="eureka" />
+        <module name="feedbacks" />
+        <module name="payment" />
+        <module name="planification" />
+        <module name="gateway" />
+      </profile>
+      <profile name="Annotation profile for trainings" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="trainings" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="documents" options="-parameters" />
+      <module name="eureka" options="-parameters" />
+      <module name="evaluations" options="-parameters" />
+      <module name="feedbacks" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="payment" options="-parameters" />
+      <module name="planification" options="-parameters" />
+      <module name="trainings" options="-parameters" />
+    </option>
+  </component>
+</project>
