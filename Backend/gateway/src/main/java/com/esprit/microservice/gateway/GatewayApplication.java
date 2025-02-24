@@ -19,7 +19,7 @@ public class GatewayApplication {
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route("trainings", r -> r.path("/training/**").uri("lb://TRAINING"))
-				.route("documents", r -> r.path("/documents/**").uri("lb://DOCUMENTS"))
+				.route("annonces", r -> r.path("/annonces/**").uri("lb://ANNONCES"))
 				.route("evaluations", r -> r.path("/evaluation/**").uri("lb://EVALUATION"))
 				.route("payment", r -> r.path("/payment/**").uri("lb://PAYMENT"))
 				.route("documents", r -> r.path("/documents/**").uri("lb://DOCUMENTS"))

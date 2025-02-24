@@ -5,29 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a496380-1332-4e77-8085-39bef1815ab8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/documents/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/documents/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/evaluations/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/feedbacks/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/feedbacks/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/feedbacks/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/feedbacks/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/gateway/src/main/java/com/esprit/microservice/gateway/GatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/gateway/src/main/java/com/esprit/microservice/gateway/GatewayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/gateway/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/payment/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/payment/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/payment/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/payment/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/planification/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/planification/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/planification/src/main/java/com/esprit/microservice/planification/PlanificationApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/planification/src/main/java/com/esprit/microservice/planification/PlanificationApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/planification/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/planification/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/trainings/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/trainings/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/trainings/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/trainings/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/gateway/src/main/java/com/esprit/microservice/gateway/GatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/gateway/src/main/java/com/esprit/microservice/gateway/GatewayApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/src/main/java/com/esprit/microservice/documents/DocumentsApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/src/test/java/com/esprit/microservice/documents/DocumentsApplicationTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -44,6 +42,10 @@
     &quot;accountId&quot;: &quot;aa43b0ea-c490-485c-ae9c-87ace8fe7b2f&quot;
   }
 }</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -58,6 +60,7 @@
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Spring Boot.DocumentsApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.EurekaApplication.executor&quot;: &quot;Run&quot;,
@@ -75,6 +78,13 @@
   }
 }</component>
   <component name="RunManager" selected="Spring Boot.DocumentsApplication">
+    <configuration name="AnnoncesApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="annonces" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.annonces.AnnoncesApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DocumentsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="documents" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.microservice.documents.DocumentsApplication" />
@@ -100,8 +110,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
+        <option value="jdk-22-openjdk-22-4caba194b151-f504ca98" />
       </set>
     </attachedChunks>
   </component>
@@ -117,6 +126,8 @@
       <workItem from="1739887561413" duration="137000" />
       <workItem from="1740232382424" duration="1161000" />
       <workItem from="1740234263151" duration="13000" />
+      <workItem from="1740430837133" duration="1079000" />
+      <workItem from="1740432411034" duration="103000" />
     </task>
     <servers />
   </component>
