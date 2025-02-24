@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a496380-1332-4e77-8085-39bef1815ab8" name="Changes" comment="" />
+    <list default="true" id="3a496380-1332-4e77-8085-39bef1815ab8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/documents/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/documents/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/evaluations/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/feedbacks/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/feedbacks/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/feedbacks/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/feedbacks/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/gateway/src/main/java/com/esprit/microservice/gateway/GatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/gateway/src/main/java/com/esprit/microservice/gateway/GatewayApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/payment/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/payment/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/payment/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/payment/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/planification/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/planification/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/planification/src/main/java/com/esprit/microservice/planification/PlanificationApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/planification/src/main/java/com/esprit/microservice/planification/PlanificationApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/planification/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/planification/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/trainings/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/trainings/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/trainings/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/trainings/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,6 +32,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Ameni02&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Ameni02/MicroService-Project.git&quot;,
+    &quot;accountId&quot;: &quot;aa43b0ea-c490-485c-ae9c-87ace8fe7b2f&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -20,13 +54,49 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.DocumentsApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.EurekaApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.GatewayApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zbira/OneDrive - ESPRIT/Bureau/microservice/MicroService-Project&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager" selected="Spring Boot.DocumentsApplication">
+    <configuration name="DocumentsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="documents" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.microservice.documents.DocumentsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EurekaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="eureka" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.microservice.eureka.EurekaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.microservice.gateway.GatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -45,6 +115,8 @@
       <updated>1739300595645</updated>
       <workItem from="1739300597420" duration="50000" />
       <workItem from="1739887561413" duration="137000" />
+      <workItem from="1740232382424" duration="1161000" />
+      <workItem from="1740234263151" duration="13000" />
     </task>
     <servers />
   </component>

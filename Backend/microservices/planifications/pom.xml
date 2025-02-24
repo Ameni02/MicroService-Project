@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.esprit.microservice</groupId>
-	<artifactId>feedbacks</artifactId>
+	<artifactId>planifications</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>feedbacks</name>
-	<description>feedbacks</description>
+	<name>planifications</name>
+	<description>planifications</description>
 	<url/>
 	<licenses>
 		<license/>
