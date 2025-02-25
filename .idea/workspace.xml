@@ -5,29 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a496380-1332-4e77-8085-39bef1815ab8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/java/com/esprit/microservice/evaluations/Controller/OptionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/java/com/esprit/microservice/evaluations/Controller/QuestionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/java/com/esprit/microservice/evaluations/Controller/QuizController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/java/com/esprit/microservice/evaluations/Entities/Options.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/java/com/esprit/microservice/evaluations/Entities/Question.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/java/com/esprit/microservice/evaluations/Entities/Quiz.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/java/com/esprit/microservice/evaluations/QuizDTO/QuizDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/java/com/esprit/microservice/evaluations/Repositories/OptionRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/java/com/esprit/microservice/evaluations/Repositories/QuizRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/java/com/esprit/microservice/evaluations/Services/OptionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/java/com/esprit/microservice/evaluations/Services/QuestionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/java/com/esprit/microservice/evaluations/Services/QuizService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/documents/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/documents/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/evaluations/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/evaluations/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/feedbacks/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/feedbacks/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/feedbacks/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/feedbacks/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/gateway/src/main/java/com/esprit/microservice/gateway/GatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/gateway/src/main/java/com/esprit/microservice/gateway/GatewayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/gateway/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/payment/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/payment/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/payment/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/payment/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/planification/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/planification/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/planification/src/main/java/com/esprit/microservice/planification/PlanificationApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/planification/src/main/java/com/esprit/microservice/planification/PlanificationApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/planification/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/planification/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/trainings/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/trainings/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/trainings/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/trainings/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/gateway/src/main/java/com/esprit/microservice/gateway/GatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/gateway/src/main/java/com/esprit/microservice/gateway/GatewayApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,6 +55,9 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2suLcY1aESImTYGqsRJwBVvDVR9" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -89,6 +99,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="EvaluationsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="evaluations" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.microservice.evaluations.EvaluationsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.microservice.gateway.GatewayApplication" />
@@ -100,8 +117,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
       </set>
     </attachedChunks>
   </component>
@@ -117,6 +134,8 @@
       <workItem from="1739887561413" duration="137000" />
       <workItem from="1740232382424" duration="1161000" />
       <workItem from="1740234263151" duration="13000" />
+      <workItem from="1740418363095" duration="1912000" />
+      <workItem from="1740443894556" duration="2862000" />
     </task>
     <servers />
   </component>
