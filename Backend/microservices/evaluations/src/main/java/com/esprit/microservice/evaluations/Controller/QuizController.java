@@ -1,5 +1,8 @@
 package com.esprit.microservice.evaluations.Controller;
 
+import com.esprit.microservice.evaluations.Entities.Quiz;
+import com.esprit.microservice.evaluations.QuizDTO.QuizDto;
+import com.esprit.microservice.evaluations.Services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,9 @@ public class QuizController {
     @Autowired
     private final QuizService quizService;
 
+    public QuizController(QuizService quizService) {
+        this.quizService = quizService;
+    }
 
 
     @PostMapping
@@ -48,33 +54,6 @@ public class QuizController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{quizId}/users/{userId}/submit")
-    public ResponseEntity<QuizResult> calculateScoreAndSave(
-            @PathVariable Long quizId,
-            @PathVariable Long userId,
-            @RequestBody List<AnswerSubmission> answers) {
-
-        QuizResult quizResult = quizService.calculateScoreAndSave(quizId, userId, answers);
-        return ResponseEntity.ok(quizResult);
-    }
-
-    @PostMapping("/questions")
-    public ResponseEntity<Quiz> addQuizWithQuestions(@RequestBody QuizDto quizDto) {
-        // Save the quiz along with its questions and options
-        Quiz quiz = quizService.addQuizWithQuestionsAndOptions(quizDto);
-        return ResponseEntity.ok(quiz);
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<List<QuizDtoWithoutQuestions>> getAllQuizzesWithoutQuestions() {
-        List<QuizDtoWithoutQuestions> quizzes = quizService.getAllQuizzesWithoutQuestions();
-        return ResponseEntity.ok(quizzes);
-    }
-
-    @GetMapping("/{id}/details")
-    public QuizDto getQuizWithDetails(@PathVariable Long id) {
-        return quizService.getQuizWithDetails(id);
-    }
 
 
 }
