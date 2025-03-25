@@ -1,0 +1,44 @@
+services:
+  eureka:
+    build: ./eureka
+    image:  amenizoubeir/prj-back-eureka:latest
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-network
+
+  gateway:
+    build: ./gateway
+    image:  amenizoubeir/prj-back-gateway:latest
+    container_name: gateway-service
+    ports:
+      - "8030:8030"
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+    networks:
+      - microservices-network
+
+  feedbacks-service:
+    build: ./microservices/feedbacks
+    image:  amenizoubeir/prj-back-feedbacks-service:latest
+    container_name: feedbacks-service
+    ports:
+      - "8063:8063"
+    depends_on:
+      - eureka
+      - gateway
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+    networks:
+      - microservices-network
+
+
+
+
+
+networks:
+  microservices-network:
+    driver: bridge
