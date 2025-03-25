@@ -8,6 +8,8 @@ import com.esprit.microservice.feedbacks.Repositories.FeedbackRepository;
 import com.esprit.microservice.feedbacks.Repositories.ResponseRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -21,8 +23,16 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/feedbacks")
+@RefreshScope
 public class FeedbackController {
 
+    @Value("${welcome.message}")
+    private String welcomeMessage;
+    //simple web service for testing
+    @GetMapping("/hello")
+    public String sayHello() {
+        return welcomeMessage;
+    }
     @Autowired
     private FeedbackRepository feedbackRepository;
 
@@ -31,6 +41,7 @@ public class FeedbackController {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
 
     // ==================== Feedback Endpoints ====================
 
