@@ -17,6 +17,12 @@ public class Feedback {
     @Size(max = 1000, message = "Comment cannot exceed 1000 characters")
     private String comment;
 
+
+    @Column(nullable = false)
+    private boolean isAnonymous = false;
+
+
+
     @Min(value = 1, message = "Rating must be at least 1")
     @Max(value = 5, message = "Rating cannot exceed 5")
     private int rating;
@@ -26,6 +32,7 @@ public class Feedback {
     @NotBlank(message = "Status cannot be blank")
     private String status;
 
+
     @NotNull(message = "Category cannot be null")
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -34,6 +41,25 @@ public class Feedback {
     @OneToMany(mappedBy = "feedback", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Response> responses;
 
+    @Column(nullable = false)
+    private boolean archived = false;
+
+    public boolean isAnonymous() {
+        return isAnonymous;
+    }
+
+    public void setAnonymous(boolean anonymous) {
+        isAnonymous = anonymous;
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
+    }
     // Getters and Setters
     public Long getId() {
         return id;
@@ -90,4 +116,6 @@ public class Feedback {
     public void setResponses(List<Response> responses) {
         this.responses = responses;
     }
+
+
 }

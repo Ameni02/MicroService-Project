@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ResponseRepository extends JpaRepository<Response, Long> {
     List<Response> findByFeedbackId(Long feedbackId);
+
 }

@@ -6,6 +6,15 @@ import com.esprit.microservice.feedbacks.Entities.Response;
 import com.esprit.microservice.feedbacks.Repositories.CategoryRepository;
 import com.esprit.microservice.feedbacks.Repositories.FeedbackRepository;
 import com.esprit.microservice.feedbacks.Repositories.ResponseRepository;
+import com.esprit.microservice.feedbacks.Services.FeedbackService;
+import com.esprit.microservice.feedbacks.dtos.AnonymousFeedbackDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,162 +22,155 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/feedbacks")
 @RefreshScope
+@Tag(name = "Feedback Management", description = "APIs for managing feedbacks, responses, and categories")
 public class FeedbackController {
+
+    private final FeedbackService feedbackService;
+
+    @Autowired
+    public FeedbackController(FeedbackService feedbackService) {
+        this.feedbackService = feedbackService;
+    }
 
     @Value("${welcome.message}")
     private String welcomeMessage;
-    //simple web service for testing
+
     @GetMapping("/hello")
     public String sayHello() {
         return welcomeMessage;
     }
-    @Autowired
-    private FeedbackRepository feedbackRepository;
 
-    @Autowired
-    private ResponseRepository responseRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-
-    // ==================== Feedback Endpoints ====================
-
-    // Get all feedbacks
+    // Feedback Endpoints
     @GetMapping
     public List<Feedback> getAllFeedbacks() {
-        return feedbackRepository.findAll();
+        return feedbackService.getAllFeedbacks();
     }
 
-    // Get a specific feedback by ID
     @GetMapping("/{feedbackId}")
-    public ResponseEntity<Feedback> getFeedbackById(@PathVariable Long feedbackId) {
-        return feedbackRepository.findById(feedbackId)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Feedback getFeedbackById(@PathVariable Long feedbackId) {
+        return feedbackService.getFeedbackById(feedbackId);
     }
 
-    // Create a new feedback
     @PostMapping
-    public ResponseEntity<?> createFeedback(@Valid @RequestBody Feedback feedback, BindingResult result) {
-        if (result.hasErrors()) {
-            return handleValidationErrors(result);
-        }
-        feedback.setSubmissionDate(LocalDateTime.now());
-        feedback.setStatus("New");
-        return ResponseEntity.ok(feedbackRepository.save(feedback));
+    @ResponseStatus(HttpStatus.CREATED)
+    public Feedback createFeedback(@Valid @RequestBody Feedback feedback) {
+        return feedbackService.createFeedback(feedback);
     }
 
-    // Update an existing feedback
     @PutMapping("/{feedbackId}")
-    public ResponseEntity<?> updateFeedback(@PathVariable Long feedbackId, @Valid @RequestBody Feedback updatedFeedback, BindingResult result) {
-        if (result.hasErrors()) {
-            return handleValidationErrors(result);
-        }
-        return feedbackRepository.findById(feedbackId)
-                .map(feedback -> {
-                    feedback.setComment(updatedFeedback.getComment());
-                    feedback.setRating(updatedFeedback.getRating());
-                    feedback.setStatus(updatedFeedback.getStatus());
-                    feedback.setCategory(updatedFeedback.getCategory());
-                    return ResponseEntity.ok(feedbackRepository.save(feedback));
-                })
-                .orElse(ResponseEntity.notFound().build());
+    public Feedback updateFeedback(@PathVariable Long feedbackId,
+                                   @Valid @RequestBody Feedback feedback) {
+        return feedbackService.updateFeedback(feedbackId, feedback);
     }
 
-    // Delete a feedback
     @DeleteMapping("/{feedbackId}")
-    public ResponseEntity<String> deleteFeedback(@PathVariable Long feedbackId) {
-        if (feedbackRepository.existsById(feedbackId)) {
-            feedbackRepository.deleteById(feedbackId);
-            return ResponseEntity.ok("Feedback deleted successfully");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Feedback not found with id: " + feedbackId);
-        }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteFeedback(@PathVariable Long feedbackId) {
+        feedbackService.deleteFeedback(feedbackId);
     }
 
-    // ==================== Response Endpoints ====================
+    // Statistics Endpoints
+    @GetMapping("/stats/status-count")
+    public Map<String, Long> getFeedbackCountByStatus() {
+        return feedbackService.getFeedbackCountByStatus();
+    }
 
-    // Get all responses for a specific feedback
+    @GetMapping("/stats/average-rating")
+    public Double getAverageRating() {
+        return feedbackService.getAverageRating();
+    }
+
+    // Response Endpoints
     @GetMapping("/{feedbackId}/responses")
-    public ResponseEntity<?> getResponsesForFeedback(@PathVariable Long feedbackId) {
-        if (!feedbackRepository.existsById(feedbackId)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Feedback not found with id: " + feedbackId);
-        }
-        return ResponseEntity.ok(responseRepository.findByFeedbackId(feedbackId));
+    public List<Response> getResponsesForFeedback(@PathVariable Long feedbackId) {
+        return feedbackService.getResponsesForFeedback(feedbackId);
     }
 
-    // Add a response to a specific feedback
     @PostMapping("/{feedbackId}/responses")
-    public ResponseEntity<?> addResponseToFeedback(@PathVariable Long feedbackId, @Valid @RequestBody Response response, BindingResult result) {
-        if (result.hasErrors()) {
-            return handleValidationErrors(result);
-        }
-        return feedbackRepository.findById(feedbackId)
-                .map(feedback -> {
-                    response.setFeedback(feedback);
-                    response.setResponseDate(LocalDateTime.now());
-                    return ResponseEntity.ok(responseRepository.save(response));
-                })
-                .orElse(ResponseEntity.notFound().build());
+    @ResponseStatus(HttpStatus.CREATED)
+    public Response addResponseToFeedback(@PathVariable Long feedbackId,
+                                          @Valid @RequestBody Response response) {
+        return feedbackService.addResponseToFeedback(feedbackId, response);
     }
 
-    // Delete a specific response
     @DeleteMapping("/responses/{responseId}")
-    public ResponseEntity<String> deleteResponse(@PathVariable Long responseId) {
-        if (responseRepository.existsById(responseId)) {
-            responseRepository.deleteById(responseId);
-            return ResponseEntity.ok("Response deleted successfully");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Response not found with id: " + responseId);
-        }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteResponse(@PathVariable Long responseId) {
+        feedbackService.deleteResponse(responseId);
     }
 
-    // ==================== Category Endpoints ====================
-
-    // Get all categories
+    // Category Endpoints
     @GetMapping("/categories")
     public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+        return feedbackService.getAllCategories();
     }
 
-    // Create a new category
     @PostMapping("/categories")
-    public ResponseEntity<?> createCategory(@Valid @RequestBody Category category, BindingResult result) {
-        if (result.hasErrors()) {
-            return handleValidationErrors(result);
-        }
-        return ResponseEntity.ok(categoryRepository.save(category));
+    @ResponseStatus(HttpStatus.CREATED)
+    public Category createCategory(@Valid @RequestBody Category category) {
+        return feedbackService.createCategory(category);
     }
 
-    // Delete a specific category
     @DeleteMapping("/categories/{categoryId}")
-    public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {
-        if (categoryRepository.existsById(categoryId)) {
-            categoryRepository.deleteById(categoryId);
-            return ResponseEntity.ok("Category deleted successfully");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category not found with id: " + categoryId);
-        }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCategory(@PathVariable Long categoryId) {
+        feedbackService.deleteCategory(categoryId);
     }
 
-    // ==================== Helper Methods ====================
+    @PostMapping("/{feedbackId}/archive")
+    public Feedback archiveFeedback(@PathVariable Long feedbackId) {
+        return feedbackService.archiveFeedback(feedbackId);
+    }
 
-    // Helper method to handle validation errors
-    private ResponseEntity<?> handleValidationErrors(BindingResult result) {
+    @PostMapping("/{feedbackId}/unarchive")
+    public Feedback unarchiveFeedback(@PathVariable Long feedbackId) {
+        return feedbackService.unarchiveFeedback(feedbackId);
+    }
+
+    @GetMapping("/archived")
+    public List<Feedback> getArchivedFeedbacks() {
+        return feedbackService.getArchivedFeedbacks();
+    }
+
+    @GetMapping("/active")
+    public List<Feedback> getActiveFeedbacks() {
+        return feedbackService.getActiveFeedbacks();
+    }
+
+
+    @PostMapping("/anonymous")
+    public ResponseEntity<Feedback> submitAnonymousFeedback(
+            @Valid @RequestBody AnonymousFeedbackDTO feedbackDTO) {
+        Feedback savedFeedback = feedbackService.submitAnonymousFeedback(feedbackDTO);
+        return new ResponseEntity<>(savedFeedback, HttpStatus.CREATED);
+    }
+
+
+
+
+
+
+
+
+
+    // Exception Handling
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
-        result.getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+                errors.put(error.getField(), error.getDefaultMessage()));
+        return ResponseEntity.badRequest().body(errors);
     }
 }
