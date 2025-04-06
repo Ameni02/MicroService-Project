@@ -20,7 +20,7 @@ public class Category {
 
     private String nom;
 
-    @OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Annonce> annonces;
 
     public Long getId() {

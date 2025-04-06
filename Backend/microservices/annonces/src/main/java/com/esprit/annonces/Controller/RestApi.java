@@ -2,6 +2,7 @@ package com.esprit.annonces.Controller;
 
 import com.esprit.annonces.Models.Annonce;
 import com.esprit.annonces.Models.Category;
+import com.esprit.annonces.Models.StatutAnnonce;
 import com.esprit.annonces.Service.ServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -74,4 +75,21 @@ public class RestApi {
     public List<Category> obtenirToutesLesCategories() {
         return service.obtenirToutesLesCategories();
     }
+    @GetMapping("/annonces/rechercher")
+    public List<Annonce> rechercherAnnonces(
+            @RequestParam(required = false) String titre,
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) StatutAnnonce statut) {
+        return service.rechercherAnnonces(titre, categoryId, statut);
+    }
+    @GetMapping("/annonces/aujourdhui")
+    public List<Annonce> getAnnoncesAujourdhui() {
+        return service.getAnnoncesAujourdhui();
+    }
+
+    @GetMapping("/annonces/semaines")
+    public List<Annonce> getAnnoncesCetteSemaine() {
+        return service.getAnnoncesCetteSemaine();
+    }
+
 }

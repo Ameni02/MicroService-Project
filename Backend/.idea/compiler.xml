@@ -9,28 +9,20 @@
         <module name="eureka" />
         <module name="gateway" />
       </profile>
-      <profile name="Annotation profile for trainings" enabled="true">
+      <profile name="Annotation profile for annonces" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
+        <module name="evaluations" />
+        <module name="annonces" />
+        <module name="documents" />
         <module name="trainings" />
-      </profile>
-      <profile name="Annotation profile for planifications" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
         <module name="feedbacks" />
         <module name="payment" />
         <module name="planifications" />
-        <module name="evaluations" />
-        <module name="documents" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -39,6 +31,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="annonces" options="-parameters" />
       <module name="documents" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="evaluations" options="-parameters" />
