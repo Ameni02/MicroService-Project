@@ -1,102 +1,91 @@
-require('dotenv').config();
 const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
 const cors = require('cors');
 const path = require('path');
+const Eureka = require('eureka-js-client').Eureka;
+const ConfigClient = require('./config/configClient');
+require('dotenv').config();
+
 const app = express();
-const http = require('http').createServer(app);
-const io = require('socket.io')(http, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST", "DELETE"]
-  }
-});
+const server = http.createServer(app);
+const io = socketIo(server);
+
+// Initialize config client
+const configClient = new ConfigClient('http://localhost:8888');
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Make io accessible to routes
+// Store Socket.IO instance in app
 app.set('io', io);
 
-// Database connection
-const { sequelize, testConnection } = require('./config/database');
+// Import routes
+const threadsRoutes = require('./routes/threads');
 
-// Import models
-const { Thread, Reply } = require('./models');
-
-// Routes
-const threadRoutes = require('./routes/threads');
-app.use('/api/threads', threadRoutes);
-
-// Health check endpoint
-app.get('/health', async (req, res) => {
-  try {
-    await sequelize.authenticate();
-    res.status(200).json({ 
-      status: 'ok',
-      timestamp: new Date().toISOString(),
-      uptime: process.uptime(),
-      database: 'connected'
-    });
-  } catch (error) {
-    res.status(500).json({ 
-      status: 'error',
-      timestamp: new Date().toISOString(),
-      uptime: process.uptime(),
-      database: 'disconnected',
-      error: error.message
-    });
-  }
-});
+// Use routes
+app.use('/api/threads', threadsRoutes);
 
 // Socket.IO connection handling
 io.on('connection', (socket) => {
-  console.log('New client connected');
-
-  socket.on('disconnect', () => {
-    console.log('Client disconnected');
-  });
-  
-  socket.on('error', (error) => {
-    console.error('Socket error:', error);
-  });
+    console.log('New client connected');
+    
+    socket.on('disconnect', () => {
+        console.log('Client disconnected');
+    });
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error('Error:', err.message);
-  console.error('Stack:', err.stack);
-  
-  const statusCode = err.statusCode || 500;
-  res.status(statusCode).json({ 
-    message: err.message || 'Something went wrong!',
-    status: 'error',
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
-  });
+// Database connection
+const { testConnection } = require('./models');
+
+// Eureka client configuration
+const eurekaClient = new Eureka({
+    instance: {
+        app: 'discussion-forum-service',
+        hostName: 'localhost',
+        ipAddr: '127.0.0.1',
+        port: {
+            '$': 5000,
+            '@enabled': true,
+        },
+        vipAddress: 'discussion-forum-service',
+        dataCenterInfo: {
+            '@class': 'com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo',
+            name: 'MyOwn',
+        },
+    },
+    eureka: {
+        host: 'localhost',
+        port: 8761,
+        servicePath: '/eureka/apps/',
+    },
 });
 
-// Global error handlers
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-});
+// Start the server
+async function startServer() {
+    try {
+        // Fetch configuration from config server
+        await configClient.fetchConfig();
+        const port = process.env.PORT || 3000;
 
-process.on('uncaughtException', (error) => {
-  console.error('Uncaught Exception:', error);
-  process.exit(1);
-});
+        // Connect to database
+        await testConnection();
 
-// Start server
-const PORT = process.env.PORT || 3000;
+        // Start Eureka client
+        eurekaClient.start();
 
-// Connect to database and start server
-testConnection().then(() => {
-  http.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-}).catch(err => {
-  console.error('Failed to start server:', err);
-  process.exit(1);
-});
+        // Start HTTP server
+        server.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        });
+    } catch (error) {
+        console.error('Failed to start server:', error);
+        process.exit(1);
+    }
+}
+
+startServer();
 
 module.exports = app;
