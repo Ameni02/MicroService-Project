@@ -25,8 +25,10 @@ public class GatewayApplication {
 				.route("documents", r -> r.path("/documents/**").uri("lb://DOCUMENTS"))
 				.route("planifications", r -> r.path("/planification/**").uri("lb://PLANIFICATION"))
 				.route("feedbacks", r -> r.path("/feedback/**").uri("lb://FEEDBACK"))
-
+				.route("dicussion-forum-service", r -> r.path("/forum/**").uri("lb://DISCUSSION-FORUM-SERVICE"))
 				.build();
+
+
 	}
 }
 

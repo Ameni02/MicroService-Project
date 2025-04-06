@@ -1,0 +1,71 @@
+services:
+  eureka:
+    build: ./eureka
+    image:  amenizoubeir/prj-back-eureka:latest
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-network
+
+  config-server:
+    build: ./config-server
+    image: amenizoubeir/prj-back-config-server:latest
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+    networks:
+      - microservices-network
+
+  gateway:
+    build: ./gateway
+    image:  amenizoubeir/prj-back-gateway:latest
+    container_name: gateway-service
+    ports:
+      - "8030:8030"
+    depends_on:
+      - eureka
+      - config-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+    networks:
+      - microservices-network
+
+  feedbacks-service:
+    build: ./microservices/feedbacks
+    image:  amenizoubeir/prj-back-feedbacks-service:latest
+    container_name: feedbacks-service
+    ports:
+      - "8063:8063"
+    depends_on:
+      - eureka
+      - gateway
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+    networks:
+      - microservices-network
+
+  discussion-forum-service:
+    build: ./microservices/discussion-forum-service
+    image: amenizoubeir/prj-back-discussion-forum-service:latest
+    container_name: discussion-forum-service
+    ports:
+      - "3000:3000"
+    depends_on:
+      - eureka
+      - gateway
+      - config-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
