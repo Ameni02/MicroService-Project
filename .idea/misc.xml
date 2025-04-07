@@ -8,6 +8,10 @@
         <option value="$PROJECT_DIR$/Backend/microservices/eureka/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/microservices/gateway/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/microservices/annonces/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/eureka/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/microservices/feedbacks/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/config-server/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

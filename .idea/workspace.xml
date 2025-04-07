@@ -5,19 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a496380-1332-4e77-8085-39bef1815ab8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Backend/config-server/src/main/resources/config/annonces.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/annonces/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Models/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Service/EmailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Service/ModerationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/gateway/src/main/java/com/esprit/microservice/gateway/GatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/gateway/src/main/java/com/esprit/microservice/gateway/GatewayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/src/main/java/com/esprit/microservice/documents/DocumentsApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/documents/src/test/java/com/esprit/microservice/documents/DocumentsApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/config-server/src/main/resources/config/gateway.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/config-server/src/main/resources/config/gateway.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/AnnoncesApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/AnnoncesApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Controller/RestApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Controller/RestApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Models/Annonce.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Models/Annonce.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Models/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Models/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Repo/AnnonceRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Repo/AnnonceRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Service/ServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Service/ServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +36,13 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,8 +59,14 @@
     &quot;accountId&quot;: &quot;aa43b0ea-c490-485c-ae9c-87ace8fe7b2f&quot;
   }
 }</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
   <component name="ProjectColorInfo">{
@@ -56,16 +79,32 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Docker.Backend.annonce-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.Backend.keycloak: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.Backend: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.config-server/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.discussion-forum-service/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.eureka/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.feedbacks/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.gateway/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.config-server [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.config-server [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.eureka [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.feedbacks [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.gateway [clean,install].executor&quot;: &quot;Run&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.AnnoncesApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.DocumentsApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.EurekaApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.FeedbacksApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.GatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/zbira/OneDrive - ESPRIT/Bureau/microservice/MicroService-Project&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -77,10 +116,17 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Spring Boot.DocumentsApplication">
+  <component name="RunManager" selected="Spring Boot.FeedbacksApplication">
     <configuration name="AnnoncesApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="annonces" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.annonces.AnnoncesApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="config-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.microservice.configserver.ConfigServerApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -99,6 +145,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="FeedbacksApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="feedbacks" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.microservice.feedbacks.FeedbacksApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.microservice.gateway.GatewayApplication" />
@@ -106,6 +159,72 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Backend: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="Backend/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="Backend.keycloak: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="keycloak" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="Backend/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="config-server/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="Backend/config-server/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="discussion-forum-service/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="Backend/microservices/discussion-forum-service/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="feedbacks/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="Backend/microservices/feedbacks/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.Backend: Compose Deployment" />
+        <item itemvalue="Docker.Backend.keycloak: Compose Deployment" />
+        <item itemvalue="Docker.config-server/Dockerfile" />
+        <item itemvalue="Docker.discussion-forum-service/Dockerfile" />
+        <item itemvalue="Docker.feedbacks/Dockerfile" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -128,6 +247,10 @@
       <workItem from="1740234263151" duration="13000" />
       <workItem from="1740430837133" duration="1079000" />
       <workItem from="1740432411034" duration="103000" />
+      <workItem from="1740514620528" duration="41000" />
+      <workItem from="1743978717813" duration="8073000" />
+      <workItem from="1744014088299" duration="3923000" />
+      <workItem from="1744030434631" duration="1300000" />
     </task>
     <servers />
   </component>
