@@ -43,7 +43,7 @@ public class Feedback {
     private List<Response> responses;
 
     @OneToMany(mappedBy = "feedback", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Translation> translations = new ArrayList<>();
+    private List<TranslationResult> translationResults = new ArrayList<>();
 
     @Column(nullable = false)
     private boolean archived = false;
@@ -121,14 +121,14 @@ public class Feedback {
         this.responses = responses;
     }
 
-    public List<Translation> getTranslations() {
-        if (translations == null) {
-            translations = new ArrayList<>();
+    public List<TranslationResult> getTranslations() {
+        if (translationResults == null) {
+            translationResults = new ArrayList<>();
         }
-        return translations;
+        return translationResults;
     }
 
-    public void setTranslations(List<Translation> translations) {
-        this.translations = translations;
+    public void setTranslations(List<TranslationResult> translationResults) {
+        this.translationResults = translationResults;
     }
 }

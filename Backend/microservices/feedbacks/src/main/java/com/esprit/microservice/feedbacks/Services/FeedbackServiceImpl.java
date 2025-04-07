@@ -3,13 +3,14 @@ package com.esprit.microservice.feedbacks.Services;
 import com.esprit.microservice.feedbacks.Entities.Category;
 import com.esprit.microservice.feedbacks.Entities.Feedback;
 import com.esprit.microservice.feedbacks.Entities.Response;
-import com.esprit.microservice.feedbacks.Entities.Translation;
+import com.esprit.microservice.feedbacks.Entities.TranslationResult;
 import com.esprit.microservice.feedbacks.Repositories.CategoryRepository;
 import com.esprit.microservice.feedbacks.Repositories.FeedbackRepository;
 import com.esprit.microservice.feedbacks.Repositories.ResponseRepository;
 import com.esprit.microservice.feedbacks.dtos.AnonymousFeedbackDTO;
-import com.esprit.microservice.feedbacks.Services.TranslationService;
 import jakarta.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class FeedbackServiceImpl implements FeedbackService {
-
+    private static final Logger logger = LoggerFactory.getLogger(FeedbackServiceImpl.class);
     private final FeedbackRepository feedbackRepository;
     private final ResponseRepository responseRepository;
     private final CategoryRepository categoryRepository;
@@ -59,25 +60,33 @@ public class FeedbackServiceImpl implements FeedbackService {
         }
 
         feedback.setSubmissionDate(LocalDateTime.now());
-        
+
         if (feedback.getStatus() == null) {
             feedback.setStatus("Pending");
         }
-        
-        Feedback savedFeedback = feedbackRepository.save(feedback);
-        
+
         try {
-            Translation translation = translationService.translateText(feedback.getComment(), "en");
+            // Save feedback first to get ID
+            Feedback savedFeedback = feedbackRepository.save(feedback);
+
+            // Create translation
+            TranslationResult translation = translationService.translateText(
+                    feedback.getComment(),
+                    "en" // Default to English
+            );
             translation.setFeedback(savedFeedback);
+
+            // Add to feedback's translations
             savedFeedback.getTranslations().add(translation);
+
             return feedbackRepository.save(savedFeedback);
+
         } catch (Exception e) {
-            // Log the translation error but continue with the saved feedback
-            // You might want to add proper logging here
-            return savedFeedback;
+            logger.error("Failed to create feedback with translation", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Failed to create feedback", e);
         }
     }
-
     @Override
     public Feedback updateFeedback(Long id, Feedback feedback) {
         if (feedback == null) {
@@ -97,9 +106,9 @@ public class FeedbackServiceImpl implements FeedbackService {
             try {
                 existingFeedback.getTranslations().clear();
                 
-                Translation translation = translationService.translateText(feedback.getComment(), "en");
-                translation.setFeedback(existingFeedback);
-                existingFeedback.getTranslations().add(translation);
+                TranslationResult translationResult = translationService.translateText(feedback.getComment(), "en");
+                translationResult.setFeedback(existingFeedback);
+                existingFeedback.getTranslations().add(translationResult);
             } catch (Exception e) {
                 // Log the translation error but continue with the update
                 // You might want to add proper logging here

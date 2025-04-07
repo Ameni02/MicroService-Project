@@ -1,32 +1,26 @@
 package com.esprit.microservice.feedbacks.Entities;
 
-import com.esprit.microservice.feedbacks.Entities.Feedback;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Translation {
+@Getter @Setter
+public class TranslationResult {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String originalText;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String translatedText;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
     private String sourceLanguage;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 10)
     private String targetLanguage;
 
     @ManyToOne(fetch = FetchType.LAZY)
