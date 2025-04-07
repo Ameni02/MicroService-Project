@@ -3,34 +3,22 @@ package com.esprit.microservice.feedbacks.Services;
 import com.esprit.microservice.feedbacks.Entities.Category;
 import com.esprit.microservice.feedbacks.Entities.Feedback;
 import com.esprit.microservice.feedbacks.Entities.Response;
+import com.esprit.microservice.feedbacks.Entities.Translation;
 import com.esprit.microservice.feedbacks.Repositories.CategoryRepository;
 import com.esprit.microservice.feedbacks.Repositories.FeedbackRepository;
 import com.esprit.microservice.feedbacks.Repositories.ResponseRepository;
 import com.esprit.microservice.feedbacks.dtos.AnonymousFeedbackDTO;
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
+import com.esprit.microservice.feedbacks.Services.TranslationService;
 import jakarta.transaction.Transactional;
-import org.hibernate.service.spi.ServiceException;
-import org.springdoc.core.converters.models.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.awt.print.Pageable;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static org.aspectj.lang.reflect.DeclareAnnotation.Kind.Field;
 
 @Service
 @Transactional
@@ -39,14 +27,17 @@ public class FeedbackServiceImpl implements FeedbackService {
     private final FeedbackRepository feedbackRepository;
     private final ResponseRepository responseRepository;
     private final CategoryRepository categoryRepository;
+    private final TranslationService translationService;
 
     @Autowired
     public FeedbackServiceImpl(FeedbackRepository feedbackRepository,
-                               ResponseRepository responseRepository,
-                               CategoryRepository categoryRepository) {
+                             ResponseRepository responseRepository,
+                             CategoryRepository categoryRepository,
+                             TranslationService translationService) {
         this.feedbackRepository = feedbackRepository;
         this.responseRepository = responseRepository;
         this.categoryRepository = categoryRepository;
+        this.translationService = translationService;
     }
 
     @Override
@@ -61,26 +52,61 @@ public class FeedbackServiceImpl implements FeedbackService {
                         HttpStatus.NOT_FOUND, "Feedback not found with id: " + id));
     }
 
-
-
     @Override
     public Feedback createFeedback(Feedback feedback) {
+        if (feedback == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Feedback cannot be null");
+        }
+
         feedback.setSubmissionDate(LocalDateTime.now());
-        feedback.setStatus("New");
-        return feedbackRepository.save(feedback);
+        
+        if (feedback.getStatus() == null) {
+            feedback.setStatus("Pending");
+        }
+        
+        Feedback savedFeedback = feedbackRepository.save(feedback);
+        
+        try {
+            Translation translation = translationService.translateText(feedback.getComment(), "en");
+            translation.setFeedback(savedFeedback);
+            savedFeedback.getTranslations().add(translation);
+            return feedbackRepository.save(savedFeedback);
+        } catch (Exception e) {
+            // Log the translation error but continue with the saved feedback
+            // You might want to add proper logging here
+            return savedFeedback;
+        }
     }
 
     @Override
-    public Feedback updateFeedback(Long id, Feedback feedbackDetails) {
-        Feedback feedback = feedbackRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Feedback not found with id: " + id));
+    public Feedback updateFeedback(Long id, Feedback feedback) {
+        if (feedback == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Feedback cannot be null");
+        }
 
-        feedback.setComment(feedbackDetails.getComment());
-        feedback.setRating(feedbackDetails.getRating());
-        feedback.setStatus(feedbackDetails.getStatus());
-        feedback.setCategory(feedbackDetails.getCategory());
-        return feedbackRepository.save(feedback);
+        Feedback existingFeedback = getFeedbackById(id);
+        
+        existingFeedback.setComment(feedback.getComment());
+        existingFeedback.setRating(feedback.getRating());
+        existingFeedback.setStatus(feedback.getStatus());
+        existingFeedback.setAnonymous(feedback.isAnonymous());
+        existingFeedback.setArchived(feedback.isArchived());
+        existingFeedback.setCategory(feedback.getCategory());
+        
+        if (!existingFeedback.getComment().equals(feedback.getComment())) {
+            try {
+                existingFeedback.getTranslations().clear();
+                
+                Translation translation = translationService.translateText(feedback.getComment(), "en");
+                translation.setFeedback(existingFeedback);
+                existingFeedback.getTranslations().add(translation);
+            } catch (Exception e) {
+                // Log the translation error but continue with the update
+                // You might want to add proper logging here
+            }
+        }
+        
+        return feedbackRepository.save(existingFeedback);
     }
 
     @Override
@@ -101,14 +127,13 @@ public class FeedbackServiceImpl implements FeedbackService {
         return responseRepository.findByFeedbackId(feedbackId);
     }
 
-
-
     @Override
     public Response addResponseToFeedback(Long feedbackId, Response response) {
-        Feedback feedback = feedbackRepository.findById(feedbackId)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Feedback not found with id: " + feedbackId));
+        if (response == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Response cannot be null");
+        }
 
+        Feedback feedback = getFeedbackById(feedbackId);
         response.setFeedback(feedback);
         response.setResponseDate(LocalDateTime.now());
         return responseRepository.save(response);
@@ -128,9 +153,11 @@ public class FeedbackServiceImpl implements FeedbackService {
         return categoryRepository.findAll();
     }
 
-
     @Override
     public Category createCategory(Category category) {
+        if (category == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Category cannot be null");
+        }
         return categoryRepository.save(category);
     }
 
@@ -145,37 +172,28 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public Map<String, Long> getFeedbackCountByStatus() {
-        Map<String, Long> statusCounts = new HashMap<>();
-        statusCounts.put("New", feedbackRepository.countByStatus("New"));
-        statusCounts.put("InProgress", feedbackRepository.countByStatus("InProgress"));
-        statusCounts.put("Resolved", feedbackRepository.countByStatus("Resolved"));
-        return statusCounts;
+        return feedbackRepository.findAll().stream()
+                .collect(Collectors.groupingBy(Feedback::getStatus, Collectors.counting()));
     }
 
     @Override
     public Double getAverageRating() {
-        return feedbackRepository.getAverageRating();
+        return feedbackRepository.findAll().stream()
+                .mapToInt(Feedback::getRating)
+                .average()
+                .orElse(0.0);
     }
-
-
-    //archive
 
     @Override
     public Feedback archiveFeedback(Long id) {
-        Feedback feedback = feedbackRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Feedback not found with id: " + id));
-
+        Feedback feedback = getFeedbackById(id);
         feedback.setArchived(true);
         return feedbackRepository.save(feedback);
     }
 
     @Override
     public Feedback unarchiveFeedback(Long id) {
-        Feedback feedback = feedbackRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Feedback not found with id: " + id));
-
+        Feedback feedback = getFeedbackById(id);
         feedback.setArchived(false);
         return feedbackRepository.save(feedback);
     }
@@ -190,22 +208,22 @@ public class FeedbackServiceImpl implements FeedbackService {
         return feedbackRepository.findByArchivedFalse();
     }
 
+    @Override
+    public Feedback submitAnonymousFeedback(AnonymousFeedbackDTO feedbackDTO) {
+        if (feedbackDTO == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Feedback DTO cannot be null");
+        }
 
+        // Get the category from the ID
+        Category category = categoryRepository.findById(feedbackDTO.getCategoryId())
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Category not found with id: " + feedbackDTO.getCategoryId()));
 
-
-    public Feedback submitAnonymousFeedback(AnonymousFeedbackDTO dto) {
         Feedback feedback = new Feedback();
-        feedback.setComment(dto.getComment());
-        feedback.setRating(dto.getRating());
+        feedback.setComment(feedbackDTO.getComment());
+        feedback.setRating(feedbackDTO.getRating());
         feedback.setAnonymous(true);
-        feedback.setSubmissionDate(LocalDateTime.now());
-        feedback.setStatus("New");
-
-        Category category = categoryRepository.findById(dto.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
         feedback.setCategory(category);
-
-        return feedbackRepository.save(feedback);
+        return createFeedback(feedback);
     }
-
 }

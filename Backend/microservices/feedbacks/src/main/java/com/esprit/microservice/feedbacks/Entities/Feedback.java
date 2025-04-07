@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -40,6 +41,9 @@ public class Feedback {
 
     @OneToMany(mappedBy = "feedback", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Response> responses;
+
+    @OneToMany(mappedBy = "feedback", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Translation> translations = new ArrayList<>();
 
     @Column(nullable = false)
     private boolean archived = false;
@@ -117,5 +121,14 @@ public class Feedback {
         this.responses = responses;
     }
 
+    public List<Translation> getTranslations() {
+        if (translations == null) {
+            translations = new ArrayList<>();
+        }
+        return translations;
+    }
 
+    public void setTranslations(List<Translation> translations) {
+        this.translations = translations;
+    }
 }
