@@ -1,0 +1,130 @@
+services:
+  eureka:
+    build: ./eureka
+    image:  medaminekalai/prj-back-eureka:latest
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-network
+
+  config-server:
+    build: ./config-server
+    image: medaminekalai/prj-back-config-server:latest
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+    networks:
+      - microservices-network
+
+  gateway:
+    build: ./gateway
+    image:  medaminekalai/prj-back-gateway:latest
+    container_name: gateway-service
+    ports:
+      - "8030:8030"
+    depends_on:
+      - eureka
+      - config-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+    networks:
+      - microservices-network
+
+  feedbacks-service:
+    build: ./microservices/feedbacks
+    image:  medaminekalai/prj-back-feedbacks-service:latest
+    container_name: feedbacks-service
+    ports:
+      - "8063:8063"
+    depends_on:
+      - eureka
+      - gateway
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+    networks:
+      - microservices-network
+
+  discussion-forum-service:
+    build: ./microservices/discussion-forum-service
+    image: medaminekalai/prj-back-discussion-forum-service:latest
+    container_name: discussion-forum-service
+    ports:
+      - "3000:3000"
+    depends_on:
+      - eureka
+      - gateway
+      - config-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+    networks:
+      - microservices-network
+  annonce-service:
+    build: ./microservices/annonces
+    image: medaminekalai/prj-back-annonce-service:latest
+    container_name: annonce-service
+    ports:
+      - "8062:8062"
+    depends_on:
+      - eureka
+      - config-server
+      - gateway
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+    networks:
+      - microservices-network
+    evaluations-service:
+      build: ./microservices/evaluations
+      image: sekribalkis/evaluation-springapp:latest
+      container_name: evaluation-service
+      ports:
+        - "8099:8099"
+      depends_on:
+        - eureka
+        - gateway
+        - config-server
+      environment:
+        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      networks:
+        - microservices-network
+  keycloak-db:
+    image: postgres:15
+    container_name: keycloak-db
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+    networks:
+      - microservices-network
+    ports:
+      - "5432:5432"
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.1
+    container_name: keycloak
+    command:
+      - start-dev
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak
+    depends_on:
+      - keycloak-db
+    ports:
+      - "8080:8080"
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
