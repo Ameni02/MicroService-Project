@@ -1,0 +1,300 @@
+<main class="main">
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero section light-background">
+
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-5">
+        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+          <h2>eStartup</h2>
+          <p>Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+          <div class="d-flex">
+            <a href="#about" class="btn-get-started">Get Started</a>
+            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2">
+          <img src="assets/img/hero-img.png" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
+      <div class="container position-relative">
+        <div class="row gy-4 mt-5">
+
+          <div class="col-xl-3 col-md-6" *ngFor="let box of iconBoxes">
+            <div class="icon-box">
+              <div class="icon"><i class="bi" [class]="box.icon"></i></div>
+              <h4 class="title"><a href="" class="stretched-link">{{box.title}}</a></h4>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </section><!-- /Hero Section -->
+
+  <!-- About Section -->
+  <section id="about" class="about section">
+
+    <div class="container">
+
+      <div class="row gy-4">
+
+        <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+          <p class="who-we-are">Who We Are</p>
+          <h3>Unleashing Potential with Creative Strategy</h3>
+          <p class="fst-italic">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+          </p>
+          <ul>
+            <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
+            <li><i class="bi bi-check-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
+            <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+          </ul>
+          <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+        </div>
+
+        <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
+          <div class="row gy-4">
+            <div class="col-lg-6">
+              <img src="assets/img/about-company-1.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="col-lg-6">
+              <div class="row gy-4">
+                <div class="col-lg-12">
+                  <img src="assets/img/about-company-2.jpg" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-12">
+                  <img src="assets/img/about-company-3.jpg" class="img-fluid" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- /About Section -->
+
+  <!-- Services Section -->
+  <section id="services" class="services section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Services</h2>
+      <div><span>Check Our</span> <span class="description-title">Services</span></div>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+      <div class="row gy-4">
+
+        <div class="col-lg-4 col-md-6" *ngFor="let service of services" data-aos="fade-up" [attr.data-aos-delay]="service.delay">
+          <div class="service-item position-relative">
+            <div class="icon">
+              <i class="bi" [class]="service.icon"></i>
+            </div>
+            <a href="service-details.html" class="stretched-link">
+              <h3>{{service.title}}</h3>
+            </a>
+            <p>{{service.description}}</p>
+          </div>
+        </div><!-- End Service Item -->
+
+      </div>
+
+    </div>
+
+  </section><!-- /Services Section -->
+
+  <!-- Features Section -->
+  <section id="features" class="features section light-background">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Features</h2>
+      <div><span>Check Our</span> <span class="description-title">Features</span></div>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+      <div class="row gy-5 justify-content-between">
+
+        <div class="col-xl-5" data-aos="zoom-out" data-aos-delay="100">
+          <img src="assets/img/features.svg" class="img-fluid" alt="">
+        </div>
+
+        <div class="col-xl-6 d-flex">
+          <div class="row align-self-center gy-4">
+
+            <div class="col-md-6" *ngFor="let feature of features; let i = index" data-aos="fade-up" [attr.data-aos-delay]="200 + (i * 100)">
+              <div class="feature-box d-flex align-items-center">
+                <i class="bi bi-check"></i>
+                <h3>{{feature.title}}</h3>
+              </div>
+            </div><!-- End Feature Item -->
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section><!-- /Features Section -->
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Pricing</h2>
+      <div><span>Check Our</span> <span class="description-title">Pricing</span></div>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+      <div class="row gy-4">
+
+        <div class="col-lg-3 col-md-6" *ngFor="let plan of pricingPlans; let i = index" data-aos="zoom-in" [attr.data-aos-delay]="100 + (i * 100)">
+          <div class="pricing-tem" [class.featured]="plan.featured">
+            <span *ngIf="plan.featured" class="featured">Featured</span>
+            <h3 [style.color]="plan.color">{{plan.name}}</h3>
+            <div class="price"><sup>$</sup>{{plan.price}}<span> / mo</span></div>
+            <div class="icon">
+              <i class="bi" [class]="plan.icon" [style.color]="plan.color"></i>
+            </div>
+            <ul>
+              <li *ngFor="let feature of plan.features" [class.na]="!feature.included">{{feature.text}}</li>
+            </ul>
+            <a href="#" class="btn-buy">Buy Now</a>
+          </div>
+        </div><!-- End Pricing Item -->
+
+      </div><!-- End pricing row -->
+
+    </div>
+
+  </section><!-- /Pricing Section -->
+
+  <!-- Faq Section -->
+  <section id="faq" class="faq section light-background">
+
+    <div class="container">
+
+      <div class="row gy-4">
+
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="content px-xl-5">
+            <h3><span>Frequently Asked </span><strong>Questions</strong></h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="faq-container">
+            <div class="faq-item" *ngFor="let faq of faqs; let i = index" [class.faq-active]="i === 0">
+              <h3><span class="num">{{i + 1}}.</span> <span>{{faq.question}}</span></h3>
+              <div class="faq-content">
+                <p>{{faq.answer}}</p>
+              </div>
+              <i class="faq-toggle bi bi-chevron-right"></i>
+            </div><!-- End Faq item-->
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </section><!-- /Faq Section -->
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Contact</h2>
+      <div><span>Need Help?</span> <span class="description-title">Contact Us</span></div>
+    </div><!-- End Section Title -->
+
+    <div class="container" data-aos="fade" data-aos-delay="100">
+
+      <div class="row gy-4">
+
+        <div class="col-lg-4">
+          <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+            <i class="bi bi-geo-alt flex-shrink-0"></i>
+            <div>
+              <h3>Address</h3>
+              <p>A108 Adam Street, New York, NY 535022</p>
+            </div>
+          </div><!-- End Info Item -->
+
+          <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+            <i class="bi bi-telephone flex-shrink-0"></i>
+            <div>
+              <h3>Call Us</h3>
+              <p>+1 5589 55488 55</p>
+            </div>
+          </div><!-- End Info Item -->
+
+          <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+            <i class="bi bi-envelope flex-shrink-0"></i>
+            <div>
+              <h3>Email Us</h3>
+              <p>infocom</p>
+            </div>
+          </div><!-- End Info Item -->
+
+        </div>
+
+        <div class="col-lg-8">
+          <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <div class="row gy-4">
+
+              <div class="col-md-6">
+                <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+              </div>
+
+              <div class="col-md-6 ">
+                <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+              </div>
+
+              <div class="col-md-12">
+                <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+              </div>
+
+              <div class="col-md-12">
+                <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+              </div>
+
+              <div class="col-md-12 text-center">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                <button type="submit">Send Message</button>
+              </div>
+
+            </div>
+          </form>
+        </div><!-- End Contact Form -->
+
+      </div>
+
+    </div>
+
+  </section><!-- /Contact Section -->
+
+</main>

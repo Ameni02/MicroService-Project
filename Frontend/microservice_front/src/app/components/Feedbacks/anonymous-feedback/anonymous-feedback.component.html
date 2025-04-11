@@ -1,0 +1,26 @@
+<!-- anonymous-feedback.component.html -->
+<div class="anonymous-feedback-container">
+  <div class="header">
+    <h2>Submit Anonymous Feedback</h2>
+    <p class="subtitle">Your feedback is valuable to us. Please share your thoughts anonymously.</p>
+  </div>
+
+  <div *ngIf="success" class="success-message">
+    <div class="success-icon">✓</div>
+    <h3>Thank You!</h3>
+    <p>Your feedback has been submitted successfully.</p>
+    <p>You will be redirected to the home page shortly...</p>
+  </div>
+
+  <div *ngIf="!success">
+    <app-feedback-form
+      [isAnonymous]="true"
+   
+      (cancel)="onCancel()">
+    </app-feedback-form>
+
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+  </div>
+</div>

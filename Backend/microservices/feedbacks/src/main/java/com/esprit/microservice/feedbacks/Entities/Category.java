@@ -1,8 +1,10 @@
 package com.esprit.microservice.feedbacks.Entities;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,8 +21,9 @@ public class Category {
     @Size(max = 500, message = "Description cannot exceed 500 characters")
     private String description;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Feedback> feedbacks;
+    @OneToMany(mappedBy = "category")
+    @JsonIgnoreProperties("category") // Add this annotation
+    private List<Feedback> feedbacks = new ArrayList<>();
 
     // Getters and Setters
     public Long getId() {

@@ -32,6 +32,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/feedbacks")
+@CrossOrigin(origins = "http://localhost:4200")
 @RefreshScope
 @Tag(name = "Feedback Management", description = "APIs for managing feedbacks, responses, and categories")
 public class FeedbackController {

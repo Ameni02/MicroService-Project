@@ -1,8 +1,10 @@
 package com.esprit.microservice.feedbacks.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +20,8 @@ public class Feedback {
     @Size(max = 1000, message = "Comment cannot exceed 1000 characters")
     private String comment;
 
-
     @Column(nullable = false)
     private boolean isAnonymous = false;
-
-
 
     @Min(value = 1, message = "Rating must be at least 1")
     @Max(value = 5, message = "Rating cannot exceed 5")
@@ -32,38 +31,22 @@ public class Feedback {
 
     @NotBlank(message = "Status cannot be blank")
     private String status;
-
-
     @NotNull(message = "Category cannot be null")
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @JsonIgnoreProperties("feedbacks") // Add this annotation
     private Category category;
 
     @OneToMany(mappedBy = "feedback", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Response> responses;
 
     @OneToMany(mappedBy = "feedback", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore  // Prevents infinite recursion in bidirectional relationship
     private List<TranslationResult> translationResults = new ArrayList<>();
 
     @Column(nullable = false)
     private boolean archived = false;
 
-    public boolean isAnonymous() {
-        return isAnonymous;
-    }
-
-    public void setAnonymous(boolean anonymous) {
-        isAnonymous = anonymous;
-    }
-
-    public boolean isArchived() {
-        return archived;
-    }
-
-
-    public void setArchived(boolean archived) {
-        this.archived = archived;
-    }
     // Getters and Setters
     public Long getId() {
         return id;
@@ -79,6 +62,14 @@ public class Feedback {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public boolean isAnonymous() {
+        return isAnonymous;
+    }
+
+    public void setAnonymous(boolean anonymous) {
+        isAnonymous = anonymous;
     }
 
     public int getRating() {
@@ -113,6 +104,7 @@ public class Feedback {
         this.category = category;
     }
 
+    @JsonIgnore  // Alternative placement for responses if needed
     public List<Response> getResponses() {
         return responses;
     }
@@ -121,6 +113,7 @@ public class Feedback {
         this.responses = responses;
     }
 
+    @JsonIgnore  // Alternative placement for translations if needed
     public List<TranslationResult> getTranslations() {
         if (translationResults == null) {
             translationResults = new ArrayList<>();
@@ -130,5 +123,13 @@ public class Feedback {
 
     public void setTranslations(List<TranslationResult> translationResults) {
         this.translationResults = translationResults;
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 }

@@ -30,15 +30,17 @@ public class FeedbackServiceImpl implements FeedbackService {
     private final CategoryRepository categoryRepository;
     private final TranslationService translationService;
 
+
     @Autowired
     public FeedbackServiceImpl(FeedbackRepository feedbackRepository,
-                             ResponseRepository responseRepository,
-                             CategoryRepository categoryRepository,
-                             TranslationService translationService) {
+                               ResponseRepository responseRepository,
+                               CategoryRepository categoryRepository,
+                               TranslationService translationService) {
         this.feedbackRepository = feedbackRepository;
         this.responseRepository = responseRepository;
         this.categoryRepository = categoryRepository;
         this.translationService = translationService;
+
     }
 
     @Override
@@ -52,6 +54,7 @@ public class FeedbackServiceImpl implements FeedbackService {
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Feedback not found with id: " + id));
     }
+
 
     @Override
     public Feedback createFeedback(Feedback feedback) {

@@ -1,0 +1,77 @@
+<div class="feedback-list-container">
+  <div class="section-header">
+    <h2>Active Feedbacks</h2>
+    <div class="action-buttons">
+      <button class="btn btn-primary" (click)="createFeedback()">
+        <i class="bi bi-plus-circle"></i> New Feedback
+      </button>
+      <button class="btn btn-secondary" (click)="showAnonymousForm = true" [disabled]="showAnonymousForm">
+        <i class="bi bi-incognito"></i> Anonymous Feedback
+      </button>
+    </div>
+  </div>
+
+  <!-- Anonymous Feedback Form -->
+  <div *ngIf="showAnonymousForm" class="anonymous-feedback-form">
+    <h3>Submit Anonymous Feedback</h3>
+    <div class="form-group">
+      <label for="comment">Comment:</label>
+      <textarea id="comment" [(ngModel)]="anonymousFeedbackData.comment" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Rating:</label>
+      <div class="rating-input">
+        <span *ngFor="let star of [1,2,3,4,5]" 
+               (click)="anonymousFeedbackData.rating = star"
+               [class.active]="star <= anonymousFeedbackData.rating">
+          ★
+        </span>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" (click)="submitAnonymousFeedback()">Submit</button>
+      <button class="btn btn-secondary" (click)="cancelAnonymousFeedback()">Cancel</button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading feedbacks...</p>
+  </div>
+
+  <div *ngIf="error" class="error-container">
+    <div class="alert alert-danger">{{ error }}</div>
+    <button class="btn btn-primary" (click)="loadFeedbacks()">Try Again</button>
+  </div>
+
+  <div *ngIf="!loading && !error && activeFeedbacks.length === 0" class="no-feedbacks">
+    <p>No active feedbacks available.</p>
+  </div>
+
+  <div *ngIf="!loading && !error && activeFeedbacks.length > 0" class="feedbacks-grid">
+    <div *ngFor="let feedback of activeFeedbacks" class="feedback-card" (click)="viewFeedback(feedback.id)">
+      <div class="feedback-header">
+        <h3>{{ feedback.name || 'Anonymous' }}</h3>
+        <span class="status-badge" [ngClass]="{
+          'status-open': feedback.status === 'OPEN',
+          'status-in-progress': feedback.status === 'IN_PROGRESS',
+          'status-resolved': feedback.status === 'RESOLVED'
+        }">
+          {{ feedback.status }}
+        </span>
+      </div>
+      
+      <div class="feedback-content">
+        <p class="feedback-comment">{{ feedback.comment }}</p>
+        <div class="feedback-rating">
+          <span *ngFor="let star of [1,2,3,4,5]" [class.active]="star <= feedback.rating">★</span>
+        </div>
+      </div>
+
+      <div class="feedback-footer">
+        <span class="feedback-date">{{ feedback.createdAt | date:'mediumDate' }}</span>
+        <span class="feedback-id">#{{ feedback.id }}</span>
+      </div>
+    </div>
+  </div>
+</div>

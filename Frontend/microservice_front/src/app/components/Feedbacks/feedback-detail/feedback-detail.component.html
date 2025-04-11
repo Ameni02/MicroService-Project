@@ -1,0 +1,95 @@
+<div class="feedback-detail-container">
+  <div class="header">
+    <h2>Feedback Details</h2>
+    <div class="actions">
+      <button *ngIf="feedback?.isArchived" 
+              (click)="unarchiveFeedback()"
+              [disabled]="isUnarchiving"
+              class="btn btn-primary">
+        <span *ngIf="!isUnarchiving">Unarchive</span>
+        <span *ngIf="isUnarchiving" class="spinner"></span>
+      </button>
+      <!--
+      <button *ngIf="!feedback?.isArchived" 
+              (click)="archiveFeedback()"
+              [disabled]="isArchiving"
+              class="btn btn-warning">
+        <span *ngIf="!isArchiving">Archive</span>
+        <span *ngIf="isArchiving" class="spinner"></span>
+      </button>
+      <button (click)="navigateToFeedbackList()" class="btn btn-outline">
+        Back to List
+      </button> -->
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading feedback...</p>
+  </div>
+
+  <div *ngIf="error" class="error-container">
+    <p>{{ error }}</p>
+    <button class="btn btn-primary" (click)="loadFeedback()">Try Again</button>
+  </div>
+
+  <div *ngIf="!loading && !error && feedback" class="feedback-content">
+    <div class="feedback-header">
+      <h2>{{ feedback.name || 'Anonymous' }}</h2>
+      <div class="feedback-meta">
+        <span class="feedback-date">{{ feedback.createdAt | date:'mediumDate' }}</span>
+        <app-status-badge [status]="feedback.status" [isArchived]="false"></app-status-badge>
+      </div>
+    </div>
+
+    <div class="feedback-body">
+      <div class="feedback-rating">
+        <app-rating-stars [rating]="feedback.rating" [editable]="false"></app-rating-stars>
+      </div>
+      <p class="feedback-comment">{{ feedback.comment }}</p>
+    </div>
+
+    <!-- Response Form -->
+    <div class="response-form">
+      <h3>Add Your Response</h3>
+      <form [formGroup]="responseForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="content">Your Response</label>
+          <textarea 
+            id="content" 
+            formControlName="content" 
+            rows="4" 
+            placeholder="Write your response here..."
+            [class.is-invalid]="responseForm.get('content')?.invalid && responseForm.get('content')?.touched">
+          </textarea>
+          <div class="invalid-feedback" *ngIf="responseForm.get('content')?.invalid && responseForm.get('content')?.touched">
+            Response is required and must be at least 10 characters long
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" [disabled]="responseForm.invalid || submitting">
+            <span *ngIf="!submitting">Submit Response</span>
+            <span *ngIf="submitting" class="spinner"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Responses List -->
+    <div class="responses-section">
+      <h3>Responses</h3>
+      <div *ngIf="feedback.responses && feedback.responses.length > 0" class="responses-list">
+        <div *ngFor="let response of feedback.responses" class="response-card">
+          <div class="response-header">
+            <span class="response-author">{{ response.author }}</span>
+            <span class="response-date">{{ response.createdAt | date:'mediumDate' }}</span>
+          </div>
+          <p class="response-content">{{ response.content }}</p>
+        </div>
+      </div>
+      <div *ngIf="!feedback.responses || feedback.responses.length === 0" class="no-responses">
+        <p>No responses yet. Be the first to respond!</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="rating-stars">
+  <span
+    *ngFor="let star of stars"
+    [class.filled]="star <= rating"
+    [class.editable]="editable"
+    (click)="setRating(star)"
+  >
+    ★
+  </span>
+</div> 

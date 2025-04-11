@@ -1,0 +1,8 @@
+<span class="status-badge" [ngClass]="{
+  'status-new': status === 'NEW',
+  'status-in-progress': status === 'IN_PROGRESS',
+  'status-resolved': status === 'RESOLVED',
+  'status-archived': isArchived
+}">
+  {{ status }}
+</span> 

@@ -1,10 +1,11 @@
-
 package com.esprit.microservice.feedbacks.Entities;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,7 +24,9 @@ public class Response {
     @NotNull(message = "Feedback cannot be null")
     @ManyToOne
     @JoinColumn(name = "feedback_id")
+    @JsonIgnore // This will completely ignore the feedback reference
     private Feedback feedback;
+
 
     // Getters and Setters
     public Long getId() {

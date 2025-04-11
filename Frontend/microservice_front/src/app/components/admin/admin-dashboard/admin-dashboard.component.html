@@ -1,0 +1,170 @@
+<div class="admin-dashboard">
+  <!-- Sidebar Navigation -->
+  <aside class="dashboard-sidebar">
+    <div class="sidebar-header">
+      <h3>Admin Panel</h3>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li [class.active]="activeSection === 'overview'">
+          <a (click)="navigateToSection('overview')">
+            <i class="bi bi-grid"></i> Overview
+          </a>
+        </li>
+        <li [class.active]="activeSection === 'users'">
+          <a (click)="navigateToSection('users')">
+            <i class="bi bi-people"></i> Users
+          </a>
+        </li>
+        <li [class.active]="activeSection === 'trainings'">
+          <a (click)="navigateToSection('trainings')">
+            <i class="bi bi-book"></i> Trainings
+          </a>
+        </li>
+        <li [class.active]="activeSection === 'events'">
+          <a (click)="navigateToSection('events')">
+            <i class="bi bi-calendar-event"></i> Events
+          </a>
+        </li>
+        <li [class.active]="activeSection === 'feedbacks'">
+          <a (click)="navigateToSection('feedbacks')">
+            <i class="bi bi-chat-dots"></i> Feedbacks
+          </a>
+        </li>
+        <li [class.active]="activeSection === 'reports'">
+          <a (click)="navigateToSection('reports')">
+            <i class="bi bi-graph-up"></i> Reports
+          </a>
+        </li>
+        <li [class.active]="activeSection === 'settings'">
+          <a (click)="navigateToSection('settings')">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="dashboard-main">
+    <!-- Top Header -->
+    <header class="dashboard-header">
+      <div class="header-search">
+        <input type="text" placeholder="Search...">
+        <i class="bi bi-search"></i>
+      </div>
+      <div class="header-actions">
+        <button class="btn-notification">
+          <i class="bi bi-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        <div class="admin-profile">
+          <img src="assets/img/admin-avatar.jpg" alt="Admin">
+          <span>Admin Name</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-content">
+      <!-- Quick Actions -->
+      <section class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-buttons">
+          <button (click)="handleQuickAction('newTraining')" class="btn-action">
+            <i class="bi bi-plus-circle"></i>
+            New Training
+          </button>
+          <button (click)="handleQuickAction('newEvent')" class="btn-action">
+            <i class="bi bi-calendar-plus"></i>
+            New Event
+          </button>
+          <button (click)="handleQuickAction('viewReports')" class="btn-action">
+            <i class="bi bi-file-earmark-text"></i>
+            View Reports
+          </button>
+        </div>
+      </section>
+
+      <!-- Statistics Cards -->
+      <section class="statistics-grid">
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3>Users</h3>
+            <i class="bi bi-people"></i>
+          </div>
+          <div class="stat-numbers">
+            <div class="main-stat">{{statistics.users.total}}</div>
+            <div class="sub-stats">
+              <span>New: {{statistics.users.new}}</span>
+              <span>Active: {{statistics.users.active}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3>Trainings</h3>
+            <i class="bi bi-book"></i>
+          </div>
+          <div class="stat-numbers">
+            <div class="main-stat">{{statistics.trainings.total}}</div>
+            <div class="sub-stats">
+              <span>Active: {{statistics.trainings.active}}</span>
+              <span>Draft: {{statistics.trainings.draft}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3>Events</h3>
+            <i class="bi bi-calendar-event"></i>
+          </div>
+          <div class="stat-numbers">
+            <div class="main-stat">{{statistics.events.total}}</div>
+            <div class="sub-stats">
+              <span>Upcoming: {{statistics.events.upcoming}}</span>
+              <span>Past: {{statistics.events.past}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3>Feedbacks</h3>
+            <i class="bi bi-chat-dots"></i>
+          </div>
+          <div class="stat-numbers">
+            <div class="main-stat">{{statistics.feedbacks.total}}</div>
+            <div class="sub-stats">
+              <span>Pending: {{statistics.feedbacks.pending}}</span>
+              <span>Resolved: {{statistics.feedbacks.resolved}}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Activities -->
+      <section class="recent-activities">
+        <h2>Recent Activities</h2>
+        <div class="activity-list">
+          <div class="activity-item" *ngFor="let activity of recentActivities">
+            <div class="activity-icon" [ngClass]="activity.type">
+              <i class="bi" [ngClass]="{
+                'bi-person': activity.type === 'user',
+                'bi-book': activity.type === 'training',
+                'bi-chat': activity.type === 'feedback'
+              }"></i>
+            </div>
+            <div class="activity-details">
+              <h4>{{activity.action}}</h4>
+              <p>{{activity.details}}</p>
+              <span class="activity-time">{{activity.timestamp | date:'shortTime'}}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>

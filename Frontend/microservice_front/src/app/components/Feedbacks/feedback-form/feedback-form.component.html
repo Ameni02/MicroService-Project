@@ -1,0 +1,76 @@
+<div class="feedback-form-container">
+  <h2>{{ feedback ? 'Edit Feedback' : 'Create Feedback' }}</h2>
+
+  <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" class="feedback-form">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        [class.is-invalid]="feedbackForm.get('name')?.invalid && feedbackForm.get('name')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="feedbackForm.get('name')?.invalid && feedbackForm.get('name')?.touched">
+        <div *ngIf="feedbackForm.get('name')?.errors?.['required']">Name is required</div>
+        <div *ngIf="feedbackForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="role">Role</label>
+      <input
+        type="text"
+        id="role"
+        formControlName="role"
+        [class.is-invalid]="feedbackForm.get('role')?.invalid && feedbackForm.get('role')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="feedbackForm.get('role')?.invalid && feedbackForm.get('role')?.touched">
+        <div *ngIf="feedbackForm.get('role')?.errors?.['required']">Role is required</div>
+        <div *ngIf="feedbackForm.get('role')?.errors?.['minlength']">Role must be at least 3 characters</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Comment</label>
+      <textarea
+        id="comment"
+        formControlName="comment"
+        rows="4"
+        [class.is-invalid]="feedbackForm.get('comment')?.invalid && feedbackForm.get('comment')?.touched"
+      ></textarea>
+      <div class="invalid-feedback" *ngIf="feedbackForm.get('comment')?.invalid && feedbackForm.get('comment')?.touched">
+        <div *ngIf="feedbackForm.get('comment')?.errors?.['required']">Comment is required</div>
+        <div *ngIf="feedbackForm.get('comment')?.errors?.['minlength']">Comment must be at least 10 characters</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Rating</label>
+      <app-rating-stars
+        [rating]="feedbackForm.get('rating')?.value"
+        [editable]="true"
+        (ratingChange)="feedbackForm.patchValue({ rating: $event })"
+      ></app-rating-stars>
+      <div class="invalid-feedback" *ngIf="feedbackForm.get('rating')?.invalid && feedbackForm.get('rating')?.touched">
+        <div *ngIf="feedbackForm.get('rating')?.errors?.['required']">Rating is required</div>
+        <div *ngIf="feedbackForm.get('rating')?.errors?.['min'] || feedbackForm.get('rating')?.errors?.['max']">
+          Rating must be between 1 and 5
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()" [disabled]="loading">
+        Cancel
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="feedbackForm.invalid || loading">
+        <span *ngIf="loading" class="spinner"></span>
+        {{ feedback ? 'Update' : 'Create' }}
+      </button>
+    </div>
+  </form>
+</div> 
