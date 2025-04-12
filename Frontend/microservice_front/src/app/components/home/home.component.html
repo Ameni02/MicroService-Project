@@ -3,30 +3,30 @@
   <!-- Hero Section -->
   <section id="hero" class="hero section light-background">
 
-    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+    <div class="container position-relative">
       <div class="row gy-5">
         <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h2>eStartup</h2>
-          <p>Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+          <h2>Online-Trainings Platform</h2>
+          <p>A comprehensive microservices-based solution for managing training programs, feedback, evaluations, and more. Streamline your training operations with our integrated platform.</p>
           <div class="d-flex">
-            <a href="#about" class="btn-get-started">Get Started</a>
-            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+            <a routerLink="/trainings" class="btn-get-started">Get Started</a>
+            <a href="#services" class="btn-watch-video d-flex align-items-center"><i class="bi bi-arrow-down-circle"></i><span>Explore Services</span></a>
           </div>
         </div>
-        <div class="col-lg-6 order-1 order-lg-2">
-          <img src="assets/img/hero-img.png" class="img-fluid" alt="">
+        <div class="col-lg-6 order-1 order-lg-2 d-flex align-items-center justify-content-center">
+          <img src="/assets/img/hero-img.png" class="img-fluid" alt="Platform Illustration" style="max-height: 400px;">
         </div>
       </div>
     </div>
 
-    <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
+    <div class="icon-boxes position-relative">
       <div class="container position-relative">
         <div class="row gy-4 mt-5">
 
           <div class="col-xl-3 col-md-6" *ngFor="let box of iconBoxes">
             <div class="icon-box">
               <div class="icon"><i class="bi" [class]="box.icon"></i></div>
-              <h4 class="title"><a href="" class="stretched-link">{{box.title}}</a></h4>
+              <h4 class="title"><a [routerLink]="box.route" class="stretched-link">{{box.title}}</a></h4>
             </div>
           </div>
 
@@ -40,36 +40,41 @@
   <section id="about" class="about section">
 
     <div class="container">
+      <!-- Section Title -->
+      <div class="container section-title">
+        <h2>About Our Platform</h2>
+        <div><span>Discover</span> <span class="description-title">Our Mission</span></div>
+      </div><!-- End Section Title -->
 
       <div class="row gy-4">
 
-        <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-lg-6 content">
           <p class="who-we-are">Who We Are</p>
-          <h3>Unleashing Potential with Creative Strategy</h3>
+          <h3>Empowering Training Management with Microservices</h3>
           <p class="fst-italic">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.
+            Our Online-Trainings Platform is built on a modern microservices architecture, providing a flexible and scalable solution for all your training management needs.
           </p>
           <ul>
-            <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-            <li><i class="bi bi-check-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-            <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+            <li><i class="bi bi-check-circle"></i> <span>Comprehensive suite of integrated microservices for seamless training management</span></li>
+            <li><i class="bi bi-check-circle"></i> <span>Advanced feedback system with analytics and multilingual support</span></li>
+            <li><i class="bi bi-check-circle"></i> <span>Secure document management and evaluation tools to measure training effectiveness</span></li>
+            <li><i class="bi bi-check-circle"></i> <span>Interactive discussion forums to enhance collaboration between trainers and participants</span></li>
           </ul>
-          <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          <a routerLink="/about" class="read-more"><span>Learn More About Us</span><i class="bi bi-arrow-right"></i></a>
         </div>
 
-        <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
+        <div class="col-lg-6 about-images">
           <div class="row gy-4">
             <div class="col-lg-6">
-              <img src="assets/img/about-company-1.jpg" class="img-fluid" alt="">
+              <img src="/assets/img/about-company-1.jpg" class="img-fluid" alt="Team Collaboration">
             </div>
             <div class="col-lg-6">
               <div class="row gy-4">
                 <div class="col-lg-12">
-                  <img src="assets/img/about-company-2.jpg" class="img-fluid" alt="">
+                  <img src="/assets/img/about-company-2.jpg" class="img-fluid" alt="Training Session">
                 </div>
                 <div class="col-lg-12">
-                  <img src="assets/img/about-company-3.jpg" class="img-fluid" alt="">
+                  <img src="/assets/img/about-company-3.jpg" class="img-fluid" alt="Platform Development">
                 </div>
               </div>
             </div>
@@ -86,21 +91,21 @@
   <section id="services" class="services section">
 
     <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-      <h2>Services</h2>
-      <div><span>Check Our</span> <span class="description-title">Services</span></div>
+    <div class="container section-title">
+      <h2>Our Microservices</h2>
+      <div><span>Explore Our</span> <span class="description-title">Integrated Services</span></div>
     </div><!-- End Section Title -->
 
     <div class="container">
 
       <div class="row gy-4">
 
-        <div class="col-lg-4 col-md-6" *ngFor="let service of services" data-aos="fade-up" [attr.data-aos-delay]="service.delay">
+        <div class="col-lg-4 col-md-6" *ngFor="let service of services">
           <div class="service-item position-relative">
             <div class="icon">
               <i class="bi" [class]="service.icon"></i>
             </div>
-            <a href="service-details.html" class="stretched-link">
+            <a [routerLink]="service.route" class="stretched-link">
               <h3>{{service.title}}</h3>
             </a>
             <p>{{service.description}}</p>
@@ -117,23 +122,23 @@
   <section id="features" class="features section light-background">
 
     <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-      <h2>Features</h2>
-      <div><span>Check Our</span> <span class="description-title">Features</span></div>
+    <div class="container section-title">
+      <h2>Platform Features</h2>
+      <div><span>Discover Our</span> <span class="description-title">Key Capabilities</span></div>
     </div><!-- End Section Title -->
 
     <div class="container">
 
       <div class="row gy-5 justify-content-between">
 
-        <div class="col-xl-5" data-aos="zoom-out" data-aos-delay="100">
-          <img src="assets/img/features.svg" class="img-fluid" alt="">
+        <div class="col-xl-5">
+          <img src="/assets/img/services.jpg" class="img-fluid" alt="Features Illustration">
         </div>
 
         <div class="col-xl-6 d-flex">
           <div class="row align-self-center gy-4">
 
-            <div class="col-md-6" *ngFor="let feature of features; let i = index" data-aos="fade-up" [attr.data-aos-delay]="200 + (i * 100)">
+            <div class="col-md-6" *ngFor="let feature of features; let i = index">
               <div class="feature-box d-flex align-items-center">
                 <i class="bi bi-check"></i>
                 <h3>{{feature.title}}</h3>
@@ -149,20 +154,81 @@
 
   </section><!-- /Features Section -->
 
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="section">
+    <!-- Section Title -->
+    <div class="container section-title">
+      <h2>How It Works</h2>
+      <div><span>Our</span> <span class="description-title">Platform Workflow</span></div>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+      <div class="row gy-4 justify-content-center">
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="card h-100 text-center p-4">
+            <div class="card-body">
+              <div class="icon mb-4">
+                <i class="bi bi-1-circle fs-1 text-primary"></i>
+              </div>
+              <h4>Register</h4>
+              <p>Create an account and set up your organization profile with customizable settings.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="card h-100 text-center p-4">
+            <div class="card-body">
+              <div class="icon mb-4">
+                <i class="bi bi-2-circle fs-1 text-primary"></i>
+              </div>
+              <h4>Configure</h4>
+              <p>Set up your training programs, feedback categories, and evaluation criteria.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="card h-100 text-center p-4">
+            <div class="card-body">
+              <div class="icon mb-4">
+                <i class="bi bi-3-circle fs-1 text-primary"></i>
+              </div>
+              <h4>Implement</h4>
+              <p>Launch your training programs and start collecting feedback from participants.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="card h-100 text-center p-4">
+            <div class="card-body">
+              <div class="icon mb-4">
+                <i class="bi bi-4-circle fs-1 text-primary"></i>
+              </div>
+              <h4>Analyze</h4>
+              <p>Review feedback, generate reports, and make data-driven improvements.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- /How It Works Section -->
+
   <!-- Pricing Section -->
   <section id="pricing" class="pricing section">
 
     <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-      <h2>Pricing</h2>
-      <div><span>Check Our</span> <span class="description-title">Pricing</span></div>
+    <div class="container section-title">
+      <h2>Subscription Plans</h2>
+      <div><span>Choose</span> <span class="description-title">Your Plan</span></div>
     </div><!-- End Section Title -->
 
     <div class="container">
 
       <div class="row gy-4">
 
-        <div class="col-lg-3 col-md-6" *ngFor="let plan of pricingPlans; let i = index" data-aos="zoom-in" [attr.data-aos-delay]="100 + (i * 100)">
+        <div class="col-lg-3 col-md-6" *ngFor="let plan of pricingPlans; let i = index">
           <div class="pricing-tem" [class.featured]="plan.featured">
             <span *ngIf="plan.featured" class="featured">Featured</span>
             <h3 [style.color]="plan.color">{{plan.name}}</h3>
@@ -183,23 +249,58 @@
 
   </section><!-- /Pricing Section -->
 
-  <!-- Faq Section -->
-  <section id="faq" class="faq section light-background">
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonials section">
+    <!-- Section Title -->
+    <div class="container section-title">
+      <h2>Testimonials</h2>
+      <div><span>What Our</span> <span class="description-title">Clients Say</span></div>
+    </div><!-- End Section Title -->
 
     <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-4" *ngFor="let testimonial of testimonials; let i = index">
+          <div class="testimonial-item">
+            <div class="d-flex mb-4 align-items-center">
+              <img [src]="testimonial.image" class="testimonial-img flex-shrink-0" alt="">
+              <div class="ms-3">
+                <h3>{{testimonial.name}}</h3>
+                <h4>{{testimonial.position}} at {{testimonial.company}}</h4>
+              </div>
+            </div>
+            <p>
+              <i class="bi bi-quote quote-icon-left"></i>
+              {{testimonial.quote}}
+              <i class="bi bi-quote quote-icon-right"></i>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- /Testimonials Section -->
+
+  <!-- Faq Section -->
+  <section id="faq" class="faq section">
+
+    <div class="container">
+      <!-- Section Title -->
+      <div class="container section-title">
+        <h2>FAQ</h2>
+        <div><span>Frequently Asked</span> <span class="description-title">Questions</span></div>
+      </div><!-- End Section Title -->
 
       <div class="row gy-4">
 
-        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-lg-4">
           <div class="content px-xl-5">
-            <h3><span>Frequently Asked </span><strong>Questions</strong></h3>
+            <h3><span>Have </span><strong>Questions?</strong></h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+              Find answers to commonly asked questions about our Online-Trainings Platform. If you can't find what you're looking for, please contact our support team.
             </p>
           </div>
         </div>
 
-        <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+        <div class="col-lg-8">
 
           <div class="faq-container">
             <div class="faq-item" *ngFor="let faq of faqs; let i = index" [class.faq-active]="i === 0">
@@ -223,44 +324,44 @@
   <section id="contact" class="contact section">
 
     <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-      <h2>Contact</h2>
-      <div><span>Need Help?</span> <span class="description-title">Contact Us</span></div>
+    <div class="container section-title">
+      <h2>Get In Touch</h2>
+      <div><span>Need Help?</span> <span class="description-title">Contact Our Team</span></div>
     </div><!-- End Section Title -->
 
-    <div class="container" data-aos="fade" data-aos-delay="100">
+    <div class="container">
 
       <div class="row gy-4">
 
         <div class="col-lg-4">
-          <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+          <div class="info-item d-flex">
             <i class="bi bi-geo-alt flex-shrink-0"></i>
             <div>
               <h3>Address</h3>
-              <p>A108 Adam Street, New York, NY 535022</p>
+              <p>ESPRIT School of Engineering, Ariana, Tunisia</p>
             </div>
           </div><!-- End Info Item -->
 
-          <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+          <div class="info-item d-flex">
             <i class="bi bi-telephone flex-shrink-0"></i>
             <div>
               <h3>Call Us</h3>
-              <p>+1 5589 55488 55</p>
+              <p>+216 70 685 685</p>
             </div>
           </div><!-- End Info Item -->
 
-          <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+          <div class="info-item d-flex">
             <i class="bi bi-envelope flex-shrink-0"></i>
             <div>
               <h3>Email Us</h3>
-              <p>infocom</p>
+              <p>contact&#64;esprit.tn</p>
             </div>
           </div><!-- End Info Item -->
 
         </div>
 
         <div class="col-lg-8">
-          <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+          <form class="php-email-form">
             <div class="row gy-4">
 
               <div class="col-md-6">
@@ -296,5 +397,21 @@
     </div>
 
   </section><!-- /Contact Section -->
+
+  <!-- Call to Action Section -->
+  <section id="cta" class="cta section">
+    <div class="container text-center">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h2>Ready to Transform Your Training Management?</h2>
+          <p>Join thousands of organizations that have revolutionized their training programs with our comprehensive microservices platform.</p>
+          <div class="cta-btn-container">
+            <a routerLink="/trainings" class="btn-get-started">Get Started Today</a>
+            <a routerLink="/contact" class="btn-secondary ms-3">Contact Sales</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- /Call to Action Section -->
 
 </main>

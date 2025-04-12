@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+// @ts-ignore
+declare var AOS: any;
 
 @Component({
   selector: 'app-home',
@@ -9,176 +13,226 @@ export class HomeComponent implements OnInit {
   // Icon Boxes in Hero Section
   iconBoxes = [
     {
-      icon: 'bi-easel',
-      title: 'Lorem Ipsum'
+      icon: 'bi-mortarboard',
+      title: 'Training Management',
+      route: '/trainings'
     },
     {
-      icon: 'bi-gem',
-      title: 'Sed ut perspiciatis'
+      icon: 'bi-chat-dots',
+      title: 'Feedback System',
+      route: '/feedbacks'
     },
     {
-      icon: 'bi-geo-alt',
-      title: 'Magni Dolores'
+      icon: 'bi-clipboard-check',
+      title: 'Evaluation Tools',
+      route: '/evaluation'
     },
     {
-      icon: 'bi-command',
-      title: 'Nemo Enim'
+      icon: 'bi-calendar-event',
+      title: 'Event Planning',
+      route: '/events'
     }
   ];
 
   // Features Section
   features = [
     {
-      title: 'Eos aspernatur rem'
+      title: 'Centralized Training Management'
     },
     {
-      title: 'Facilis neque ipsa'
+      title: 'Comprehensive Feedback System'
     },
     {
-      title: 'Volup amet volupt'
+      title: 'Detailed Evaluation Tools'
     },
     {
-      title: 'Rerum omnis sint'
+      title: 'Secure Document Management'
     },
     {
-      title: 'Alias possimus'
+      title: 'Integrated Payment Processing'
     },
     {
-      title: 'Repellendus molli'
+      title: 'Interactive Discussion Forums'
     }
   ];
 
-  // Services Section
+  // Services Section - Microservices
   services = [
     {
-      icon: 'bi-activity',
-      title: 'Nesciunt Mete',
-      description: 'Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.',
-      delay: 100
+      icon: 'bi-mortarboard',
+      title: 'Training Service',
+      description: 'Manage and organize training programs with comprehensive course catalogs, instructor management, and participant tracking.',
+      delay: 100,
+      route: '/trainings'
     },
     {
-      icon: 'bi-broadcast',
-      title: 'Eosle Commodi',
-      description: 'Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.',
-      delay: 200
+      icon: 'bi-chat-dots',
+      title: 'Feedback Service',
+      description: 'Collect, analyze, and respond to user feedback with our advanced feedback management system featuring categorization and analytics.',
+      delay: 200,
+      route: '/feedbacks'
     },
     {
-      icon: 'bi-easel',
-      title: 'Ledo Markt',
-      description: 'Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.',
-      delay: 300
+      icon: 'bi-clipboard-check',
+      title: 'Evaluation Service',
+      description: 'Create customized evaluation forms, conduct assessments, and generate detailed reports to measure training effectiveness.',
+      delay: 300,
+      route: '/evaluation'
     },
     {
-      icon: 'bi-bounding-box-circles',
-      title: 'Asperiores Commodit',
-      description: 'Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.',
-      delay: 400
+      icon: 'bi-credit-card',
+      title: 'Payment Service',
+      description: 'Process payments securely with our integrated payment gateway supporting multiple payment methods and subscription management.',
+      delay: 400,
+      route: '/payment'
     },
     {
-      icon: 'bi-calendar4-week',
-      title: 'Velit Doloremque',
-      description: 'Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.',
-      delay: 500
+      icon: 'bi-file-earmark-text',
+      title: 'Documents Service',
+      description: 'Store, manage, and share training materials, certificates, and other important documents with advanced access controls.',
+      delay: 500,
+      route: '/documents'
     },
     {
-      icon: 'bi-chat-square-text',
-      title: 'Dolori Architecto',
-      description: 'Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.',
-      delay: 600
+      icon: 'bi-calendar-check',
+      title: 'Planification Service',
+      description: 'Schedule and organize training sessions, manage resources, and send automated notifications to participants.',
+      delay: 600,
+      route: '/planification'
     }
   ];
 
   // Pricing Plans
   pricingPlans = [
     {
-      name: 'Free Plan',
+      name: 'Basic Plan',
       price: '0',
       color: '#20c997',
       icon: 'bi-box',
       featured: false,
       features: [
-        { text: 'Aida dere', included: true },
-        { text: 'Nec feugiat nisl', included: true },
-        { text: 'Nulla at volutpat dola', included: true },
-        { text: 'Pharetra massa', included: false },
-        { text: 'Massa ultricies mi', included: false }
+        { text: 'Training Management', included: true },
+        { text: 'Basic Feedback System', included: true },
+        { text: 'Simple Evaluation Tools', included: true },
+        { text: 'Document Storage (Limited)', included: false },
+        { text: 'Premium Support', included: false }
       ]
     },
     {
-      name: 'Starter Plan',
-      price: '19',
+      name: 'Professional Plan',
+      price: '29',
       color: '#0dcaf0',
       icon: 'bi-send',
       featured: true,
       features: [
-        { text: 'Aida dere', included: true },
-        { text: 'Nec feugiat nisl', included: true },
-        { text: 'Nulla at volutpat dola', included: true },
-        { text: 'Pharetra massa', included: true },
-        { text: 'Massa ultricies mi', included: false }
+        { text: 'Training Management', included: true },
+        { text: 'Advanced Feedback System', included: true },
+        { text: 'Comprehensive Evaluation', included: true },
+        { text: 'Document Storage (10GB)', included: true },
+        { text: 'Premium Support', included: false }
       ]
     },
     {
-      name: 'Business Plan',
-      price: '29',
+      name: 'Enterprise Plan',
+      price: '49',
       color: '#fd7e14',
-      icon: 'bi-airplane',
+      icon: 'bi-building',
       featured: false,
       features: [
-        { text: 'Aida dere', included: true },
-        { text: 'Nec feugiat nisl', included: true },
-        { text: 'Nulla at volutpat dola', included: true },
-        { text: 'Pharetra massa', included: true },
-        { text: 'Massa ultricies mi', included: true }
+        { text: 'Training Management', included: true },
+        { text: 'Advanced Feedback System', included: true },
+        { text: 'Comprehensive Evaluation', included: true },
+        { text: 'Document Storage (50GB)', included: true },
+        { text: 'Premium Support', included: true }
       ]
     },
     {
-      name: 'Ultimate Plan',
-      price: '49',
+      name: 'Custom Plan',
+      price: 'Custom',
       color: '#0d6efd',
       icon: 'bi-rocket',
       featured: false,
       features: [
-        { text: 'Aida dere', included: true },
-        { text: 'Nec feugiat nisl', included: true },
-        { text: 'Nulla at volutpat dola', included: true },
-        { text: 'Pharetra massa', included: true },
-        { text: 'Massa ultricies mi', included: true }
+        { text: 'Training Management', included: true },
+        { text: 'Advanced Feedback System', included: true },
+        { text: 'Comprehensive Evaluation', included: true },
+        { text: 'Unlimited Document Storage', included: true },
+        { text: 'Dedicated Support Team', included: true }
       ]
+    }
+  ];
+
+  // Testimonials Section
+  testimonials = [
+    {
+      name: 'Ahmed Ben Ali',
+      position: 'Training Manager',
+      company: 'Tech Solutions',
+      image: '/assets/img/about-company-1.jpg',
+      quote: 'The Online-Trainings Platform has revolutionized how we manage our training programs. The feedback system is particularly impressive with its multilingual capabilities.'
+    },
+    {
+      name: 'Sophia Mansour',
+      position: 'HR Director',
+      company: 'Global Innovations',
+      image: '/assets/img/about-company-2.jpg',
+      quote: 'We\'ve seen a 40% increase in training effectiveness since implementing this platform. The evaluation tools provide invaluable insights for continuous improvement.'
+    },
+    {
+      name: 'Karim Hatem',
+      position: 'CEO',
+      company: 'EdTech Startup',
+      image: '/assets/img/about-company-3.jpg',
+      quote: 'The microservices architecture made it incredibly easy to integrate with our existing systems. The support team has been exceptional throughout the implementation process.'
     }
   ];
 
   // FAQ Section
   faqs = [
     {
-      question: 'Non consectetur a erat nam at lectus urna duis?',
-      answer: 'Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.'
+      question: 'What is the Online-Trainings Platform?',
+      answer: 'Our Online-Trainings Platform is a comprehensive microservices-based solution designed to manage all aspects of training programs, including course management, feedback collection, evaluation, document management, and more.'
     },
     {
-      question: 'Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?',
-      answer: 'Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.'
+      question: 'How does the Feedback System work?',
+      answer: 'Our Feedback System allows users to submit feedback on training programs, which can be categorized, analyzed, and responded to by administrators. It supports anonymous feedback and includes translation capabilities for international users.'
     },
     {
-      question: 'Dolor sit amet consectetur adipiscing elit pellentesque?',
-      answer: 'Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis'
+      question: 'Can I integrate the platform with my existing systems?',
+      answer: 'Yes, our platform is built using a microservices architecture, which makes it highly flexible and easy to integrate with existing systems through our well-documented APIs.'
     },
     {
-      question: 'Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?',
-      answer: 'Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.'
+      question: 'What payment methods are supported?',
+      answer: 'Our Payment Service supports major credit cards, PayPal, and bank transfers. Custom payment integrations can be implemented for Enterprise and Custom plan subscribers.'
     },
     {
-      question: 'Tempus quam pellentesque nec nam aliquam sem et tortor consequat?',
-      answer: 'Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in'
+      question: 'Is there a mobile app available?',
+      answer: 'Currently, our platform is optimized for web browsers on both desktop and mobile devices. A dedicated mobile app is on our roadmap for future development.'
     }
   ];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+    // Initialize AOS (Animate On Scroll)
+    if (typeof AOS !== 'undefined') {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        mirror: false
+      });
+    }
+
     // Initialize FAQ toggle functionality
     setTimeout(() => {
       this.initFaqToggle();
     }, 100);
+  }
+
+  // Navigate to service route
+  navigateToService(route: string): void {
+    this.router.navigate([route]);
   }
 
   // Handle FAQ toggle functionality

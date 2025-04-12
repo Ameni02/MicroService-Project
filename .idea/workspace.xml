@@ -6,28 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3a496380-1332-4e77-8085-39bef1815ab8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/category-management/category-management.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/category-management/category-management.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/feedback-detail/feedback-detail.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/feedback-detail/feedback-detail.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/feedback-detail/feedback-detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/feedback-detail/feedback-detail.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/feedback-detail/feedback-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/feedback-detail/feedback-detail.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/feedback-form/feedback-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/feedback-form/feedback-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/feedback-list/feedback-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/feedback-list/feedback-list.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/feedback-list/feedback-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/Feedbacks/feedback-list/feedback-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/admin/admin-dashboard/admin-dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/admin/admin-dashboard/admin-dashboard.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/admin/admin-dashboard/admin-dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/admin/admin-dashboard/admin-dashboard.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/header/header.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/header/header.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/shared/rating-stars/rating-stars.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/shared/rating-stars/rating-stars.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/shared/status-badge/status-badge.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/shared/status-badge/status-badge.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/models/category.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/models/category.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/models/feedback.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/models/feedback.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/models/response.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/models/response.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/services/feedback.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/services/feedback.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,81 +42,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.DocumentsApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.EurekaApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.FeedbacksApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.GatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Feedbacks&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zbira/OneDrive - ESPRIT/Bureau/microservice/MicroService-Project&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.ConfigServerApplication.executor": "Run",
+    "Spring Boot.DocumentsApplication.executor": "Run",
+    "Spring Boot.EurekaApplication.executor": "Run",
+    "Spring Boot.FeedbacksApplication.executor": "Run",
+    "Spring Boot.GatewayApplication.executor": "Run",
+    "git-widget-placeholder": "Feedbacks",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/zbira/OneDrive - ESPRIT/Bureau/microservice/MicroService-Project",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.configurations.included.in.services": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Spring Boot.GatewayApplication">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="MicroService-Project" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="MicroService-Project" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="MicroService-Project" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Python.FlaskServer">
-      <module name="MicroService-Project" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <method v="2" />
-    </configuration>
+}]]></component>
+  <component name="RunManager" selected="Spring Boot.FeedbacksApplication">
     <configuration name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="config-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.microservice.configserver.ConfigServerApplication" />
@@ -173,19 +101,6 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <module name="MicroService-Project" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <method v="2" />
     </configuration>
   </component>
   <component name="SharedIndexes">

@@ -548,6 +548,90 @@
   }
 }
 
+/* Testimonials Section */
+.testimonials .testimonial-item {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 10px;
+  background: #fff;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.testimonials .testimonial-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.testimonials .testimonial-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimonials h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.testimonials h4 {
+  font-size: 14px;
+  color: #6c757d;
+  margin: 5px 0 0 0;
+}
+
+.testimonials .quote-icon-left,
+.testimonials .quote-icon-right {
+  color: #0d6efd;
+  font-size: 20px;
+  line-height: 0;
+}
+
+.testimonials .quote-icon-left {
+  margin-right: 5px;
+}
+
+.testimonials .quote-icon-right {
+  margin-left: 5px;
+}
+
+.testimonials p {
+  font-style: italic;
+  margin: 15px 0 0 0;
+  color: #666;
+}
+
+/* How It Works Section */
+#how-it-works .card {
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+#how-it-works .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+#how-it-works .icon i {
+  color: #0d6efd;
+}
+
+#how-it-works h4 {
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+#how-it-works p {
+  color: #666;
+  font-size: 14px;
+}
+
 /* Responsive Design */
 @media (max-width: 991px) {
   .hero h2 {
@@ -579,4 +663,64 @@
   .contact .info-item {
     margin-bottom: 30px;
   }
+
+  #how-it-works .card {
+    margin-bottom: 20px;
+  }
+
+  .cta h2 {
+    font-size: 28px;
+  }
+
+  .cta p {
+    font-size: 15px;
+  }
+
+  .cta-btn-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+/* Call to Action Section */
+.cta {
+  background: linear-gradient(rgba(13, 110, 253, 0.9), rgba(13, 110, 253, 0.9)), url('/assets/img/services.jpg') center center;
+  background-size: cover;
+  padding: 80px 0;
+  color: #fff;
+}
+
+.cta h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.cta p {
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.cta-btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn-secondary {
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 50px;
+  transition: 0.5s;
+  color: #0d6efd;
+  background: #fff;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background: #f8f9fa;
+  color: #0b5ed7;
 }
