@@ -1,0 +1,62 @@
+<form [formGroup]="replyForm" (ngSubmit)="onSubmit()">
+  <!-- Error Alert -->
+  <div class="alert alert-danger" *ngIf="error">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error }}
+  </div>
+
+  <!-- Author Field -->
+  <div class="mb-3">
+    <label for="author" class="form-label">Your Name</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      id="author" 
+      formControlName="author" 
+      placeholder="Enter your name"
+      [ngClass]="{'is-invalid': replyForm.get('author')?.invalid && replyForm.get('author')?.touched}"
+    >
+    <div class="invalid-feedback" *ngIf="replyForm.get('author')?.errors?.['required'] && replyForm.get('author')?.touched">
+      Name is required.
+    </div>
+    <div class="invalid-feedback" *ngIf="replyForm.get('author')?.errors?.['minlength'] && replyForm.get('author')?.touched">
+      Name must be at least 3 characters.
+    </div>
+    <div class="invalid-feedback" *ngIf="replyForm.get('author')?.errors?.['maxlength'] && replyForm.get('author')?.touched">
+      Name cannot exceed 50 characters.
+    </div>
+  </div>
+
+  <!-- Content Field -->
+  <div class="mb-3">
+    <label for="content" class="form-label">Reply</label>
+    <textarea 
+      class="form-control" 
+      id="content" 
+      formControlName="content" 
+      rows="4" 
+      placeholder="Enter your reply"
+      [ngClass]="{'is-invalid': replyForm.get('content')?.invalid && replyForm.get('content')?.touched}"
+    ></textarea>
+    <div class="invalid-feedback" *ngIf="replyForm.get('content')?.errors?.['required'] && replyForm.get('content')?.touched">
+      Reply content is required.
+    </div>
+    <div class="invalid-feedback" *ngIf="replyForm.get('content')?.errors?.['minlength'] && replyForm.get('content')?.touched">
+      Reply must be at least 5 characters.
+    </div>
+  </div>
+
+  <!-- Form Actions -->
+  <div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-secondary me-2" (click)="onCancel()">
+      <i class="bi bi-x-circle me-1"></i>Cancel
+    </button>
+    <button type="submit" class="btn btn-primary" [disabled]="submitting">
+      <i class="bi bi-reply me-1"></i>
+      <span *ngIf="!submitting">Post Reply</span>
+      <span *ngIf="submitting">
+        <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+        Posting...
+      </span>
+    </button>
+  </div>
+</form>

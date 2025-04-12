@@ -11,6 +11,8 @@ import { AdminDashboardComponent } from './components/admin/admin-dashboard/admi
 import { CategoryManagementComponent } from './components/Feedbacks/category-management/category-management.component';
 import { FeedbackManagementComponent } from './components/admin/feedback-management/feedback-management.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { ForumComponent } from './components/forum/forum.component';
+import { ForumManagementComponent } from './components/admin/forum-management/forum-management.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,13 +26,15 @@ const routes: Routes = [
       { path: 'feedbacks/list', component: FeedbackListComponent },
       { path: 'feedbacks/archived', component: FeedbackListComponent },
       { path: 'feedbacks/categories', component: CategoryManagementComponent },
-      { path: 'reports', component: StatisticsDashboardComponent }
+      { path: 'reports', component: StatisticsDashboardComponent },
+      { path: 'forum', component: ForumManagementComponent }
     ]
   },
   { path: 'feedbacks', component: FeedbackListComponent },
   { path: 'feedbacks/create', component: FeedbackFormComponent },
   { path: 'feedbacks/:id', component: FeedbackDetailComponent },
   { path: 'statistics', component: StatisticsDashboardComponent },
+  { path: 'forum', component: ForumComponent },
   { path: '**', redirectTo: '' }
 ];
 

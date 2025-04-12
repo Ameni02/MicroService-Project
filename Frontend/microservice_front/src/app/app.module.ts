@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,6 +26,14 @@ import { RatingStarsComponent } from './components/shared/rating-stars/rating-st
 import { FeedbackManagementComponent } from './components/admin/feedback-management/feedback-management.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
+// Forum Components
+import { ForumComponent } from './components/forum/forum.component';
+import { ThreadListComponent } from './components/forum/thread-list/thread-list.component';
+import { ThreadDetailComponent } from './components/forum/thread-detail/thread-detail.component';
+import { ThreadFormComponent } from './components/forum/thread-form/thread-form.component';
+import { ReplyFormComponent } from './components/forum/reply-form/reply-form.component';
+import { ForumManagementComponent } from './components/admin/forum-management/forum-management.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +54,14 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     CategoryManagementComponent,
     StatusBadgeComponent,
     RatingStarsComponent,
-    FeedbackManagementComponent
+    FeedbackManagementComponent,
+    // Forum Components
+    ForumComponent,
+    ThreadListComponent,
+    ThreadDetailComponent,
+    ThreadFormComponent,
+    ReplyFormComponent,
+    ForumManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +73,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     AdminLayoutComponent
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

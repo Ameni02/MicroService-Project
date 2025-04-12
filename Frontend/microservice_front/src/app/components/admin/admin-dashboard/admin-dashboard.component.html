@@ -1,6 +1,6 @@
 <div class="admin-dashboard">
   <!-- Sidebar Navigation -->
-  
+
 
   <!-- Main Content Area -->
   <main class="dashboard-main">
@@ -39,6 +39,10 @@
           <button (click)="handleQuickAction('viewReports')" class="btn-action">
             <i class="bi bi-file-earmark-text"></i>
             View Reports
+          </button>
+          <button (click)="handleQuickAction('manageForum')" class="btn-action">
+            <i class="bi bi-chat-square-text"></i>
+            Manage Forum
           </button>
         </div>
       </section>
@@ -97,6 +101,20 @@
             <div class="sub-stats">
               <span>Pending: {{statistics.feedbacks.pending}}</span>
               <span>Resolved: {{statistics.feedbacks.resolved}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card" (click)="navigateToSection('forum')" style="cursor: pointer;">
+          <div class="stat-header">
+            <h3>Discussion Forum</h3>
+            <i class="bi bi-chat-square-text"></i>
+          </div>
+          <div class="stat-numbers">
+            <div class="main-stat">{{statistics.forum.threads}}</div>
+            <div class="sub-stats">
+              <span>Replies: {{statistics.forum.replies}}</span>
+              <span>Locked: {{statistics.forum.locked}}</span>
             </div>
           </div>
         </div>

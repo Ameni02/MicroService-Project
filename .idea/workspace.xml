@@ -6,6 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="3a496380-1332-4e77-8085-39bef1815ab8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/discussion-forum-service/models/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/discussion-forum-service/models/database.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/admin/admin-dashboard/admin-dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/admin/admin-dashboard/admin-dashboard.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/admin/admin-dashboard/admin-dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/components/admin/admin-dashboard/admin-dashboard.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/layouts/admin-layout/admin-layout.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/layouts/admin-layout/admin-layout.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
