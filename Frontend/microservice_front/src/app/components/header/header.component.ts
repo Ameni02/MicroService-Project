@@ -20,20 +20,13 @@ export class HeaderComponent {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  // General navigation method
   navigateTo(route: string): void {
     this.router.navigate([route])
-      .then(success => {
-        if (!success) {
-          console.error(`Navigation to ${route} failed`);
-          this.router.navigate(['/']); // Fallback to home
-        }
+      .then(() => {
         this.isMenuOpen = false;
+      })
+      .catch(error => {
+        console.error('Navigation error:', error);
       });
-  }
-
-  // Special handling for feedbacks
-  navigateToFeedbacks(): void {
-    this.navigateTo('/feedbacks');
   }
 }

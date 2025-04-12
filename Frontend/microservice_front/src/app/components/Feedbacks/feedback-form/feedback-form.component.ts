@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback } from '../../../models/feedback.model';
+import { Category } from '../../../models/category.model';
 import { FeedbackService } from '../../../services/feedback.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -18,6 +19,7 @@ export class FeedbackFormComponent implements OnInit {
   feedbackForm: FormGroup;
   loading = false;
   error: string | null = null;
+  categories: Category[] = [];
   isEditMode = false;
 
   constructor(
@@ -27,22 +29,47 @@ export class FeedbackFormComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.feedbackForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      role: ['', [Validators.required, Validators.minLength(3)]],
       comment: ['', [Validators.required, Validators.minLength(10)]],
-      rating: [0, [Validators.required, Validators.min(1), Validators.max(5)]]
+      rating: [0, [Validators.required, Validators.min(1), Validators.max(5)]],
+      categoryId: [null, Validators.required]
     });
   }
 
   ngOnInit(): void {
+    // Load categories first
+    this.loadCategories();
+
     // Check if we're in edit mode
-    if (this.route.snapshot.params['id']) {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id && id !== 'create') {
       this.isEditMode = true;
-      this.loadFeedback(this.route.snapshot.params['id']);
+      this.loadFeedback(Number(id));
     } else if (this.feedback) {
       this.isEditMode = true;
       this.patchFormValues();
+    } else {
+      // We're in create mode, nothing to load
+      console.log('Creating new feedback');
     }
+  }
+
+  loadCategories(): void {
+    this.loading = true;
+    this.feedbackService.getAllCategories().subscribe({
+      next: (categories: Category[]) => {
+        this.categories = categories;
+        this.loading = false;
+
+        // If there are categories, select the first one by default
+        if (categories.length > 0 && !this.feedbackForm.get('categoryId')?.value) {
+          this.feedbackForm.patchValue({ categoryId: categories[0].id });
+        }
+      },
+      error: (err: Error) => {
+        console.error('Error loading categories:', err);
+        this.loading = false;
+      }
+    });
   }
 
   loadFeedback(id: number): void {
@@ -63,10 +90,9 @@ export class FeedbackFormComponent implements OnInit {
   patchFormValues(): void {
     if (this.feedback) {
       this.feedbackForm.patchValue({
-        name: this.feedback.name,
-        role: this.feedback.role,
         comment: this.feedback.comment,
-        rating: this.feedback.rating
+        rating: this.feedback.rating,
+        categoryId: this.feedback.category?.id || null
       });
     }
   }
@@ -74,25 +100,53 @@ export class FeedbackFormComponent implements OnInit {
   onSubmit(): void {
     if (this.feedbackForm.valid) {
       this.loading = true;
-      const formData = this.feedbackForm.value;
+      this.error = null;
 
-      const operation = this.isEditMode && this.feedback
-        ? this.feedbackService.updateFeedback(this.feedback.id, formData)
-        : this.feedbackService.createFeedback(formData);
+      // Create a complete feedback object with all required fields
+      const formData = {
+        comment: this.feedbackForm.value.comment,
+        rating: this.feedbackForm.value.rating,
+        isAnonymous: this.isAnonymous || false,
+        status: 'Pending',
+        archived: false,
+        categoryId: this.feedbackForm.value.categoryId
+      };
 
-      operation.subscribe({
-        next: (result) => {
-          this.submit.emit(result);
-          this.router.navigate(['/feedbacks']);
-          this.loading = false;
-        },
-        error: (err) => {
-          this.error = this.isEditMode 
-            ? 'Failed to update feedback' 
-            : 'Failed to create feedback';
-          this.loading = false;
-        }
+      console.log('Submitting feedback:', formData);
+
+      // Use a try-catch block to handle any errors
+      try {
+        const operation = this.isEditMode && this.feedback?.id
+          ? this.feedbackService.updateFeedback(this.feedback.id, formData)
+          : this.feedbackService.createFeedback(formData);
+
+        operation.subscribe({
+          next: (result) => {
+            console.log('Feedback submitted successfully:', result);
+            this.submit.emit(result);
+            this.router.navigate(['/feedbacks']);
+            this.loading = false;
+          },
+          error: (err) => {
+            console.error('Error submitting feedback:', err);
+            this.error = this.isEditMode
+              ? 'Failed to update feedback'
+              : 'Failed to create feedback';
+            this.loading = false;
+          }
+        });
+      } catch (err) {
+        console.error('Exception during feedback submission:', err);
+        this.error = 'An unexpected error occurred';
+        this.loading = false;
+      }
+    } else {
+      // Form is invalid, mark all fields as touched to show validation errors
+      Object.keys(this.feedbackForm.controls).forEach(key => {
+        const control = this.feedbackForm.get(key);
+        control?.markAsTouched();
       });
+      this.error = 'Please fix the errors in the form';
     }
   }
 

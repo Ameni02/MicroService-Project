@@ -48,7 +48,7 @@ export class CategoryManagementComponent implements OnInit {
       this.loading = true;
       const categoryData = this.categoryForm.value;
 
-      if (this.editingCategory) {
+      if (this.editingCategory?.id) {
         this.categoryService.updateCategory(this.editingCategory.id, categoryData).subscribe({
           next: () => {
             this.loadCategories();
@@ -82,8 +82,8 @@ export class CategoryManagementComponent implements OnInit {
     });
   }
 
-  deleteCategory(categoryId: number): void {  // Changed from string to number
-    if (confirm('Are you sure you want to delete this category?')) {
+  deleteCategory(categoryId: number | undefined): void {
+    if (categoryId && confirm('Are you sure you want to delete this category?')) {
       this.loading = true;
       this.categoryService.deleteCategory(categoryId).subscribe({
         next: () => {

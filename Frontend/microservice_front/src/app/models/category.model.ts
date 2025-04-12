@@ -1,7 +1,8 @@
+import { Feedback } from './feedback.model';
+
 export interface Category {
-    id: number;
+    id?: number;
     name: string;
     description?: string;
-    createdAt: Date;
-    updatedAt: Date;
-} 
+    feedbacks?: Feedback[];
+}

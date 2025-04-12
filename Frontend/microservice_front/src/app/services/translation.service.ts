@@ -1,35 +1,40 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
 
-export interface Translation {
-  text: string;
-  language: string;
+export interface TranslationResult {
+  id?: number;
+  originalText: string;
+  translatedText: string;
+  sourceLanguage: string;
+  targetLanguage: string;
+  feedback?: any;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class TranslationService {
-  private apiUrl = `${environment.apiUrl}/translations`;
+  private readonly apiUrl = 'http://localhost:8063/api/translations';
 
   constructor(private http: HttpClient) {}
 
-  translateText(text: string, sourceLanguage: string, targetLanguage: string): Observable<Translation> {
-    return this.http.post<Translation>(this.apiUrl, {
-      text,
-      sourceLanguage,
-      targetLanguage
-    });
+  translateText(text: string, targetLanguage: string = 'en'): Observable<TranslationResult> {
+    const params = { text, targetLanguage };
+    return this.http.post<TranslationResult>(`${this.apiUrl}/translate`, null, { params }).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  getTranslations(text: string, sourceLanguage: string): Observable<Translation[]> {
-    return this.http.get<Translation[]>(`${this.apiUrl}`, {
-      params: {
-        text,
-        sourceLanguage
-      }
-    });
+  detectLanguage(text: string): Observable<string> {
+    const params = { text };
+    return this.http.post<string>(`${this.apiUrl}/detect`, null, { params }).pipe(
+      catchError(this.handleError)
+    );
   }
-} 
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('Translation service error:', error);
+    return throwError(() => new Error(error.message || 'Translation service error'));
+  }
+}

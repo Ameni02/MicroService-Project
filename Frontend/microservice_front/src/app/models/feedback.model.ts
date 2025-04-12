@@ -1,21 +1,37 @@
-import { Response } from './response.model';
+import { Category } from './category.model';
+import { TranslationResult } from '../services/translation.service';
 
 export interface Feedback {
     id: number;
-    name: string;
-    role: string;
     comment: string;
+    isAnonymous: boolean;
     rating: number;
+    submissionDate: Date;
     status: string;
-    isArchived: boolean;
-    createdAt: Date;
-    updatedAt: Date;
-    categoryId?: number;
-    responses?: Response[];
+    category: Category;
+    archived: boolean;
+    translations?: TranslationResult[];
 }
 
 export interface AnonymousFeedbackDTO {
     comment: string;
     rating: number;
-    categoryId?: number;
-} 
+    categoryId: number | null;
+}
+
+export interface FeedbackStats {
+    pending: number;
+    resolved: number;
+    total: number;
+    archived: number;
+    totalFeedbacks?: number;
+    averageRating?: number;
+    statusCounts?: { [key: string]: number };
+}
+
+export interface Activity {
+    id: number;
+    type: string;
+    description: string;
+    timestamp: Date;
+}

@@ -1,95 +1,120 @@
 <div class="feedback-detail-container">
-  <div class="header">
-    <h2>Feedback Details</h2>
-    <div class="actions">
-      <button *ngIf="feedback?.isArchived" 
-              (click)="unarchiveFeedback()"
-              [disabled]="isUnarchiving"
-              class="btn btn-primary">
-        <span *ngIf="!isUnarchiving">Unarchive</span>
-        <span *ngIf="isUnarchiving" class="spinner"></span>
-      </button>
-      <!--
-      <button *ngIf="!feedback?.isArchived" 
-              (click)="archiveFeedback()"
-              [disabled]="isArchiving"
-              class="btn btn-warning">
-        <span *ngIf="!isArchiving">Archive</span>
-        <span *ngIf="isArchiving" class="spinner"></span>
-      </button>
-      <button (click)="navigateToFeedbackList()" class="btn btn-outline">
-        Back to List
-      </button> -->
+  <button class="back-button" (click)="goBack()">
+    <i class="bi bi-arrow-left"></i> Back
+  </button>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
   </div>
 
-  <div *ngIf="loading" class="loading-container">
-    <div class="spinner"></div>
-    <p>Loading feedback...</p>
-  </div>
-
-  <div *ngIf="error" class="error-container">
-    <p>{{ error }}</p>
-    <button class="btn btn-primary" (click)="loadFeedback()">Try Again</button>
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
   </div>
 
   <div *ngIf="!loading && !error && feedback" class="feedback-content">
     <div class="feedback-header">
-      <h2>{{ feedback.name || 'Anonymous' }}</h2>
-      <div class="feedback-meta">
-        <span class="feedback-date">{{ feedback.createdAt | date:'mediumDate' }}</span>
-        <app-status-badge [status]="feedback.status" [isArchived]="false"></app-status-badge>
-      </div>
+      <h2>Feedback Details</h2>
+      <span class="badge" [ngClass]="'status-' + feedback.status.toLowerCase()">
+        {{ feedback.status }}
+      </span>
     </div>
 
-    <div class="feedback-body">
-      <div class="feedback-rating">
+    <div class="feedback-info">
+      <div class="info-group">
+        <label>Submitted by:</label>
+        <span>{{ feedback.isAnonymous ? 'Anonymous' : 'User' }}</span>
+      </div>
+      <div class="info-group">
+        <label>Date:</label>
+        <span>{{ feedback.submissionDate | date:'medium' }}</span>
+      </div>
+      <div class="info-group">
+        <label>Category:</label>
+        <span>{{ feedback.category ? feedback.category.name : 'None' }}</span>
+      </div>
+      <div class="info-group">
+        <label>Rating:</label>
         <app-rating-stars [rating]="feedback.rating" [editable]="false"></app-rating-stars>
       </div>
-      <p class="feedback-comment">{{ feedback.comment }}</p>
     </div>
 
-    <!-- Response Form -->
-    <div class="response-form">
-      <h3>Add Your Response</h3>
-      <form [formGroup]="responseForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="content">Your Response</label>
-          <textarea 
-            id="content" 
-            formControlName="content" 
-            rows="4" 
-            placeholder="Write your response here..."
-            [class.is-invalid]="responseForm.get('content')?.invalid && responseForm.get('content')?.touched">
-          </textarea>
-          <div class="invalid-feedback" *ngIf="responseForm.get('content')?.invalid && responseForm.get('content')?.touched">
-            Response is required and must be at least 10 characters long
-          </div>
-        </div>
-        <div class="form-actions">
-          <button type="submit" class="btn btn-primary" [disabled]="responseForm.invalid || submitting">
-            <span *ngIf="!submitting">Submit Response</span>
-            <span *ngIf="submitting" class="spinner"></span>
+    <div class="feedback-comment">
+      <div class="comment-header">
+        <h3>Comment</h3>
+        <div class="translation-controls">
+          <select [(ngModel)]="targetLanguage" class="form-control form-control-sm">
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="es">Spanish</option>
+            <option value="de">German</option>
+            <option value="it">Italian</option>
+            <option value="ar">Arabic</option>
+          </select>
+          <button
+            class="btn btn-sm btn-primary"
+            (click)="translateFeedback()"
+            [disabled]="translationLoading"
+          >
+            <i class="bi bi-translate"></i>
+            <span *ngIf="!translationLoading">Translate</span>
+            <span *ngIf="translationLoading" class="spinner-border spinner-border-sm"></span>
           </button>
         </div>
-      </form>
+      </div>
+
+      <p>{{ feedback.comment }}</p>
+
+      <!-- Translation Result -->
+      <div *ngIf="translationError" class="alert alert-danger">
+        {{ translationError }}
+      </div>
+
+      <div *ngIf="currentTranslation" class="translation-result">
+        <div class="translation-header">
+          <h4>Translation ({{ currentTranslation.sourceLanguage }} → {{ currentTranslation.targetLanguage }})</h4>
+        </div>
+        <p class="translated-text">{{ currentTranslation.translatedText }}</p>
+      </div>
     </div>
 
-    <!-- Responses List -->
-    <div class="responses-section">
+    <div class="feedback-responses">
       <h3>Responses</h3>
-      <div *ngIf="feedback.responses && feedback.responses.length > 0" class="responses-list">
-        <div *ngFor="let response of feedback.responses" class="response-card">
-          <div class="response-header">
-            <span class="response-author">{{ response.author }}</span>
-            <span class="response-date">{{ response.createdAt | date:'mediumDate' }}</span>
-          </div>
-          <p class="response-content">{{ response.content }}</p>
+      <div *ngIf="responses.length === 0" class="no-responses">
+        No responses yet.
+      </div>
+      <div *ngFor="let response of responses" class="response-item">
+        <div class="response-header">
+          <span class="response-author">Admin</span>
+          <span class="response-date">{{ response.responseDate | date:'short' }}</span>
         </div>
+        <p class="response-content">{{ response.responseText }}</p>
       </div>
-      <div *ngIf="!feedback.responses || feedback.responses.length === 0" class="no-responses">
-        <p>No responses yet. Be the first to respond!</p>
-      </div>
+    </div>
+
+    <div class="response-form-container">
+      <h3>Add Response</h3>
+      <form [formGroup]="responseForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="responseText">Your Response</label>
+          <textarea
+            id="responseText"
+            formControlName="responseText"
+            class="form-control"
+            rows="4"
+            [class.is-invalid]="responseForm.get('responseText')?.invalid && responseForm.get('responseText')?.touched"
+          ></textarea>
+          <div class="invalid-feedback" *ngIf="responseForm.get('responseText')?.invalid && responseForm.get('responseText')?.touched">
+            <div *ngIf="responseForm.get('responseText')?.errors?.['required']">Response is required</div>
+            <div *ngIf="responseForm.get('responseText')?.errors?.['minlength']">Response must be at least 10 characters</div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="responseForm.invalid || submitting">
+          <span *ngIf="submitting" class="spinner-border spinner-border-sm mr-1"></span>
+          Submit Response
+        </button>
+      </form>
     </div>
   </div>
 </div>

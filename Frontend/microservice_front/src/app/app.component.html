@@ -1,7 +1,11 @@
-<app-header></app-header>
+<ng-container *ngIf="!isAdminRoute">
+  <app-header></app-header>
+</ng-container>
 
-<main>
+<main [ngClass]="{'main-content': !isAdminRoute, 'admin-content': isAdminRoute}">
   <router-outlet></router-outlet>
 </main>
 
-<app-footer></app-footer>
+<ng-container *ngIf="!isAdminRoute">
+  <app-footer></app-footer>
+</ng-container>

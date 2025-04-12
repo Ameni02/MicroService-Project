@@ -1,20 +1,19 @@
 <header id="header" class="header d-flex align-items-center sticky-top">
   <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-    <a href="/" class="logo d-flex align-items-center">
-      <h1 class="sitename">Online-Trainings   <span>Platform</span> </h1>
+    <a routerLink="/" class="logo d-flex align-items-center">
+      <h1 class="sitename">Online-Trainings <span>Platform</span></h1>
     </a>
 
     <nav id="navmenu" class="navmenu" [class.mobile-nav-active]="isMenuOpen">
       <ul>
-        <li><a (click)="navigateTo('/')" [class.active]="currentUrl === '/'">Home</a></li>
-        <li><a (click)="navigateTo('/trainings')" [class.active]="currentUrl === '/trainings'">Trainings</a></li>
-        <li><a (click)="navigateTo('/evaluation')" [class.active]="currentUrl === '/evaluation'">Evaluation</a></li>
-        <li><a (click)="navigateTo('/events')" [class.active]="currentUrl === '/events'">Events</a></li>
-        <li><a (click)="navigateTo('/ads')" [class.active]="currentUrl === '/ads'">Ads</a></li>
-        <li><a (click)="navigateToFeedbacks()" [class.active]="currentUrl.startsWith('/feedbacks')">Feedback</a></li>
-        <li><a (click)="navigateTo('/forum')" [class.active]="currentUrl === '/forum'">Discussion Forum</a></li>
-        
-        <li><a (click)="navigateTo('/contact')" [class.active]="currentUrl === '/contact'">Contact</a></li>
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+        <li><a routerLink="/trainings" routerLinkActive="active">Trainings</a></li>
+        <li><a routerLink="/evaluation" routerLinkActive="active">Evaluation</a></li>
+        <li><a routerLink="/events" routerLinkActive="active">Events</a></li>
+        <li><a routerLink="/ads" routerLinkActive="active">Ads</a></li>
+        <li><a routerLink="/feedbacks" routerLinkActive="active">Feedback</a></li>
+        <li><a routerLink="/forum" routerLinkActive="active">Discussion Forum</a></li>
+        <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
       </ul>
       <i class="mobile-nav-toggle d-xl-none bi bi-list" (click)="toggleMenu()"></i>
     </nav>

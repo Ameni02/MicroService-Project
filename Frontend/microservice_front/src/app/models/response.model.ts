@@ -1,8 +1,8 @@
+import { Feedback } from './feedback.model';
+
 export interface Response {
-    id: number;
-    feedbackId: number;
-    author: string;
-    content: string;
-    createdAt: Date;
-    updatedAt: Date;
-  }
+    id?: number;
+    responseText: string;
+    responseDate?: Date;
+    feedback?: Feedback;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FeedbackService, FeedbackStats, Activity } from '../../../services/feedback.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -8,78 +9,96 @@ import { Router } from '@angular/router';
 })
 export class AdminDashboardComponent implements OnInit {
   activeSection: string = 'overview';
-  
+
   statistics = {
-    users: {
-      total: 1250,
-      new: 48,
-      active: 890
-    },
-    trainings: {
-      total: 75,
-      active: 45,
-      draft: 30
-    },
-    events: {
-      upcoming: 12,
-      past: 24,
-      total: 36
-    },
-    feedbacks: {
-      pending: 15,
-      resolved: 85,
-      total: 100
-    }
+    users: { total: 0, new: 0, active: 0 },
+    trainings: { total: 0, active: 0, draft: 0 },
+    events: { upcoming: 0, past: 0, total: 0 },
+    feedbacks: { pending: 0, resolved: 0, total: 0, archived: 0 }
   };
 
-  recentActivities = [
-    {
-      type: 'user',
-      action: 'New registration',
-      details: 'John Doe registered as a trainer',
-      timestamp: new Date(Date.now() - 1000 * 60 * 30) // 30 minutes ago
-    },
-    {
-      type: 'training',
-      action: 'Course updated',
-      details: 'Advanced Angular Development course content updated',
-      timestamp: new Date(Date.now() - 1000 * 60 * 60) // 1 hour ago
-    },
-    {
-      type: 'feedback',
-      action: 'New feedback',
-      details: 'Urgent feedback received for Cloud Computing course',
-      timestamp: new Date(Date.now() - 1000 * 60 * 120) // 2 hours ago
-    }
-  ];
+  recentActivities: Activity[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private feedbackService: FeedbackService
+  ) {}
 
   ngOnInit(): void {
     this.loadDashboardData();
   }
 
   loadDashboardData(): void {
-    // Here you would typically make API calls to fetch real-time data
-    // this.adminService.getDashboardStats().subscribe(...)
+    this.feedbackService.getFeedbackStats().subscribe({
+      next: (stats: FeedbackStats) => {
+        this.statistics.feedbacks = {
+          pending: stats.pending,
+          resolved: stats.resolved,
+          total: stats.total,
+          archived: stats.archived
+        };
+      },
+      error: (error: Error) => {
+        console.error('Error loading feedback stats:', error);
+      }
+    });
+
+    this.feedbackService.getRecentActivities().subscribe({
+      next: (activities: Activity[]) => {
+        this.recentActivities = activities;
+      },
+      error: (error: Error) => {
+        console.error('Error loading activities:', error);
+      }
+    });
+  }
+
+  getActivityIcon(type: string): string {
+    switch(type) {
+      case 'user':
+        return 'bi-person';
+      case 'training':
+        return 'bi-book';
+      case 'feedback':
+        return 'bi-chat';
+      default:
+        return 'bi-circle';
+    }
   }
 
   navigateToSection(section: string): void {
-    this.activeSection = section;
+    switch(section) {
+      case 'feedbacks':
+        this.router.navigate(['/admin/feedbacks']);
+        break;
+      case 'archived-feedbacks':
+        this.router.navigate(['/admin/feedbacks']);
+        this.activeSection = 'feedbacks';
+        break;
+      case 'categories':
+        this.router.navigate(['/admin/feedbacks']);
+        this.activeSection = 'feedbacks';
+        break;
+      case 'reports':
+        this.router.navigate(['/admin/feedbacks']);
+        this.activeSection = 'feedbacks';
+        break;
+      default:
+        this.activeSection = section;
+    }
   }
 
   handleQuickAction(action: string): void {
     switch(action) {
-      case 'newTraining':
-        this.router.navigate(['/admin/trainings/create']);
-        break;
-      case 'newEvent':
-        this.router.navigate(['/admin/events/create']);
+      case 'viewFeedbacks':
+        this.router.navigate(['/admin/feedbacks']);
         break;
       case 'viewReports':
-        this.router.navigate(['/admin/reports']);
+        this.router.navigate(['/admin/feedbacks']);
         break;
-      // Add more quick actions as needed
+      case 'manageCategories':
+        this.router.navigate(['/admin/feedbacks']);
+        break;
     }
   }
 }

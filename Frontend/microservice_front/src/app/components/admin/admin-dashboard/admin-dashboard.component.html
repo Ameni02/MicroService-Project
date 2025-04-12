@@ -1,49 +1,6 @@
 <div class="admin-dashboard">
   <!-- Sidebar Navigation -->
-  <aside class="dashboard-sidebar">
-    <div class="sidebar-header">
-      <h3>Admin Panel</h3>
-    </div>
-    <nav class="sidebar-nav">
-      <ul>
-        <li [class.active]="activeSection === 'overview'">
-          <a (click)="navigateToSection('overview')">
-            <i class="bi bi-grid"></i> Overview
-          </a>
-        </li>
-        <li [class.active]="activeSection === 'users'">
-          <a (click)="navigateToSection('users')">
-            <i class="bi bi-people"></i> Users
-          </a>
-        </li>
-        <li [class.active]="activeSection === 'trainings'">
-          <a (click)="navigateToSection('trainings')">
-            <i class="bi bi-book"></i> Trainings
-          </a>
-        </li>
-        <li [class.active]="activeSection === 'events'">
-          <a (click)="navigateToSection('events')">
-            <i class="bi bi-calendar-event"></i> Events
-          </a>
-        </li>
-        <li [class.active]="activeSection === 'feedbacks'">
-          <a (click)="navigateToSection('feedbacks')">
-            <i class="bi bi-chat-dots"></i> Feedbacks
-          </a>
-        </li>
-        <li [class.active]="activeSection === 'reports'">
-          <a (click)="navigateToSection('reports')">
-            <i class="bi bi-graph-up"></i> Reports
-          </a>
-        </li>
-        <li [class.active]="activeSection === 'settings'">
-          <a (click)="navigateToSection('settings')">
-            <i class="bi bi-gear"></i> Settings
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </aside>
+  
 
   <!-- Main Content Area -->
   <main class="dashboard-main">
@@ -158,9 +115,9 @@
               }"></i>
             </div>
             <div class="activity-details">
-              <h4>{{activity.action}}</h4>
-              <p>{{activity.details}}</p>
-              <span class="activity-time">{{activity.timestamp | date:'shortTime'}}</span>
+              <h4>{{activity.type}}</h4>
+              <p>{{activity.description}}</p>
+              <span class="activity-time">{{activity.timestamp | date:'short'}}</span>
             </div>
           </div>
         </div>

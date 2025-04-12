@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FeedbackService } from '../../../services/feedback.service';
 import { ResponseService } from '../../../services/response.service';
+import { TranslationService, TranslationResult } from '../../../services/translation.service';
 import { Feedback } from '../../../models/feedback.model';
 import { Response } from '../../../models/response.model';
 
@@ -13,104 +14,71 @@ import { Response } from '../../../models/response.model';
 })
 export class FeedbackDetailComponent implements OnInit {
   feedback: Feedback | null = null;
+  responses: Response[] = [];
   loading = false;
   error: string | null = null;
   isArchiving = false;
   isUnarchiving = false;
-  submitting = false;
   responseForm: FormGroup;
+  submitting = false;
+
+  // Translation
+  currentTranslation: TranslationResult | null = null;
+  translationLoading = false;
+  translationError: string | null = null;
+  targetLanguage: string = 'en';
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private feedbackService: FeedbackService,
     private responseService: ResponseService,
+    private translationService: TranslationService,
+    private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder
   ) {
     this.responseForm = this.fb.group({
-      content: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
-      author: ['Anonymous', [Validators.maxLength(100)]]
+      responseText: ['', [Validators.required, Validators.minLength(10)]]
     });
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id && !isNaN(+id)) {
-        this.loadFeedback(+id);
-      } else {
-        this.error = 'Invalid feedback ID';
-        this.router.navigate(['/feedbacks']);
-      }
-    });
+    this.loadFeedback();
   }
 
-  loadFeedback(id?: number): void {
-    if (!id && this.feedback?.id) {
-      id = this.feedback.id;
-    }
-    if (!id) return;
-  
+  loadFeedback(): void {
     this.loading = true;
     this.error = null;
-    
-    console.log('Loading feedback for ID:', id); // Debug log
-    
+
+    const id = this.route.snapshot.params['id'];
+    if (!id) {
+      this.error = 'No feedback ID provided';
+      this.loading = false;
+      return;
+    }
+
     this.feedbackService.getFeedbackById(id).subscribe({
-      next: (feedback: Feedback) => {
-        console.log('Received feedback:', feedback); // Debug log
-        
-        // Ensure responses array exists
-        if (!feedback.responses) {
-          feedback.responses = [];
-        }
-        
+      next: (feedback) => {
         this.feedback = feedback;
-        this.loading = false;
+        this.loadResponses(id);
       },
-      error: (err: Error) => {
-        console.error('Error loading feedback:', err); // Detailed error log
-        this.error = 'Failed to load feedback details';
+      error: (err) => {
+        this.error = 'Failed to load feedback';
         this.loading = false;
+        console.error('Error loading feedback:', err);
       }
     });
   }
 
-  onSubmit(): void {
-    if (this.responseForm.invalid || !this.feedback) return;
-
-    this.submitting = true;
-    const newResponse: Partial<Response> = {
-      content: this.responseForm.value.content,
-      author: this.responseForm.value.author,
-      feedbackId: this.feedback.id
-    };
-
-    this.responseService.createResponse(newResponse as Response).subscribe({
-      next: (response: Response) => {
-        if (!this.feedback) return;
-
-        // Initialize responses array if it doesn't exist
-        if (!this.feedback.responses) {
-          this.feedback.responses = [];
-        }
-
-        // Update the feedback with the new response
-        this.feedback = {
-          ...this.feedback,
-          responses: [...this.feedback.responses, response]
-        };
-
-        this.responseForm.reset({
-          content: '',
-          author: 'Anonymous'
-        });
-        this.submitting = false;
+  loadResponses(feedbackId: number): void {
+    this.feedbackService.getResponsesForFeedback(feedbackId).subscribe({
+      next: (responses) => {
+        this.responses = responses;
+        this.loading = false;
       },
-      error: (err: Error) => {
-        this.error = 'Failed to submit response. Please try again.';
-        this.submitting = false;
-        console.error('Error submitting response:', err);
+      error: (err) => {
+        this.error = 'Failed to load responses';
+        this.loading = false;
+        console.error('Error loading responses:', err);
       }
     });
   }
@@ -123,8 +91,8 @@ export class FeedbackDetailComponent implements OnInit {
     this.feedbackService.archiveFeedback(this.feedback.id).subscribe({
       next: () => {
         this.isArchiving = false;
-        this.router.navigate(['/feedbacks'], { 
-          state: { message: 'Feedback archived successfully' } 
+        this.router.navigate(['/feedbacks'], {
+          state: { message: 'Feedback archived successfully' }
         });
       },
       error: (err: Error) => {
@@ -143,8 +111,8 @@ export class FeedbackDetailComponent implements OnInit {
     this.feedbackService.unarchiveFeedback(this.feedback.id).subscribe({
       next: () => {
         this.isUnarchiving = false;
-        this.router.navigate(['/feedbacks'], { 
-          state: { message: 'Feedback unarchived successfully' } 
+        this.router.navigate(['/feedbacks'], {
+          state: { message: 'Feedback unarchived successfully' }
         });
       },
       error: (err: Error) => {
@@ -155,7 +123,84 @@ export class FeedbackDetailComponent implements OnInit {
     });
   }
 
+  onSubmit(): void {
+    if (this.responseForm.invalid || !this.feedback) {
+      // Mark fields as touched to show validation errors
+      Object.keys(this.responseForm.controls).forEach(key => {
+        const control = this.responseForm.get(key);
+        control?.markAsTouched();
+      });
+      return;
+    }
+
+    this.submitting = true;
+    this.error = null;
+
+    const responseData = {
+      responseText: this.responseForm.value.responseText,
+      feedbackId: this.feedback.id
+    };
+
+    console.log('Submitting response:', responseData);
+
+    try {
+      this.feedbackService.addResponse(this.feedback.id, responseData).subscribe({
+        next: (response) => {
+          console.log('Response submitted successfully:', response);
+          this.responses.push(response);
+          this.responseForm.reset();
+          this.submitting = false;
+
+          // Update the feedback status to 'In Progress' if it's 'Pending'
+          if (this.feedback && this.feedback.status === 'Pending') {
+            this.feedbackService.updateFeedbackStatus(this.feedback.id, 'In Progress').subscribe({
+              next: (updatedFeedback) => {
+                this.feedback = updatedFeedback;
+              },
+              error: (err) => {
+                console.error('Error updating feedback status:', err);
+              }
+            });
+          }
+        },
+        error: (err) => {
+          this.error = 'Failed to submit response';
+          this.submitting = false;
+          console.error('Error submitting response:', err);
+        }
+      });
+    } catch (err) {
+      console.error('Exception during response submission:', err);
+      this.error = 'An unexpected error occurred';
+      this.submitting = false;
+    }
+  }
+
   navigateToFeedbackList(): void {
     this.router.navigate(['/feedbacks']);
+  }
+
+  goBack(): void {
+    this.router.navigate(['/feedbacks']);
+  }
+
+  translateFeedback(): void {
+    if (!this.feedback) return;
+
+    this.translationLoading = true;
+    this.translationError = null;
+
+    this.translationService.translateText(this.feedback.comment, this.targetLanguage)
+      .subscribe({
+        next: (result) => {
+          this.currentTranslation = result;
+          this.translationLoading = false;
+        },
+        error: (error) => {
+          this.translationError = 'Failed to translate feedback';
+          this.translationLoading = false;
+          console.error('Error translating feedback:', error);
+        }
+      });
   }
 }
