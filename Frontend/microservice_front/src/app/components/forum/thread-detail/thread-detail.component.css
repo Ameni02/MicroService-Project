@@ -1,0 +1,39 @@
+.thread-detail {
+  margin-bottom: 30px;
+}
+
+.thread-content {
+  margin-bottom: 30px;
+}
+
+.thread-content-text {
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+.card-title {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.replies-section {
+  margin-top: 30px;
+}
+
+.reply-card {
+  border-left: 4px solid #6c757d;
+}
+
+.reply-content {
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+.badge {
+  font-weight: 500;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}

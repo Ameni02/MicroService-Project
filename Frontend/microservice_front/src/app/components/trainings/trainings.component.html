@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row gy-4">
+    <div *ngFor="let training of trainings" class="col-lg-4 col-md-6" data-aos="fade-up">
+      <div class="service-item position-relative">
+        <div class="icon">
+          <i [class]="training.icon"></i>
+        </div>
+        <a [href]="training.link" class="stretched-link">
+          <h3>{{training.title}}</h3>
+        </a>
+        <p>{{training.description}}</p>
+      </div>
+    </div>
+  </div>
+</div> 

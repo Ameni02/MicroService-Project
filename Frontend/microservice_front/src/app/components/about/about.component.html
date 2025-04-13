@@ -1,0 +1,49 @@
+<section id="about" class="about section">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-6" data-aos="fade-up">
+        <div class="content">
+          <h2>About MicroService Platform</h2>
+          <p>
+            MicroService Platform is a comprehensive solution designed to enhance professional development through
+            innovative training programs, skill evaluation, and community engagement.
+          </p>
+          <p>
+            Our platform brings together experts, learners, and organizations to create a dynamic ecosystem for
+            continuous learning and growth.
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="stats">
+          <div class="row gy-4">
+            <div class="col-6" *ngFor="let stat of stats">
+              <div class="stat-item">
+                <span class="number">{{stat.number}}</span>
+                <span class="label">{{stat.label}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="section-title">
+      <h2>Our Team</h2>
+      <p>Meet the people behind MicroService Platform</p>
+    </div>
+    <div class="row gy-4">
+      <div class="col-lg-4 col-md-6" *ngFor="let member of team" data-aos="fade-up">
+        <div class="team-member">
+          <img [src]="member.image" [alt]="member.name" class="img-fluid">
+          <div class="member-info">
+            <h4>{{member.name}}</h4>
+            <span>{{member.role}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

@@ -1,0 +1,72 @@
+<div> <app-ai-quiz-suggestions (questionAdded)="addAiQuestion($event)"></app-ai-quiz-suggestions>
+
+  <div>
+
+    <form [formGroup]="quizForm" (ngSubmit)="onSubmit()">
+      <mat-card class="form-card">
+        <h2 class="form-header">Add Quiz</h2>
+
+        <!-- Quiz Title -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Quiz Title</mat-label>
+          <input matInput formControlName="title" required>
+        </mat-form-field>
+
+        <!-- Quiz Description -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" required></textarea>
+        </mat-form-field>
+
+        <!-- Questions Section -->
+        <div formArrayName="questions">
+          <div *ngFor="let question of questions.controls; let i = index" [formGroupName]="i">
+            <mat-card class="question-card">
+              <h3>Question {{ i + 1 }}</h3>
+
+              <!-- Question Text -->
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Question Text</mat-label>
+                <input matInput formControlName="text" placeholder="Enter question text" required>
+              </mat-form-field>
+
+              <!-- Question Type -->
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Question Type</mat-label>
+                <input matInput formControlName="type" placeholder="Enter question type" required>
+              </mat-form-field>
+
+              <!-- Options Section -->
+              <div formArrayName="options">
+                <div *ngFor="let option of getOptions(i).controls; let j = index" [formGroupName]="j">
+                  <mat-form-field appearance="fill" class="option-field">
+                    <mat-label>Option {{ j + 1 }}</mat-label>
+                    <input matInput formControlName="text" placeholder="Option text" required>
+                  </mat-form-field>
+
+                  <mat-checkbox formControlName="isCorrect">Correct?</mat-checkbox>
+                </div>
+                <div class="button-group">
+                  <button mat-raised-button color="primary" type="button" (click)="addOption(i)">Add Option</button>
+                  <button mat-raised-button color="warn" type="button" (click)="cancelOption(i)">Cancel Option</button>
+                </div>
+              </div>
+
+              <!-- Cancel Question Button -->
+              <div class="button-group">
+                <button mat-raised-button color="warn" type="button" (click)="cancelQuestion(i)">Cancel Question</button>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+
+        <!-- Add Question Button -->
+        <button mat-raised-button color="primary" type="button" (click)="addQuestion()">Add Question</button>
+
+        <!-- Submit Button -->
+        <button mat-raised-button color="accent" type="submit" [disabled]="quizForm.invalid">Add Quiz</button>
+      </mat-card>
+    </form>
+  </div>
+  <!-- AI Quiz Suggestions Component -->
+</div>

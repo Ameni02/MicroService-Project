@@ -1,0 +1,29 @@
+<div class="response-list">
+  <h3>Responses</h3>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading responses...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+    <button (click)="loadResponses()">Retry</button>
+  </div>
+
+  <div *ngIf="!loading && !error && responses.length === 0" class="no-responses">
+    <p>No responses yet.</p>
+  </div>
+
+  <div *ngIf="!loading && !error && responses.length > 0" class="responses">
+    <div *ngFor="let response of responses" class="response-card">
+      <div class="response-header">
+        <span class="author">{{ response.author }}</span>
+        <span class="date">{{ response.createdAt | date:'medium' }}</span>
+      </div>
+      <div class="response-content">
+        {{ response.content }}
+      </div>
+    </div>
+  </div>
+</div> 

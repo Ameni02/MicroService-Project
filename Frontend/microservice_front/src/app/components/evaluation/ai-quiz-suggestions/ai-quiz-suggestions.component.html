@@ -1,0 +1,52 @@
+<div class="ai-quiz-container">
+  <h2>Generate AI Quiz</h2>
+
+  <!-- Input Fields -->
+  <div class="input-container">
+    <label>Topic:</label>
+    <input type="text" [(ngModel)]="topic" placeholder="Enter quiz topic" required />
+
+    <label>Number of Questions:</label>
+    <input type="number" [(ngModel)]="numQuestions" min="1" required />
+
+    <button (click)="generateQuiz()" [disabled]="loading">Generate</button>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="loading">Generating quiz, please wait...</div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <!-- 🎯 Structured Quiz Display -->
+  <div *ngIf="aiQuiz && aiQuiz.questions.length; else noStructuredQuiz">
+    <h3>{{ aiQuiz.title }}</h3>
+    <p>{{ aiQuiz.description }}</p>
+
+    <div *ngFor="let question of aiQuiz.questions; let i = index" class="question-card">
+      <p><strong>{{ i + 1 }}. {{ question.question }}</strong></p>
+
+      <!-- ✅ Show options correctly -->
+      <ul>
+        <li *ngFor="let option of question.options">
+          <input type="checkbox" [checked]="option.correct || false" disabled />
+          {{ option.text ? option.text : option }} <!-- ✅ Handles both object & string array -->
+        </li>
+      </ul>
+
+      <button (click)="addToQuiz(question)">Add to Quiz</button>
+    </div>
+  </div>
+
+  <!-- 🔥 Always Show Raw AI Response Next to Structured View -->
+  <div class="response-box">
+    <h3>Raw AI Response</h3>
+    <pre>{{ rawAiText }}</pre>
+
+  </div>
+
+  <!-- 🔥 If No Structured Quiz, Still Show Raw Response -->
+  <ng-template #noStructuredQuiz>
+    <p>No structured quiz available. Check raw response for details.</p>
+  </ng-template>
+</div>

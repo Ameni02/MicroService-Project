@@ -1,0 +1,124 @@
+.ai-quiz-container {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  background: #f9f9f9;
+  max-width: 600px;
+  margin: auto;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, button {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #ccc;
+}
+
+.loading {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+}
+
+.question-card {
+  background: white;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.ai-quiz-container {
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input-container input {
+  width: 80%;
+  padding: 8px;
+}
+
+button {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.loading {
+  font-weight: bold;
+  color: orange;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+/* 📌 Structured Quiz and Raw Response Side-by-Side */
+.quiz-response-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.structured-quiz, .raw-response {
+  width: 48%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: left;
+}
+
+/* 📌 Ensures Raw Response is Scrollable */
+.raw-response pre {
+  max-height: 300px;
+  overflow: auto;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* 📌 Mobile Responsive */
+@media (max-width: 768px) {
+  .quiz-response-container {
+    flex-direction: column;
+  }
+
+  .structured-quiz, .raw-response {
+    width: 100%;
+  }
+}
+

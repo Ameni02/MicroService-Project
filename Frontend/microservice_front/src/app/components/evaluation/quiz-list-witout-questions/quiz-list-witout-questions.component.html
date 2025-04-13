@@ -1,0 +1,40 @@
+<div class="search-container">
+  <mat-form-field appearance="outline">
+    <mat-label>Rechercher un quiz...</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput type="text" [(ngModel)]="searchQuery" (input)="filterQuizzes()">
+    <button mat-button *ngIf="searchQuery" matSuffix (click)="clearSearch()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
+<div class="quiz-container">
+  <div *ngFor="let quiz of dataSource.connect() | async" class="quiz-card">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ quiz.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ quiz.description }}</p>
+      </mat-card-content>
+      <mat-card-actions class="button-container">
+        <button mat-raised-button color="primary" [routerLink]="['/quiz-details', quiz.id]">
+          Détails
+        </button>
+        <button mat-raised-button color="warn" (click)="deleteQuiz(quiz.id)">
+          Supprimer
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<!-- Pagination -->
+<div class="paginator-container">
+  <mat-paginator
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons>
+  </mat-paginator>
+</div>

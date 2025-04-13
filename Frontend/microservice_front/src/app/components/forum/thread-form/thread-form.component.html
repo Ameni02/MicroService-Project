@@ -1,0 +1,84 @@
+<form [formGroup]="threadForm" (ngSubmit)="onSubmit()">
+  <!-- Error Alert -->
+  <div class="alert alert-danger" *ngIf="error">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error }}
+  </div>
+
+  <!-- Title Field -->
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      id="title" 
+      formControlName="title" 
+      placeholder="Enter thread title"
+      [ngClass]="{'is-invalid': threadForm.get('title')?.invalid && threadForm.get('title')?.touched}"
+    >
+    <div class="invalid-feedback" *ngIf="threadForm.get('title')?.errors?.['required'] && threadForm.get('title')?.touched">
+      Title is required.
+    </div>
+    <div class="invalid-feedback" *ngIf="threadForm.get('title')?.errors?.['minlength'] && threadForm.get('title')?.touched">
+      Title must be at least 5 characters.
+    </div>
+    <div class="invalid-feedback" *ngIf="threadForm.get('title')?.errors?.['maxlength'] && threadForm.get('title')?.touched">
+      Title cannot exceed 100 characters.
+    </div>
+  </div>
+
+  <!-- Author Field -->
+  <div class="mb-3">
+    <label for="author" class="form-label">Your Name</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      id="author" 
+      formControlName="author" 
+      placeholder="Enter your name"
+      [ngClass]="{'is-invalid': threadForm.get('author')?.invalid && threadForm.get('author')?.touched}"
+    >
+    <div class="invalid-feedback" *ngIf="threadForm.get('author')?.errors?.['required'] && threadForm.get('author')?.touched">
+      Name is required.
+    </div>
+    <div class="invalid-feedback" *ngIf="threadForm.get('author')?.errors?.['minlength'] && threadForm.get('author')?.touched">
+      Name must be at least 3 characters.
+    </div>
+    <div class="invalid-feedback" *ngIf="threadForm.get('author')?.errors?.['maxlength'] && threadForm.get('author')?.touched">
+      Name cannot exceed 50 characters.
+    </div>
+  </div>
+
+  <!-- Content Field -->
+  <div class="mb-3">
+    <label for="content" class="form-label">Content</label>
+    <textarea 
+      class="form-control" 
+      id="content" 
+      formControlName="content" 
+      rows="5" 
+      placeholder="Enter thread content"
+      [ngClass]="{'is-invalid': threadForm.get('content')?.invalid && threadForm.get('content')?.touched}"
+    ></textarea>
+    <div class="invalid-feedback" *ngIf="threadForm.get('content')?.errors?.['required'] && threadForm.get('content')?.touched">
+      Content is required.
+    </div>
+    <div class="invalid-feedback" *ngIf="threadForm.get('content')?.errors?.['minlength'] && threadForm.get('content')?.touched">
+      Content must be at least 10 characters.
+    </div>
+  </div>
+
+  <!-- Form Actions -->
+  <div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-secondary me-2" (click)="onCancel()">
+      <i class="bi bi-x-circle me-1"></i>Cancel
+    </button>
+    <button type="submit" class="btn btn-primary" [disabled]="submitting">
+      <i class="bi bi-check-circle me-1"></i>
+      <span *ngIf="!submitting">Create Thread</span>
+      <span *ngIf="submitting">
+        <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+        Creating...
+      </span>
+    </button>
+  </div>
+</form>

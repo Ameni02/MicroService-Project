@@ -1,0 +1,29 @@
+<div class="quiz-list-container">
+  <h2>Available Quizzes</h2>
+
+  <!-- Search Input -->
+  <mat-form-field appearance="outline" class="search-box">
+    <mat-label>Search for a quiz...</mat-label>
+    <input matInput type="text" [(ngModel)]="searchQuery" (input)="filterQuizzes()" placeholder="Enter quiz title...">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <!-- Quiz List -->
+  <div class="quiz-grid">
+    <div class="quiz-card" *ngFor="let quiz of filteredQuizzes">
+      <mat-card class="quiz-card-content">
+        <mat-card-header>
+          <mat-card-title>{{ quiz.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ quiz.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="takeQuiz(quiz.id)">
+            Start Quiz
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

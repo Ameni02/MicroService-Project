@@ -1,0 +1,36 @@
+<div class="quiz-container" *ngIf="quiz">
+  <h2>{{ quiz.title }}</h2>
+  <p>{{ quiz.description }}</p>
+
+  <!-- 🕒 Timer Display -->
+  <div class="timer" [ngClass]="{ 'warning': timeLeft <= 60, 'danger': timeLeft < 10 }">
+    ⏳ Temps restant : <strong>{{ displayTime }}</strong>
+  </div>
+
+  <!-- Stepper for Questions -->
+  <mat-horizontal-stepper #stepper linear>
+    <mat-step *ngFor="let question of quiz.questions; let i = index" [completed]="isAnswered(i)">
+      <ng-template matStepLabel>Question {{ i + 1 }}</ng-template>
+
+      <div class="question-content">
+        <h3>{{ question.text }}</h3>
+
+        <mat-radio-group (change)="selectAnswer(i, $event.value)">
+          <mat-radio-button *ngFor="let option of question.options" [value]="option.id">
+            {{ option.text }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="stepper-buttons">
+        <button mat-button matStepperPrevious *ngIf="i > 0">Précédent</button>
+        <button mat-button matStepperNext [disabled]="!isAnswered(i)" *ngIf="i < quiz.questions.length - 1">
+          Suivant
+        </button>
+        <button mat-raised-button color="primary" (click)="submitQuiz()" *ngIf="i === quiz.questions.length - 1">
+          Soumettre le Quiz
+        </button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

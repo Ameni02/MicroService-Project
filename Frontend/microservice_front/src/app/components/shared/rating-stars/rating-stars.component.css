@@ -1,0 +1,22 @@
+.rating-stars {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.rating-stars span {
+  color: #ddd;
+  font-size: 1.5rem;
+  cursor: default;
+}
+
+.rating-stars .filled {
+  color: #ffd700;
+}
+
+.rating-stars .editable {
+  cursor: pointer;
+}
+
+.rating-stars .editable:hover {
+  color: #ffd700;
+} 
