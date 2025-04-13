@@ -6,6 +6,9 @@ import com.esprit.annonces.Models.StatutAnnonce;
 import com.esprit.annonces.Repo.AnnonceRepo;
 import com.esprit.annonces.Repo.CategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -26,26 +29,21 @@ public class ServiceImplementation implements ServiceInterface {
 
 
     // CRUD Annonce
-    @Override
     public Annonce ajouterAnnonce(Annonce annonce) {
-        // Combine fields to analyze the full text
-        String fullText = annonce.getTitre() + " " + annonce.getDescription();
+        JwtAuthenticationToken authentication = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        Jwt jwt = (Jwt) authentication.getCredentials();
 
-        // Call moderation service to check if the annonce is bad
-        boolean isBad = moderationService.isBadAnnonce(fullText);
+        String email = jwt.getClaimAsString("email"); // Or "preferred_username", etc., depending on your Keycloak config
 
-        // If flagged as bad, reject the annonce
-        if (isBad) {
-            System.out.println("❌ Annonce rejected due to inappropriate content.");
-            return null; // Or throw an exception if you prefer
-        }
+        System.out.println("📧 Email from token: " + email);
 
-        // Set initial status to EN_ATTENTE (pending)
-        annonce.setStatut(StatutAnnonce.EN_ATTENTE);
+        // Optionally set it on your annonce
+        annonce.setEmail(email); // Only if you have this field
 
-        // Save and return the annonce
+        // Rest of your logic...
         return annonceRepository.save(annonce);
     }
+
 
 
     @Override
@@ -78,16 +76,19 @@ public class ServiceImplementation implements ServiceInterface {
             annonce.setStatut(StatutAnnonce.APPROUVEE);
             annonceRepository.save(annonce);
 
-            // Envoie d'email à l'utilisateur
-            String destinataire = annonce.getUser().getEmail(); // Assure-toi que l'utilisateur a un champ email
-            String sujet = "Annonce Validée";
-            String message = "Félicitations ! Votre annonce intitulée '" + annonce.getTitre() + "' a été validée.";
+            // Get current user's email from JWT token
+            JwtAuthenticationToken authentication = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+            Jwt jwt = (Jwt) authentication.getCredentials();
+            String email = jwt.getClaimAsString("email");
 
-            emailService.envoyerEmail(destinataire, sujet, message);
+            // Send email
+            String sujet = "Annonce Validée";
+            String message = "Félicitations ! Votre annonce '" + annonce.getTitre() + "' a été validée.";
+            emailService.envoyerEmail(email, sujet, message);
 
             return annonce;
         }
-        return null; // Retourner null ou gérer l'exception si l'annonce n'est pas trouvée
+        return null;
     }
 
 

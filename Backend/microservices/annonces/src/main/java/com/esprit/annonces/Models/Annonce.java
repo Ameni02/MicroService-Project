@@ -23,8 +23,9 @@ public class Annonce {
 
     @ManyToOne
     private Category category;
-    @ManyToOne(cascade = CascadeType.ALL) // or CascadeType.ALL
-    private User user;
+    @Column
+    private String email;
+
     @Enumerated(EnumType.STRING)
     private StatutAnnonce statut = StatutAnnonce.EN_ATTENTE; // Par défaut, l'annonce est en attente
 
@@ -76,11 +77,11 @@ public class Annonce {
         this.statut = statut;
     }
 
-    public User getUser() {
-        return user;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

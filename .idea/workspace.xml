@@ -5,28 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a496380-1332-4e77-8085-39bef1815ab8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Backend/config-server/src/main/resources/config/annonces.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/microservices/annonces/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Models/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Service/EmailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Service/ModerationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/config-server/src/main/resources/config/gateway.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/config-server/src/main/resources/config/gateway.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/AnnoncesApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/AnnoncesApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Controller/RestApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Controller/RestApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Models/Annonce.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Models/Annonce.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Models/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Models/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Repo/AnnonceRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Repo/AnnonceRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Service/ServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Service/ServiceImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,46 +58,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.Backend.annonce-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.Backend.keycloak: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.Backend: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.config-server/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.discussion-forum-service/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.eureka/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.feedbacks/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.gateway/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.config-server [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.config-server [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.eureka [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.feedbacks [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.gateway [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.AnnoncesApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.ConfigServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.DocumentsApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.EurekaApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.FeedbacksApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.GatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Merging main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zbira/OneDrive - ESPRIT/Bureau/microservice/MicroService-Project&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.Backend.annonce-service: Compose Deployment.executor": "Run",
+    "Docker.Backend.keycloak: Compose Deployment.executor": "Run",
+    "Docker.Backend: Compose Deployment.executor": "Run",
+    "Docker.config-server/Dockerfile.executor": "Run",
+    "Docker.discussion-forum-service/Dockerfile.executor": "Run",
+    "Docker.eureka/Dockerfile.executor": "Run",
+    "Docker.feedbacks/Dockerfile.executor": "Run",
+    "Docker.gateway/Dockerfile.executor": "Run",
+    "Maven.config-server [clean,install].executor": "Run",
+    "Maven.config-server [clean].executor": "Run",
+    "Maven.eureka [clean,install].executor": "Run",
+    "Maven.feedbacks [clean,install].executor": "Run",
+    "Maven.gateway [clean,install].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.AnnoncesApplication.executor": "Run",
+    "Spring Boot.ConfigServerApplication.executor": "Run",
+    "Spring Boot.DocumentsApplication.executor": "Run",
+    "Spring Boot.EurekaApplication.executor": "Run",
+    "Spring Boot.FeedbacksApplication.executor": "Run",
+    "Spring Boot.GatewayApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/zbira/OneDrive - ESPRIT/Bureau/microservice/MicroService-Project",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.configurations.included.in.services": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Spring Boot.FeedbacksApplication">
+}]]></component>
+  <component name="RunManager" selected="Spring Boot.AnnoncesApplication">
     <configuration name="AnnoncesApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="annonces" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.annonces.AnnoncesApplication" />
@@ -250,7 +231,8 @@
       <workItem from="1740514620528" duration="41000" />
       <workItem from="1743978717813" duration="8073000" />
       <workItem from="1744014088299" duration="3923000" />
-      <workItem from="1744030434631" duration="1300000" />
+      <workItem from="1744030434631" duration="2026000" />
+      <workItem from="1744113012551" duration="2908000" />
     </task>
     <servers />
   </component>

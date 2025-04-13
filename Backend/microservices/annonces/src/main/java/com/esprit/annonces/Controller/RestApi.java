@@ -5,7 +5,7 @@ import com.esprit.annonces.Models.Category;
 import com.esprit.annonces.Models.StatutAnnonce;
 import com.esprit.annonces.Service.ServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize; // For role-based access control
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("*") // Permet les requêtes CORS de n'importe quelle origine (utile pour Angular/React)
+@CrossOrigin("*")
 public class RestApi {
 
     @Autowired
@@ -22,37 +22,37 @@ public class RestApi {
     // ---------------- Annonces ----------------
 
     @PostMapping("/annonces")
-    @PreAuthorize("hasRole('ROLE_ADMIN')") // Only admin can create an annonce
+    @PreAuthorize("hasRole('client_user') or hasRole('client_admin')")
     public Annonce ajouterAnnonce(@RequestBody Annonce annonce) {
         return service.ajouterAnnonce(annonce);
     }
 
     @PutMapping("/annonces/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')") // Only admin can modify an annonce
+    @PreAuthorize("hasRole('client_admin')")
     public Annonce modifierAnnonce(@PathVariable Long id, @RequestBody Annonce annonce) {
         return service.modifierAnnonce(id, annonce);
     }
 
     @DeleteMapping("/annonces/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')") // Only admin can delete an annonce
+    @PreAuthorize("hasRole('client_admin')")
     public void supprimerAnnonce(@PathVariable Long id) {
         service.supprimerAnnonce(id);
     }
 
     @GetMapping("/annonces/{id}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')") // Both user and admin can view an annonce
+    @PreAuthorize("hasRole('client_user') or hasRole('client_admin')")
     public Optional<Annonce> obtenirAnnonceParId(@PathVariable Long id) {
         return service.obtenirAnnonceParId(id);
     }
 
     @PutMapping("/annonces/{id}/valider")
-    @PreAuthorize("hasRole('ROLE_ADMIN')") // Only admin can validate an annonce
+    @PreAuthorize("hasRole('client_admin')")
     public Annonce validerAnnonce(@PathVariable Long id) {
         return service.validerAnnonce(id);
     }
 
     @PutMapping("/annonces/{id}/rejeter")
-    @PreAuthorize("hasRole('ROLE_ADMIN')") // Only admin can reject an annonce
+    @PreAuthorize("hasRole('client_admin')")
     public Annonce rejeterAnnonce(@PathVariable Long id) {
         return service.rejeterAnnonce(id);
     }
@@ -60,38 +60,39 @@ public class RestApi {
     // ---------------- Categories ----------------
 
     @PostMapping("/categories")
-    @PreAuthorize("hasRole('ROLE_ADMIN')") // Only admin can create categories
+    @PreAuthorize("hasRole('client_admin')")
     public Category ajouterCategory(@RequestBody Category category) {
         return service.ajouterCategorie(category);
     }
 
     @PutMapping("/categories/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')") // Only admin can modify categories
+    @PreAuthorize("hasRole('client_admin')")
     public Category modifierCategory(@PathVariable Long id, @RequestBody Category category) {
         return service.modifierCategorie(id, category);
     }
 
     @DeleteMapping("/categories/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')") // Only admin can delete categories
+    @PreAuthorize("hasRole('client_admin')")
     public void supprimerCategory(@PathVariable Long id) {
         service.supprimerCategorie(id);
     }
 
     @GetMapping("/categories/{id}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')") // Both user and admin can view categories
+    @PreAuthorize("hasRole('client_user') or hasRole('client_admin')")
     public Optional<Category> obtenirCategoryParId(@PathVariable Long id) {
         return service.obtenirCategorieParId(id);
     }
 
     @GetMapping("/categories")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')") // Both user and admin can view all categories
+    @PreAuthorize("hasRole('client_user') or hasRole('client_admin')")
     public List<Category> obtenirToutesLesCategories() {
         return service.obtenirToutesLesCategories();
     }
 
     // ---------------- Recherche Annonces ----------------
+
     @GetMapping("/annonces/rechercher")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')") // Both user and admin can search annonces
+    @PreAuthorize("hasRole('client_user') or hasRole('client_admin')")
     public List<Annonce> rechercherAnnonces(
             @RequestParam(required = false) String titre,
             @RequestParam(required = false) Long categoryId,
@@ -100,15 +101,20 @@ public class RestApi {
     }
 
     @GetMapping("/annonces/aujourdhui")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')") // Both user and admin can see today's annonces
+    @PreAuthorize("hasRole('client_user') or hasRole('client_admin')")
     public List<Annonce> getAnnoncesAujourdhui() {
         return service.getAnnoncesAujourdhui();
     }
 
     @GetMapping("/annonces/semaines")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')") // Both user and admin can see this week's annonces
+    @PreAuthorize("hasRole('client_user') or hasRole('client_admin')")
     public List<Annonce> getAnnoncesCetteSemaine() {
         return service.getAnnoncesCetteSemaine();
     }
 
+    @GetMapping("/test")
+    @PreAuthorize("hasRole('client_admin')")
+    public String testAdmin() {
+        return "Admin access granted!";
+    }
 }

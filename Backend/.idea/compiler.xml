@@ -10,6 +10,15 @@
         <module name="eureka" />
         <module name="gateway" />
       </profile>
+      <profile name="Annotation profile for keycloack" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+        </processorPath>
+        <module name="keycloack" />
+      </profile>
       <profile name="Annotation profile for annonces" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -17,44 +26,25 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
-        <module name="evaluations" />
-        <module name="annonces" />
-        <module name="documents" />
         <module name="trainings" />
-<<<<<<< HEAD
-      </profile>
-      <profile name="Annotation profile for feedbacks" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-=======
->>>>>>> GestionAnnonce
         <module name="feedbacks" />
         <module name="payment" />
         <module name="planifications" />
+        <module name="evaluations" />
+        <module name="annonces" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="planification" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-<<<<<<< HEAD
-      <module name="config-server" options="-parameters" />
-=======
       <module name="annonces" options="-parameters" />
->>>>>>> GestionAnnonce
-      <module name="documents" options="-parameters" />
+      <module name="config-server" options="-parameters" />
       <module name="eureka" options="-parameters" />
       <module name="evaluations" options="-parameters" />
       <module name="feedbacks" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="keycloack" options="-parameters -Xlint:all" />
       <module name="payment" options="-parameters" />
-      <module name="planification" options="-parameters" />
       <module name="planifications" options="-parameters" />
       <module name="trainings" options="-parameters" />
     </option>

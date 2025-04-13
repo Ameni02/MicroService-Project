@@ -1,0 +1,518 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8062",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/categories/{id}": {
+      "get": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "obtenirCategoryParId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "modifierCategory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Category"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "supprimerCategory",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/annonces/{id}": {
+      "get": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "obtenirAnnonceParId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Annonce"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "modifierAnnonce",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Annonce"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Annonce"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "supprimerAnnonce",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/annonces/{id}/valider": {
+      "put": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "validerAnnonce",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Annonce"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/annonces/{id}/rejeter": {
+      "put": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "rejeterAnnonce",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Annonce"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/categories": {
+      "get": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "obtenirToutesLesCategories",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "ajouterCategory",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Category"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/annonces": {
+      "post": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "ajouterAnnonce",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Annonce"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Annonce"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/test": {
+      "get": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "testAdmin",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/annonces/semaines": {
+      "get": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "getAnnoncesCetteSemaine",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Annonce"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/annonces/rechercher": {
+      "get": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "rechercherAnnonces",
+        "parameters": [
+          {
+            "name": "titre",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "statut",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "EN_ATTENTE",
+                "APPROUVEE",
+                "REJETEE"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Annonce"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/annonces/aujourdhui": {
+      "get": {
+        "tags": [
+          "rest-api"
+        ],
+        "operationId": "getAnnoncesAujourdhui",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Annonce"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Annonce": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "titre": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "datePublication": {
+            "type": "string",
+            "format": "date"
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "email": {
+            "type": "string"
+          },
+          "statut": {
+            "type": "string",
+            "enum": [
+              "EN_ATTENTE",
+              "APPROUVEE",
+              "REJETEE"
+            ]
+          }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nom": {
+            "type": "string"
+          },
+          "annonces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Annonce"
+            }
+          }
+        }
+      }
+    }
+  }
+}
