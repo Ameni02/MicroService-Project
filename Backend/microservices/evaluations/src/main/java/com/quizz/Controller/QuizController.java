@@ -1,9 +1,9 @@
 package com.quizz.Controller;
 
-import com.quizz.quizz.Dto.AnswerSubmission;
-import com.quizz.quizz.Dto.QuizDto;
-import com.quizz.quizz.Dto.QuizDtoWithoutQuestions;
-import com.quizz.quizz.Dto.QuizWithIdDto;
+import com.quizz.Dto.AnswerSubmission;
+import com.quizz.Dto.QuizDto;
+import com.quizz.Dto.QuizDtoWithoutQuestions;
+import com.quizz.Dto.QuizWithIdDto;
 import com.quizz.Entity.Quiz;
 import com.quizz.Entity.QuizResult;
 import com.quizz.Service.QuizService;
