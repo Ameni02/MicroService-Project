@@ -10,19 +10,21 @@
         <module name="eureka" />
         <module name="gateway" />
       </profile>
-      <profile name="Annotation profile for annonces" enabled="true">
+      <profile name="Annotation profile for trainings" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
+        <module name="trainings" />
         <module name="annonces" />
-        <module name="feedbacks" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="documents" target="17" />
+      <module name="feedbacks" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -33,6 +35,7 @@
       <module name="eureka" options="-parameters" />
       <module name="feedbacks" options="-parameters" />
       <module name="gateway" options="-parameters" />
+      <module name="trainings" options="-parameters" />
     </option>
   </component>
 </project>
