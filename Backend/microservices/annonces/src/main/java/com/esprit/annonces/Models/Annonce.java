@@ -1,5 +1,6 @@
 package com.esprit.annonces.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
+
 public class Annonce {
 
     @Id
@@ -20,7 +22,7 @@ public class Annonce {
     private String titre;
     private String description;
     private LocalDate datePublication;
-
+    @JsonIgnore
     @ManyToOne
     private Category category;
     @Column

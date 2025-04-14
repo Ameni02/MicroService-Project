@@ -1,12 +1,17 @@
 /* login.component.css */
 .login-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #f5f7fa;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: #f5f7fa;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  z-index: 1;
 }
+
 
 .login-form {
   width: 100%;

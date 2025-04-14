@@ -1,50 +1,52 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-  <h2 class="login-title">Sign In</h2>
+<div class="login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <h2 class="login-title">Sign In</h2>
 
-  <div *ngIf="errorMessage" class="alert alert-danger">
-    {{ errorMessage }}
-  </div>
-
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input
-      type="text"
-      id="username"
-      formControlName="username"
-      class="form-control"
-      [ngClass]="{'is-invalid': loginForm.get('username')?.invalid && loginForm.get('username')?.touched}"
-      placeholder="Enter your username">
-    <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="invalid-feedback">
-      Username is required
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
     </div>
-  </div>
 
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input
-      type="password"
-      id="password"
-      formControlName="password"
-      class="form-control"
-      [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}"
-      placeholder="Enter your password">
-    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="invalid-feedback">
-      Password is required
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        formControlName="username"
+        class="form-control"
+        [ngClass]="{'is-invalid': loginForm.get('username')?.invalid && loginForm.get('username')?.touched}"
+        placeholder="Enter your username">
+      <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="invalid-feedback">
+        Username is required
+      </div>
     </div>
-  </div>
 
-  <button
-    type="submit"
-    class="btn btn-primary btn-block"
-    [disabled]="loginForm.invalid || isLoading">
-    <span *ngIf="!isLoading">Login</span>
-    <span *ngIf="isLoading">
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      Logging in...
-    </span>
-  </button>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        class="form-control"
+        [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}"
+        placeholder="Enter your password">
+      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="invalid-feedback">
+        Password is required
+      </div>
+    </div>
 
-  <div class="form-footer mt-3">
-    Don't have an account? <a routerLink="/register">Sign up</a>
-  </div>
-</form>
+    <button
+      type="submit"
+      class="btn btn-login"
+      [disabled]="loginForm.invalid || isLoading">
+      <span *ngIf="!isLoading">Login</span>
+      <span *ngIf="isLoading">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Logging in...
+      </span>
+    </button>
+
+    <div class="form-footer mt-3">
+      Don't have an account? <a routerLink="/register">Sign up</a>
+    </div>
+  </form>
+</div>

@@ -1,25 +1,90 @@
-<form [formGroup]="annonceForm" (ngSubmit)="onSubmit()">
-  <div class="mb-3">
-    <label for="title">Titre</label>
-    <input type="text" id="title" formControlName="title" class="form-control" required />
+<div class="container mt-4">
+  <h2 class="mb-4">Modifier une annonce</h2>
+
+  <div *ngIf="isLoading" class="alert alert-info">
+    Chargement en cours...
   </div>
 
-  <div class="mb-3">
-    <label for="description">Description</label>
-    <textarea id="description" formControlName="description" class="form-control" required rows="4"></textarea>
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
   </div>
 
-  <div class="mb-3">
-    <label for="categoryId">Catégorie</label>
-    <input type="number" id="categoryId" formControlName="categoryId" class="form-control" required />
-  </div>
+  <form [formGroup]="annonceForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+    <div class="form-group mb-3">
+      <label for="titre">Titre</label>
+      <input
+        type="text"
+        id="titre"
+        class="form-control"
+        formControlName="titre"
+        [ngClass]="{ 'is-invalid': annonceForm.get('titre')?.invalid && annonceForm.get('titre')?.touched }"
+      />
+      <div class="invalid-feedback" *ngIf="annonceForm.get('titre')?.invalid && annonceForm.get('titre')?.touched">
+        Le titre est requis.
+      </div>
+    </div>
 
-  <div class="mb-3">
-    <label for="price">Prix</label>
-    <input type="number" id="price" formControlName="price" class="form-control" required />
-  </div>
+    <div class="form-group mb-3">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        class="form-control"
+        formControlName="description"
+        rows="4"
+        [ngClass]="{ 'is-invalid': annonceForm.get('description')?.invalid && annonceForm.get('description')?.touched }"
+      ></textarea>
+      <div class="invalid-feedback" *ngIf="annonceForm.get('description')?.invalid && annonceForm.get('description')?.touched">
+        La description est requise.
+      </div>
+    </div>
 
-  <button type="submit" class="btn btn-primary" [disabled]="annonceForm.invalid || isLoading">
-    Créer
-  </button>
-</form>
+    <div class="form-group mb-3">
+      <label for="categoryId">Catégorie</label>
+      <select
+        id="categoryId"
+        class="form-select"
+        formControlName="categoryId"
+        [ngClass]="{ 'is-invalid': annonceForm.get('categoryId')?.invalid && annonceForm.get('categoryId')?.touched }"
+      >
+        <option value="" disabled>Sélectionnez une catégorie</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.nom }}
+        </option>
+      </select>
+      <div class="invalid-feedback" *ngIf="annonceForm.get('categoryId')?.invalid && annonceForm.get('categoryId')?.touched">
+        La catégorie est requise.
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        class="form-control"
+        formControlName="email"
+        [ngClass]="{ 'is-invalid': annonceForm.get('email')?.invalid && annonceForm.get('email')?.touched }"
+      />
+      <div class="invalid-feedback" *ngIf="annonceForm.get('email')?.invalid && annonceForm.get('email')?.touched">
+        Un email valide est requis.
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="statut">Statut</label>
+      <select id="statut" class="form-select" formControlName="statut">
+        <option value="">Choisir un statut</option>
+        <option value="EN_ATTENTE">En attente</option>
+        <option value="APPROUVEE">Approuvée</option>
+        <option value="REJETEE">Rejetée</option>
+      </select>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-primary" [disabled]="annonceForm.invalid || isLoading">
+        Enregistrer
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">Annuler</button>
+    </div>
+  </form>
+</div>

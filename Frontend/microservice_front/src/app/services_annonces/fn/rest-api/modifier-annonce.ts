@@ -23,13 +23,14 @@ export function modifierAnnonce(http: HttpClient, rootUrl: string, params: Modif
   }
 
   return http.request(
-    rb.build({ responseType: 'blob', accept: '*/*', context })
+    rb.build({ responseType: 'json', accept: 'application/json', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
       return r as StrictHttpResponse<Annonce>;
     })
   );
+
 }
 
 modifierAnnonce.PATH = '/api/annonces/{id}';

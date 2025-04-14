@@ -4,11 +4,11 @@
 
 import { Category } from '../models/category';
 export interface Annonce {
+  id: number;
   category?: Category;
   datePublication?: string;
   description?: string;
   email?: string;
-  id?: number;
   statut?: 'EN_ATTENTE' | 'APPROUVEE' | 'REJETEE';
   titre?: string;
 }

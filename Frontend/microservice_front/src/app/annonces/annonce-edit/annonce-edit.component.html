@@ -1,1 +1,84 @@
-<p>annonce-edit works!</p>
+<div class="container py-4">
+  <h2 class="text-center mb-4">Edit Announcement</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+    {{ errorMessage }}
+    <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+  </div>
+
+  <div *ngIf="isLoading && !currentAnnonce" class="text-center my-4">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p>Loading announcement data...</p>
+  </div>
+
+  <form *ngIf="currentAnnonce" [formGroup]="annonceForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" formControlName="titre"
+             [ngClass]="{ 'is-invalid': annonceForm.get('titre')?.invalid && (annonceForm.get('titre')?.dirty || annonceForm.get('titre')?.touched) }">
+      <div *ngIf="annonceForm.get('titre')?.invalid && (annonceForm.get('titre')?.dirty || annonceForm.get('titre')?.touched)"
+           class="invalid-feedback">
+        Title is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" rows="3" formControlName="description"
+                [ngClass]="{ 'is-invalid': annonceForm.get('description')?.invalid && (annonceForm.get('description')?.dirty || annonceForm.get('description')?.touched) }"></textarea>
+      <div *ngIf="annonceForm.get('description')?.invalid && (annonceForm.get('description')?.dirty || annonceForm.get('description')?.touched)"
+           class="invalid-feedback">
+        Description is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select class="form-select" id="category" formControlName="categoryId"
+              [ngClass]="{ 'is-invalid': annonceForm.get('categoryId')?.invalid && (annonceForm.get('categoryId')?.dirty || annonceForm.get('categoryId')?.touched) }">
+        <option value="">Select a category</option>
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.nom }}</option>
+      </select>
+      <div *ngIf="annonceForm.get('categoryId')?.invalid && (annonceForm.get('categoryId')?.dirty || annonceForm.get('categoryId')?.touched)"
+           class="invalid-feedback">
+        Category is required
+      </div>
+      <div *ngIf="categoryLoading" class="mt-2">
+        <div class="spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        Loading categories...
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Contact Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email"
+             [ngClass]="{ 'is-invalid': annonceForm.get('email')?.invalid && (annonceForm.get('email')?.dirty || annonceForm.get('email')?.touched) }">
+      <div *ngIf="annonceForm.get('email')?.invalid && (annonceForm.get('email')?.dirty || annonceForm.get('email')?.touched)"
+           class="invalid-feedback">
+        <div *ngIf="annonceForm.get('email')?.errors?.['required']">Email is required</div>
+        <div *ngIf="annonceForm.get('email')?.errors?.['email']">Please enter a valid email</div>
+      </div>
+    </div>
+
+    <div *ngIf="isAdmin" class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select class="form-select" id="status" formControlName="statut">
+        <option value="EN_ATTENTE">Pending</option>
+        <option value="APPROUVEE">Approved</option>
+        <option value="REJETEE">Rejected</option>
+      </select>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button type="button" class="btn btn-secondary me-md-2" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn btn-primary" [disabled]="annonceForm.invalid || isLoading">
+        <span *ngIf="!isLoading">Update Announcement</span>
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      </button>
+    </div>
+  </form>
+</div>

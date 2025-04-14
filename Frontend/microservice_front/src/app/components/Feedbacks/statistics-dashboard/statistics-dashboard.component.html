@@ -1,0 +1,47 @@
+<div class="statistics-dashboard">
+  <h2>Feedback Statistics</h2>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading statistics...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+    <button (click)="loadStatistics()" class="btn btn-primary">Retry</button>
+  </div>
+
+  <div *ngIf="!loading && !error" class="statistics-grid">
+    <div class="stat-card">
+      <div class="stat-value">{{ statistics.totalFeedbacks }}</div>
+      <div class="stat-label">Total Feedbacks</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-value">{{ statistics.activeFeedbacks }}</div>
+      <div class="stat-label">Active Feedbacks</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-value">{{ statistics.archivedFeedbacks }}</div>
+      <div class="stat-label">Archived Feedbacks</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-value">
+        <app-rating-stars [rating]="statistics.averageRating" [editable]="false"></app-rating-stars>
+      </div>
+      <div class="stat-label">Average Rating</div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !error" class="status-distribution">
+    <h3>Status Distribution</h3>
+    <div class="status-cards">
+      <div *ngFor="let status of Object.keys(statistics.statusCounts)" class="status-card">
+        <app-status-badge [status]="status"></app-status-badge>
+        <div class="status-count">{{ statistics.statusCounts[status] }}</div>
+      </div>
+    </div>
+  </div>
+</div> 

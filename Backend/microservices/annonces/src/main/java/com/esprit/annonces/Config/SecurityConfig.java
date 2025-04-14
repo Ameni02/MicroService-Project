@@ -9,6 +9,11 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableMethodSecurity
@@ -26,6 +31,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthConverter jwtAuthConverter) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
+                .cors() // ✅ ACTIVE CORS
+                .and()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/v3/api-docs/**",
@@ -38,6 +45,7 @@ public class SecurityConfig {
 
                         // -- YOUR OTHER ROUTES --
                         .requestMatchers("/api/annonces").hasAnyRole("client_user", "client_admin")
+                        .requestMatchers("/api/annonces/new").hasAnyRole("client_user", "client_admin")
                         .requestMatchers("/api/annonces/{id}").hasAnyRole("client_user", "client_admin")
                         .requestMatchers("/api/annonces/**").hasRole("client_admin")
 
@@ -61,5 +69,15 @@ public class SecurityConfig {
                 );
 
         return http.build();
+    }
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
+        configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }

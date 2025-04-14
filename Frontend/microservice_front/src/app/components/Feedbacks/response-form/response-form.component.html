@@ -1,0 +1,47 @@
+<div class="response-form">
+  <h3>Add Response</h3>
+
+  <form [formGroup]="responseForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="author">Author</label>
+      <input
+        type="text"
+        id="author"
+        formControlName="author"
+        [class.is-invalid]="responseForm.get('author')?.invalid && responseForm.get('author')?.touched"
+      >
+      <div class="invalid-feedback" *ngIf="responseForm.get('author')?.invalid && responseForm.get('author')?.touched">
+        <div *ngIf="responseForm.get('author')?.errors?.['required']">Author is required</div>
+        <div *ngIf="responseForm.get('author')?.errors?.['minlength']">Author must be at least 3 characters</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="content">Content</label>
+      <textarea
+        id="content"
+        formControlName="content"
+        rows="4"
+        [class.is-invalid]="responseForm.get('content')?.invalid && responseForm.get('content')?.touched"
+      ></textarea>
+      <div class="invalid-feedback" *ngIf="responseForm.get('content')?.invalid && responseForm.get('content')?.touched">
+        <div *ngIf="responseForm.get('content')?.errors?.['required']">Content is required</div>
+        <div *ngIf="responseForm.get('content')?.errors?.['minlength']">Content must be at least 10 characters</div>
+      </div>
+    </div>
+
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="resetForm()" [disabled]="loading">
+        Cancel
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="responseForm.invalid || loading">
+        <span *ngIf="loading" class="spinner"></span>
+        Submit
+      </button>
+    </div>
+  </form>
+</div> 

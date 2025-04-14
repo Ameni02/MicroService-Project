@@ -44,6 +44,7 @@ services:
       - "8063:8063"
     depends_on:
       - eureka
+      - config-server
       - gateway
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/

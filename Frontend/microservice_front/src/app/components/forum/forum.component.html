@@ -1,0 +1,41 @@
+<div class="forum-container">
+  <div class="container py-5">
+    <!-- Forum Header -->
+    <div class="row mb-4">
+      <div class="col-md-8">
+        <h1 class="fw-bold">Discussion Forum</h1>
+        <p class="text-muted">Join the conversation and share your thoughts with the community.</p>
+      </div>
+      <div class="col-md-4 text-end d-flex align-items-center justify-content-end">
+        <button class="btn btn-primary" (click)="toggleNewThreadForm()">
+          <i class="bi bi-plus-circle me-2"></i>New Thread
+        </button>
+      </div>
+    </div>
+
+    <!-- New Thread Form -->
+    <div class="card mb-4" *ngIf="showNewThreadForm">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0"><i class="bi bi-plus-circle me-2"></i>Create New Thread</h5>
+      </div>
+      <div class="card-body">
+        <app-thread-form (threadCreated)="onThreadCreated()" (cancel)="toggleNewThreadForm()"></app-thread-form>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Thread List -->
+      <div class="col-lg-12" *ngIf="!selectedThread">
+        <app-thread-list (threadSelected)="onThreadSelected($event)"></app-thread-list>
+      </div>
+
+      <!-- Thread Detail -->
+      <div class="col-lg-12" *ngIf="selectedThread">
+        <app-thread-detail
+          [thread]="selectedThread"
+          (back)="closeThreadDetails()">
+        </app-thread-detail>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="admin-layout">
+  <div class="admin-sidebar">
+    <div class="sidebar-header">
+      <h3>Admin Dashboard</h3>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li>
+          <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/feedbacks" routerLinkActive="active">
+            <i class="bi bi-chat-dots"></i> Feedbacks
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/annonces" routerLinkActive="active">
+            <i class="bi bi-tag"></i> Annonces
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/forum" routerLinkActive="active">
+            <i class="bi bi-chat-square-text"></i> Discussion Forum
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/users" routerLinkActive="active">
+            <i class="bi bi-people"></i> Users
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/settings" routerLinkActive="active">
+            <i class="bi bi-gear"></i> Settings
+          </a>
+        </li>
+        <li>
+          <a routerLink="/" class="back-to-site">
+            <i class="bi bi-box-arrow-left"></i> Back to Site
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="admin-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class RestApi {
 
     @Autowired
@@ -21,14 +21,18 @@ public class RestApi {
 
     // ---------------- Annonces ----------------
 
-    @PostMapping("/annonces")
+    @PostMapping("/annonces/new")
     @PreAuthorize("hasRole('client_user') or hasRole('client_admin')")
     public Annonce ajouterAnnonce(@RequestBody Annonce annonce) {
         return service.ajouterAnnonce(annonce);
     }
-
+    @GetMapping("/annonces")
+    @PreAuthorize("hasRole('client_admin')or hasRole('client_user')")
+    public List<Annonce> obtenirToutesLesAnnonces() {
+        return service.obtenirToutesLesAnnonces();
+    }
     @PutMapping("/annonces/{id}")
-    @PreAuthorize("hasRole('client_admin')")
+    @PreAuthorize(" hasRole('client_admin')")
     public Annonce modifierAnnonce(@PathVariable Long id, @RequestBody Annonce annonce) {
         return service.modifierAnnonce(id, annonce);
     }
@@ -40,7 +44,7 @@ public class RestApi {
     }
 
     @GetMapping("/annonces/{id}")
-    @PreAuthorize("hasRole('client_user') or hasRole('client_admin')")
+    @PreAuthorize("hasRole('client_admin')")
     public Optional<Annonce> obtenirAnnonceParId(@PathVariable Long id) {
         return service.obtenirAnnonceParId(id);
     }

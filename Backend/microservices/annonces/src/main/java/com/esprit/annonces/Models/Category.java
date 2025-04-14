@@ -1,5 +1,6 @@
 package com.esprit.annonces.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +20,7 @@ public class Category {
     private Long id;
 
     private String nom;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Annonce> annonces;
 

@@ -1,0 +1,50 @@
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-5">
+    <h1 class="display-5 fw-bold text-primary">Announcements</h1>
+    <button class="btn btn-outline-primary btn-lg shadow-sm" (click)="navigateToCreate()">
+      <i class="bi bi-plus-circle me-2"></i>Create New
+    </button>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger alert-dismissible fade show mb-4">
+    {{ error }}
+    <button type="button" class="btn-close" (click)="error = null"></button>
+  </div>
+
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-3">Loading announcements...</p>
+  </div>
+
+  <div *ngIf="!loading" class="row g-4">
+    <div *ngIf="annonces.length === 0" class="col-12">
+      <div class="card border-0 shadow-sm text-center p-5">
+        <i class="bi bi-megaphone text-muted" style="font-size: 3rem;"></i>
+        <h3 class="mt-3">No Approved Announcements</h3>
+        <p class="text-muted">Check back later or create one yourself.</p>
+        <button class="btn btn-outline-primary mt-3" (click)="navigateToCreate()">
+          <i class="bi bi-plus-circle me-2"></i>Create Announcement
+        </button>
+      </div>
+    </div>
+
+    <div *ngFor="let annonce of annonces" class="col-md-6 col-lg-4">
+      <div class="card h-100 border-0 shadow-lg rounded-4 hover-shadow transition">
+        <div class="card-body d-flex flex-column p-4">
+          <h4 class="card-title mb-2 text-primary">{{ annonce.titre || 'Untitled' }}</h4>
+          <p class="text-muted flex-grow-1 mb-3">
+            {{ annonce.description || 'No description provided' }}
+          </p>
+          <div class="d-flex justify-content-between align-items-center mt-auto small text-muted">
+            <span><i class="bi bi-calendar me-1"></i>{{ annonce.datePublication | date:'mediumDate' }}</span>
+            <span *ngIf="annonce.email" class="text-decoration-underline text-primary">
+              <i class="bi bi-envelope me-1"></i>Contact
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

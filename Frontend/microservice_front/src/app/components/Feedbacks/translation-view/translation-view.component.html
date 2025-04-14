@@ -1,0 +1,24 @@
+<div class="translation-view">
+  <h3>Translations</h3>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading translations...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+    <button (click)="loadTranslations()" class="btn btn-primary">Retry</button>
+  </div>
+
+  <div *ngIf="!loading && translations.length === 0" class="no-translations">
+    <p>No translations available.</p>
+  </div>
+
+  <div *ngIf="!loading && translations.length > 0" class="translations">
+    <div *ngFor="let translation of translations" class="translation-card">
+      <div class="language-badge">{{ translation.language }}</div>
+      <div class="translation-text">{{ translation.text }}</div>
+    </div>
+  </div>
+</div> 

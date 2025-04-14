@@ -1,0 +1,542 @@
+<div class="feedback-management-container">
+  <div class="header">
+    <h1>Feedback Management</h1>
+    <p>Manage all feedback, categories, and view reports in one place</p>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="tabs">
+    <div class="tab" [class.active]="activeTab === 'feedbacks'" (click)="setActiveTab('feedbacks')">
+      <i class="bi bi-chat-dots"></i> Active Feedbacks
+    </div>
+    <div class="tab" [class.active]="activeTab === 'archived'" (click)="setActiveTab('archived')">
+      <i class="bi bi-archive"></i> Archived Feedbacks
+    </div>
+    <div class="tab" [class.active]="activeTab === 'categories'" (click)="setActiveTab('categories')">
+      <i class="bi bi-tag"></i> Categories
+    </div>
+    <div class="tab" [class.active]="activeTab === 'reports'" (click)="setActiveTab('reports')">
+      <i class="bi bi-bar-chart"></i> Reports
+    </div>
+  </div>
+
+  <!-- Active Feedbacks Tab -->
+  <div class="tab-content" *ngIf="activeTab === 'feedbacks' && !showFeedbackDetail">
+    <div class="section-header">
+      <h2>Active Feedbacks</h2>
+      <div class="actions">
+        <button class="btn btn-primary" (click)="loadFeedbacks()">
+          <i class="bi bi-arrow-clockwise"></i> Refresh
+        </button>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+      <div class="search-input-group">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Search feedbacks..."
+          class="search-input"
+          (keyup.enter)="searchFeedbacks()"
+        >
+        <button class="btn btn-primary" (click)="searchFeedbacks()">
+          <i class="bi bi-search"></i> Search
+        </button>
+      </div>
+
+      <div class="search-filters">
+        <div class="filter-group">
+          <label>Status:</label>
+          <select [(ngModel)]="searchParams.status" class="form-control">
+            <option [ngValue]="undefined">All</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Rating:</label>
+          <select [(ngModel)]="searchParams.minRating" class="form-control">
+            <option [ngValue]="undefined">Any</option>
+            <option [ngValue]="1">1+</option>
+            <option [ngValue]="2">2+</option>
+            <option [ngValue]="3">3+</option>
+            <option [ngValue]="4">4+</option>
+            <option [ngValue]="5">5</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Category:</label>
+          <select [(ngModel)]="searchParams.categoryId" class="form-control">
+            <option [ngValue]="undefined">All</option>
+            <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+          </select>
+        </div>
+
+        <button class="btn btn-secondary" (click)="searchFeedbacks()">
+          <i class="bi bi-funnel"></i> Apply Filters
+        </button>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div *ngIf="totalPages > 1" class="pagination-container">
+      <button
+        class="btn btn-sm btn-outline"
+        [disabled]="currentPage === 0"
+        (click)="changePage(currentPage - 1)"
+      >
+        <i class="bi bi-chevron-left"></i> Previous
+      </button>
+
+      <span class="pagination-info">Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+
+      <button
+        class="btn btn-sm btn-outline"
+        [disabled]="currentPage === totalPages - 1"
+        (click)="changePage(currentPage + 1)"
+      >
+        Next <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+
+    <div *ngIf="feedbackLoading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading feedbacks...</p>
+    </div>
+
+    <div *ngIf="feedbackError" class="error-message">
+      {{ feedbackError }}
+    </div>
+
+    <div *ngIf="!feedbackLoading && !feedbackError && feedbacks.length === 0" class="empty-state">
+      <i class="bi bi-inbox"></i>
+      <p>No active feedbacks found</p>
+    </div>
+
+    <div *ngIf="!feedbackLoading && feedbacks.length > 0" class="feedback-grid">
+      <div *ngFor="let feedback of feedbacks" class="feedback-card">
+        <div class="card-header">
+          <h3>{{ feedback.isAnonymous ? 'Anonymous' : 'User' }}</h3>
+          <span class="badge" [ngClass]="'status-' + feedback.status.toLowerCase()">{{ feedback.status }}</span>
+        </div>
+        <div class="card-body">
+          <p class="feedback-comment">{{ feedback.comment | slice:0:100 }}{{ feedback.comment.length > 100 ? '...' : '' }}</p>
+          <div class="feedback-meta">
+            <div class="rating">
+              <span *ngFor="let star of [1,2,3,4,5]" [class.filled]="star <= feedback.rating">★</span>
+            </div>
+            <span class="date">{{ feedback.submissionDate | date:'short' }}</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary" (click)="viewFeedbackDetail(feedback.id)">
+            <i class="bi bi-eye"></i> View
+          </button>
+          <div class="status-actions">
+            <button class="btn btn-sm btn-outline" [class.active]="feedback.status === 'Pending'" (click)="updateFeedbackStatus(feedback.id, 'Pending')">
+              Pending
+            </button>
+            <button class="btn btn-sm btn-outline" [class.active]="feedback.status === 'In Progress'" (click)="updateFeedbackStatus(feedback.id, 'In Progress')">
+              In Progress
+            </button>
+            <button class="btn btn-sm btn-outline" [class.active]="feedback.status === 'Resolved'" (click)="updateFeedbackStatus(feedback.id, 'Resolved')">
+              Resolved
+            </button>
+            <button class="btn btn-sm btn-secondary" (click)="archiveFeedback(feedback.id)">
+              <i class="bi bi-archive"></i> Archive
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback Detail View -->
+  <div class="tab-content" *ngIf="activeTab === 'feedbacks' && showFeedbackDetail">
+    <div class="section-header">
+      <div class="back-nav">
+        <button class="btn btn-link" (click)="closeFeedbackDetail()">
+          <i class="bi bi-arrow-left"></i> Back to Feedbacks
+        </button>
+      </div>
+      <h2>Feedback Details</h2>
+    </div>
+
+    <div *ngIf="feedbackLoading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading feedback details...</p>
+    </div>
+
+    <div *ngIf="feedbackError" class="error-message">
+      {{ feedbackError }}
+    </div>
+
+    <div *ngIf="!feedbackLoading && selectedFeedback" class="feedback-detail-container">
+      <div class="detail-card">
+        <div class="detail-header">
+          <h3>{{ selectedFeedback.isAnonymous ? 'Anonymous' : 'User' }}</h3>
+          <span class="badge" [ngClass]="'status-' + selectedFeedback.status.toLowerCase()">{{ selectedFeedback.status }}</span>
+        </div>
+
+        <div class="detail-body">
+          <div class="detail-section">
+            <div class="detail-row">
+              <div class="detail-label">Submitted By:</div>
+              <div class="detail-value">{{ selectedFeedback.isAnonymous ? 'Anonymous' : 'User' }}</div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-label">Date:</div>
+              <div class="detail-value">{{ selectedFeedback.submissionDate | date:'medium' }}</div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-label">Category:</div>
+              <div class="detail-value">{{ selectedFeedback.category ? selectedFeedback.category.name : 'None' }}</div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-label">Rating:</div>
+              <div class="detail-value">
+                <div class="rating">
+                  <span *ngFor="let star of [1,2,3,4,5]" [class.filled]="star <= selectedFeedback.rating">★</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <h4>Feedback</h4>
+            <p class="feedback-full-comment">{{ selectedFeedback.comment }}</p>
+
+            <!-- Translation Section -->
+            <div class="translation-section">
+              <div class="translation-header">
+                <h5>Translation</h5>
+                <div class="translation-controls">
+                  <select [(ngModel)]="targetLanguage" class="form-control form-control-sm">
+                    <option value="en">English</option>
+                    <option value="fr">French</option>
+                    <option value="es">Spanish</option>
+                    <option value="de">German</option>
+                    <option value="it">Italian</option>
+                    <option value="ar">Arabic</option>
+                  </select>
+                  <button
+                    class="btn btn-sm btn-primary"
+                    (click)="translateFeedback()"
+                    [disabled]="translationLoading"
+                  >
+                    <i class="bi bi-translate"></i>
+                    <span *ngIf="!translationLoading">Translate</span>
+                    <span *ngIf="translationLoading" class="spinner-border spinner-border-sm"></span>
+                  </button>
+                </div>
+              </div>
+
+              <div *ngIf="translationError" class="error-message small">
+                {{ translationError }}
+              </div>
+
+              <div *ngIf="currentTranslation" class="translation-result">
+                <div class="translation-info">
+                  <span class="translation-language">{{ currentTranslation.sourceLanguage }} → {{ currentTranslation.targetLanguage }}</span>
+                </div>
+                <p class="translated-text">{{ currentTranslation.translatedText }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <h4>Status</h4>
+            <div class="status-actions detail-status-actions">
+              <button class="btn btn-outline" [class.active]="selectedFeedback.status === 'Pending'" (click)="updateFeedbackStatus(selectedFeedback.id, 'Pending')">
+                Pending
+              </button>
+              <button class="btn btn-outline" [class.active]="selectedFeedback.status === 'In Progress'" (click)="updateFeedbackStatus(selectedFeedback.id, 'In Progress')">
+                In Progress
+              </button>
+              <button class="btn btn-outline" [class.active]="selectedFeedback.status === 'Resolved'" (click)="updateFeedbackStatus(selectedFeedback.id, 'Resolved')">
+                Resolved
+              </button>
+              <button class="btn btn-secondary" (click)="archiveFeedback(selectedFeedback.id)">
+                <i class="bi bi-archive"></i> Archive
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Responses Section -->
+      <div class="responses-container">
+        <h3>Responses</h3>
+
+        <div *ngIf="feedbackResponses.length === 0" class="empty-state small">
+          <i class="bi bi-chat"></i>
+          <p>No responses yet</p>
+        </div>
+
+        <div *ngIf="feedbackResponses.length > 0" class="responses-list">
+          <div *ngFor="let response of feedbackResponses" class="response-item">
+            <div class="response-header">
+              <span class="response-author">Admin</span>
+              <span class="response-date">{{ response.responseDate | date:'medium' }}</span>
+            </div>
+            <p class="response-text">{{ response.responseText }}</p>
+          </div>
+        </div>
+
+        <!-- Add Response Form -->
+        <div class="response-form">
+          <h4>Add Response</h4>
+          <div class="form-group">
+            <textarea
+              [(ngModel)]="responseText"
+              class="form-control"
+              rows="4"
+              placeholder="Type your response here..."
+            ></textarea>
+          </div>
+          <button
+            class="btn btn-primary"
+            [disabled]="!responseText.trim() || submittingResponse"
+            (click)="submitResponse()"
+          >
+            <span *ngIf="submittingResponse" class="spinner-border spinner-border-sm mr-2"></span>
+            Submit Response
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Archived Feedbacks Tab -->
+  <div class="tab-content" *ngIf="activeTab === 'archived'">
+    <div class="section-header">
+      <h2>Archived Feedbacks</h2>
+      <div class="actions">
+        <button class="btn btn-primary" (click)="loadArchivedFeedbacks()">
+          <i class="bi bi-arrow-clockwise"></i> Refresh
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="feedbackLoading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading archived feedbacks...</p>
+    </div>
+
+    <div *ngIf="feedbackError" class="error-message">
+      {{ feedbackError }}
+    </div>
+
+    <div *ngIf="!feedbackLoading && !feedbackError && archivedFeedbacks.length === 0" class="empty-state">
+      <i class="bi bi-archive"></i>
+      <p>No archived feedbacks found</p>
+    </div>
+
+    <div *ngIf="!feedbackLoading && archivedFeedbacks.length > 0" class="feedback-grid">
+      <div *ngFor="let feedback of archivedFeedbacks" class="feedback-card archived">
+        <div class="card-header">
+          <h3>{{ feedback.isAnonymous ? 'Anonymous' : 'User' }}</h3>
+          <span class="badge status-archived">Archived</span>
+        </div>
+        <div class="card-body">
+          <p class="feedback-comment">{{ feedback.comment | slice:0:100 }}{{ feedback.comment.length > 100 ? '...' : '' }}</p>
+          <div class="feedback-meta">
+            <div class="rating">
+              <span *ngFor="let star of [1,2,3,4,5]" [class.filled]="star <= feedback.rating">★</span>
+            </div>
+            <span class="date">{{ feedback.submissionDate | date:'short' }}</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary" (click)="viewFeedbackDetail(feedback.id)">
+            <i class="bi bi-eye"></i> View
+          </button>
+          <button class="btn btn-secondary" (click)="unarchiveFeedback(feedback.id)">
+            <i class="bi bi-arrow-counterclockwise"></i> Unarchive
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Categories Tab -->
+  <div class="tab-content" *ngIf="activeTab === 'categories'">
+    <div class="section-header">
+      <h2>Feedback Categories</h2>
+      <div class="actions">
+        <button class="btn btn-primary" (click)="loadCategories()">
+          <i class="bi bi-arrow-clockwise"></i> Refresh
+        </button>
+      </div>
+    </div>
+
+    <div class="category-form">
+      <h3>Add New Category</h3>
+      <div class="form-group">
+        <label for="categoryName">Category Name</label>
+        <input type="text" id="categoryName" [(ngModel)]="newCategory.name" class="form-control" placeholder="Enter category name">
+      </div>
+      <div class="form-group">
+        <label for="categoryDescription">Description</label>
+        <textarea id="categoryDescription" [(ngModel)]="newCategory.description" class="form-control" placeholder="Enter category description"></textarea>
+      </div>
+      <button class="btn btn-primary" (click)="createCategory()" [disabled]="!newCategory.name || categoryLoading">
+        <i class="bi bi-plus-circle"></i> Add Category
+      </button>
+      <div *ngIf="categoryError" class="error-message mt-3">
+        {{ categoryError }}
+      </div>
+    </div>
+
+    <div *ngIf="categoryLoading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading categories...</p>
+    </div>
+
+    <div *ngIf="!categoryLoading && !categoryError && categories.length === 0" class="empty-state">
+      <i class="bi bi-tags"></i>
+      <p>No categories found</p>
+    </div>
+
+    <div *ngIf="!categoryLoading && categories.length > 0" class="category-list">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categories">
+            <td>{{ category.id }}</td>
+            <td>{{ category.name }}</td>
+            <td>{{ category.description || 'No description' }}</td>
+            <td>
+              <button class="btn btn-sm btn-danger" (click)="deleteCategory(category.id!)">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Reports Tab -->
+  <div class="tab-content" *ngIf="activeTab === 'reports'">
+    <div class="section-header">
+      <h2>Feedback Reports & Analytics</h2>
+      <div class="actions">
+        <button class="btn btn-primary" (click)="loadStats()">
+          <i class="bi bi-arrow-clockwise"></i> Refresh
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="statsLoading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading statistics...</p>
+    </div>
+
+    <div *ngIf="statsError" class="error-message">
+      {{ statsError }}
+    </div>
+
+    <div *ngIf="!statsLoading && !statsError" class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="bi bi-chat-dots"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Total Feedbacks</h3>
+          <div class="stat-value">{{ stats.total }}</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="bi bi-hourglass-split"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Pending</h3>
+          <div class="stat-value">{{ stats.pending }}</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="bi bi-check-circle"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Resolved</h3>
+          <div class="stat-value">{{ stats.resolved }}</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="bi bi-archive"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Archived</h3>
+          <div class="stat-value">{{ stats.archived }}</div>
+        </div>
+      </div>
+
+      <div class="stat-card wide">
+        <div class="stat-icon">
+          <i class="bi bi-star"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Average Rating</h3>
+          <div class="stat-value">
+            <div class="rating-display">
+              <span *ngFor="let star of [1,2,3,4,5]" [class.filled]="star <= (stats.averageRating || 0)">★</span>
+              <span class="rating-value">{{ (stats.averageRating || 0) | number:'1.1-1' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!statsLoading && !statsError && stats.statusCounts" class="status-distribution">
+      <h3>Status Distribution</h3>
+      <div class="status-chart">
+        <div *ngFor="let status of getStatusKeys()" class="status-bar">
+          <div class="status-label">{{ status }}</div>
+          <div class="bar-container">
+            <div class="bar" [style.width.%]="getStatusPercentage(status)" [ngClass]="'status-' + status.toLowerCase()">
+              {{ stats.statusCounts[status] }}
+            </div>
+          </div>
+          <div class="status-percentage">{{ getStatusPercentage(status) }}%</div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!statsLoading && !statsError && recentActivities.length > 0" class="recent-activities">
+      <h3>Recent Activities</h3>
+      <div class="activity-timeline">
+        <div *ngFor="let activity of recentActivities" class="activity-item">
+          <div class="activity-icon" [ngClass]="'activity-' + activity.type.toLowerCase()">
+            <i class="bi" [ngClass]="getActivityIcon(activity.type)"></i>
+          </div>
+          <div class="activity-content">
+            <div class="activity-time">{{ activity.timestamp | date:'medium' }}</div>
+            <div class="activity-description">{{ activity.description }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

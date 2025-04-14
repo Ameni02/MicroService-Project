@@ -1,0 +1,145 @@
+<div class="admin-dashboard">
+  <!-- Sidebar Navigation -->
+
+
+  <!-- Main Content Area -->
+  <main class="dashboard-main">
+    <!-- Top Header -->
+    <header class="dashboard-header">
+      <div class="header-search">
+        <input type="text" placeholder="Search...">
+        <i class="bi bi-search"></i>
+      </div>
+      <div class="header-actions">
+        <button class="btn-notification">
+          <i class="bi bi-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        <div class="admin-profile">
+          <img src="assets/img/admin-avatar.jpg" alt="Admin">
+          <span>Admin Name</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-content">
+      <!-- Quick Actions -->
+      <section class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-buttons">
+          <button (click)="handleQuickAction('newTraining')" class="btn-action">
+            <i class="bi bi-plus-circle"></i>
+            New Training
+          </button>
+          <button (click)="handleQuickAction('newEvent')" class="btn-action">
+            <i class="bi bi-calendar-plus"></i>
+            New Event
+          </button>
+          <button (click)="handleQuickAction('viewReports')" class="btn-action">
+            <i class="bi bi-file-earmark-text"></i>
+            View Reports
+          </button>
+          <button (click)="handleQuickAction('manageForum')" class="btn-action">
+            <i class="bi bi-chat-square-text"></i>
+            Manage Forum
+          </button>
+        </div>
+      </section>
+
+      <!-- Statistics Cards -->
+      <section class="statistics-grid">
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3>Users</h3>
+            <i class="bi bi-people"></i>
+          </div>
+          <div class="stat-numbers">
+            <div class="main-stat">{{statistics.users.total}}</div>
+            <div class="sub-stats">
+              <span>New: {{statistics.users.new}}</span>
+              <span>Active: {{statistics.users.active}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3>Trainings</h3>
+            <i class="bi bi-book"></i>
+          </div>
+          <div class="stat-numbers">
+            <div class="main-stat">{{statistics.trainings.total}}</div>
+            <div class="sub-stats">
+              <span>Active: {{statistics.trainings.active}}</span>
+              <span>Draft: {{statistics.trainings.draft}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3>Events</h3>
+            <i class="bi bi-calendar-event"></i>
+          </div>
+          <div class="stat-numbers">
+            <div class="main-stat">{{statistics.events.total}}</div>
+            <div class="sub-stats">
+              <span>Upcoming: {{statistics.events.upcoming}}</span>
+              <span>Past: {{statistics.events.past}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <h3>Feedbacks</h3>
+            <i class="bi bi-chat-dots"></i>
+          </div>
+          <div class="stat-numbers">
+            <div class="main-stat">{{statistics.feedbacks.total}}</div>
+            <div class="sub-stats">
+              <span>Pending: {{statistics.feedbacks.pending}}</span>
+              <span>Resolved: {{statistics.feedbacks.resolved}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card" (click)="navigateToSection('forum')" style="cursor: pointer;">
+          <div class="stat-header">
+            <h3>Discussion Forum</h3>
+            <i class="bi bi-chat-square-text"></i>
+          </div>
+          <div class="stat-numbers">
+            <div class="main-stat">{{statistics.forum.threads}}</div>
+            <div class="sub-stats">
+              <span>Replies: {{statistics.forum.replies}}</span>
+              <span>Locked: {{statistics.forum.locked}}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Activities -->
+      <section class="recent-activities">
+        <h2>Recent Activities</h2>
+        <div class="activity-list">
+          <div class="activity-item" *ngFor="let activity of recentActivities">
+            <div class="activity-icon" [ngClass]="activity.type">
+              <i class="bi" [ngClass]="{
+                'bi-person': activity.type === 'user',
+                'bi-book': activity.type === 'training',
+                'bi-chat': activity.type === 'feedback'
+              }"></i>
+            </div>
+            <div class="activity-details">
+              <h4>{{activity.type}}</h4>
+              <p>{{activity.description}}</p>
+              <span class="activity-time">{{activity.timestamp | date:'short'}}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>

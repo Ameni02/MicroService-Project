@@ -1,0 +1,205 @@
+<div class="feedback-list-container">
+  <div class="section-header">
+    <h2>Active Feedbacks</h2>
+    <div class="action-buttons">
+      <button class="btn btn-primary" (click)="createFeedback()">
+        <i class="bi bi-plus-circle"></i> New Feedback
+      </button>
+      <button class="btn btn-secondary" (click)="showAnonymousForm = true" [disabled]="showAnonymousForm">
+        <i class="bi bi-incognito"></i> Anonymous Feedback
+      </button>
+    </div>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <div class="search-input-group">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Search feedbacks..."
+        class="search-input"
+        (keyup.enter)="searchFeedbacks()"
+      >
+      <button class="btn btn-primary" (click)="searchFeedbacks()">
+        <i class="bi bi-search"></i> Search
+      </button>
+      <button class="btn btn-outline" (click)="toggleFilters()">
+        <i class="bi bi-funnel"></i> Filters
+      </button>
+    </div>
+
+    <!-- Filters -->
+    <div *ngIf="showFilters" class="search-filters">
+      <div class="filter-group">
+        <label>Status:</label>
+        <select [(ngModel)]="searchParams.status" class="form-control">
+          <option [ngValue]="undefined">All</option>
+          <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Min Rating:</label>
+        <select [(ngModel)]="searchParams.minRating" class="form-control">
+          <option [ngValue]="undefined">Any</option>
+          <option *ngFor="let rating of ratingOptions" [ngValue]="rating">{{ rating }}+</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Category:</label>
+        <select [(ngModel)]="searchParams.categoryId" class="form-control">
+          <option [ngValue]="undefined">All</option>
+          <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+        </select>
+      </div>
+
+      <div class="filter-actions">
+        <button class="btn btn-primary" (click)="searchFeedbacks()">
+          <i class="bi bi-funnel"></i> Apply Filters
+        </button>
+        <button class="btn btn-outline" (click)="resetFilters()">
+          <i class="bi bi-x-circle"></i> Reset
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div *ngIf="totalPages > 1" class="pagination-container">
+    <button
+      class="btn btn-sm btn-outline"
+      [disabled]="currentPage === 0"
+      (click)="changePage(currentPage - 1)"
+    >
+      <i class="bi bi-chevron-left"></i> Previous
+    </button>
+
+    <span class="pagination-info">Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+
+    <button
+      class="btn btn-sm btn-outline"
+      [disabled]="currentPage === totalPages - 1"
+      (click)="changePage(currentPage + 1)"
+    >
+      Next <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- Anonymous Feedback Form Modal -->
+  <div *ngIf="showAnonymousForm" class="anonymous-feedback-modal">
+    <div class="anonymous-feedback-form">
+      <div class="form-header">
+        <h3>Submit Anonymous Feedback</h3>
+        <p class="form-subtitle">Your feedback is valuable to us and will remain anonymous.</p>
+        <button class="close-btn" (click)="cancelAnonymousFeedback()">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+
+      <div class="form-body">
+        <div class="form-group">
+          <label for="category">Category:</label>
+          <select
+            id="category"
+            [(ngModel)]="anonymousFeedbackData.categoryId"
+            class="form-control"
+            [class.is-invalid]="!anonymousFeedbackData.categoryId && formSubmitted"
+          >
+            <option [ngValue]="null">Select a category</option>
+            <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+          </select>
+          <div *ngIf="!anonymousFeedbackData.categoryId && formSubmitted" class="invalid-feedback">
+            Please select a category
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="rating">Rating:</label>
+          <div class="rating-input">
+            <span *ngFor="let star of [1,2,3,4,5]"
+                  (click)="anonymousFeedbackData.rating = star"
+                  [class.active]="star <= anonymousFeedbackData.rating"
+                  [class.is-invalid]="anonymousFeedbackData.rating === 0 && formSubmitted">
+              ★
+            </span>
+          </div>
+          <div *ngIf="anonymousFeedbackData.rating === 0 && formSubmitted" class="invalid-feedback">
+            Please provide a rating
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="comment">Your Feedback:</label>
+          <textarea
+            id="comment"
+            [(ngModel)]="anonymousFeedbackData.comment"
+            rows="5"
+            placeholder="Please share your thoughts, suggestions, or concerns..."
+            [class.is-invalid]="!anonymousFeedbackData.comment && formSubmitted"
+          ></textarea>
+          <div *ngIf="!anonymousFeedbackData.comment && formSubmitted" class="invalid-feedback">
+            Please provide your feedback
+          </div>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button class="btn btn-secondary" (click)="cancelAnonymousFeedback()">
+          <i class="bi bi-x-circle"></i> Cancel
+        </button>
+        <button class="btn btn-primary" (click)="submitAnonymousFeedback()" [disabled]="loading">
+          <i class="bi bi-send"></i>
+          <span *ngIf="!loading">Submit Feedback</span>
+          <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
+        </button>
+      </div>
+
+      <div *ngIf="error" class="error-message">
+        <i class="bi bi-exclamation-triangle"></i> {{ error }}
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading feedbacks...</p>
+  </div>
+
+  <div *ngIf="error" class="error-container">
+    <div class="alert alert-danger">{{ error }}</div>
+    <button class="btn btn-primary" (click)="loadFeedbacks()">Try Again</button>
+  </div>
+
+  <div *ngIf="!loading && !error && activeFeedbacks.length === 0" class="no-feedbacks">
+    <p>No active feedbacks available.</p>
+  </div>
+
+  <div *ngIf="!loading && !error && activeFeedbacks.length > 0" class="feedbacks-grid">
+    <div *ngFor="let feedback of activeFeedbacks" class="feedback-card" (click)="viewFeedback(feedback.id)">
+      <div class="feedback-header">
+        <h3>{{ feedback.isAnonymous ? 'Anonymous' : 'User' }}</h3>
+        <span class="status-badge" [ngClass]="{
+          'status-open': feedback.status === 'OPEN',
+          'status-in-progress': feedback.status === 'IN_PROGRESS',
+          'status-resolved': feedback.status === 'RESOLVED'
+        }">
+          {{ feedback.status }}
+        </span>
+      </div>
+
+      <div class="feedback-content">
+        <p class="feedback-comment">{{ feedback.comment }}</p>
+        <div class="feedback-rating">
+          <span *ngFor="let star of [1,2,3,4,5]" [class.active]="star <= feedback.rating">★</span>
+        </div>
+      </div>
+
+      <div class="feedback-footer">
+        <span class="feedback-date">{{ feedback.submissionDate | date:'mediumDate' }}</span>
+        <span class="feedback-id">#{{ feedback.id }}</span>
+      </div>
+    </div>
+  </div>
+</div>

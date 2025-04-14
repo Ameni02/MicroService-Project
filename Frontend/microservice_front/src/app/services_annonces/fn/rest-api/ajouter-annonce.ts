@@ -30,4 +30,4 @@ export function ajouterAnnonce(http: HttpClient, rootUrl: string, params: Ajoute
   );
 }
 
-ajouterAnnonce.PATH = '/api/annonces';
+ajouterAnnonce.PATH = '/api/annonces/new';

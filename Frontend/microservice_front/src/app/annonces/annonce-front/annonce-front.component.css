@@ -1,0 +1,44 @@
+/* Add these styles to your component's CSS file */
+.hover-effect {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.badge {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35em 0.65em;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+  color: #212529 !important;
+}
+
+.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+.bg-secondary {
+  background-color: #6c757d !important;
+}

@@ -50,10 +50,17 @@ export class LoginComponent {
           const token = response.accessToken;
           if (token) {
             localStorage.setItem('auth_token', token);
-            console.log('Login successful, user roles:', this.jwtHelper.getUserRoles());
-            this.router.navigateByUrl(this.returnUrl);
+
+            // Redirect based on role
+            if (this.jwtHelper.isAdmin()) {
+              this.router.navigate(['/admin']);
+            } else {
+              // Check if there's a returnUrl, otherwise go to home
+              const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+              this.router.navigateByUrl(returnUrl);
+            }
           } else {
-            this.errorMessage = 'Aucun token reçu du serveur';
+            this.errorMessage = 'No token received from server';
           }
           this.isLoading = false;
         },
@@ -61,9 +68,9 @@ export class LoginComponent {
           console.error('Login failed:', err);
           this.isLoading = false;
           if (err.status === 401) {
-            this.errorMessage = 'Nom d\'utilisateur ou mot de passe incorrect';
+            this.errorMessage = 'Invalid username or password';
           } else {
-            this.errorMessage = err.error?.message || 'Échec de la connexion. Veuillez réessayer.';
+            this.errorMessage = err.error?.message || 'Login failed. Please try again.';
           }
         }
       });
