@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="feedbacks" />
+        <module name="evaluations" />
         <module name="annonces" />
         <module name="eureka" />
         <module name="gateway" />
@@ -32,6 +33,7 @@
       <module name="config-server" options="-parameters" />
       <module name="documents" options="-parameters" />
       <module name="eureka" options="-parameters" />
+      <module name="evaluations" options="-parameters" />
       <module name="feedbacks" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="keycloack" options="-parameters -Xlint:all" />

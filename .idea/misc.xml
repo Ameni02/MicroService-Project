@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/Backend/microservices/feedbacks/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/config-server/pom.xml" />
         <option value="$PROJECT_DIR$/Backend/keycloack/pom.xml" />
+        <option value="$PROJECT_DIR$/Backend/microservices/evaluations/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

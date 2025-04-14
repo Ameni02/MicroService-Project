@@ -1,7 +1,7 @@
 services:
   eureka:
     build: ./eureka
-    image:  medaminekalai/prj-back-eureka:latest
+    image: medaminekalai/prj-back-eureka:latest
     container_name: eureka-server
     ports:
       - "8761:8761"
@@ -23,7 +23,7 @@ services:
 
   gateway:
     build: ./gateway
-    image:  medaminekalai/prj-back-gateway:latest
+    image: medaminekalai/prj-back-gateway:latest
     container_name: gateway-service
     ports:
       - "8030:8030"
@@ -38,7 +38,7 @@ services:
 
   feedbacks-service:
     build: ./microservices/feedbacks
-    image:  medaminekalai/prj-back-feedbacks-service:latest
+    image: medaminekalai/prj-back-feedbacks-service:latest
     container_name: feedbacks-service
     ports:
       - "8063:8063"
@@ -66,6 +66,22 @@ services:
       - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
     networks:
       - microservices-network
+
+#  evaluations-service:
+#    image: medaminekalai/prj-back-evaluations-service:latest
+#    container_name: evaluation-service
+#    ports:
+#      - "8099:8099"
+#    depends_on:
+#      - eureka
+#      - config-server
+#      - gateway
+#    environment:
+#      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+#    networks:
+#      - microservices-network
+
+
   annonce-service:
     build: ./microservices/annonces
     image: medaminekalai/prj-back-annonce-service:latest
@@ -81,6 +97,7 @@ services:
       - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
     networks:
       - microservices-network
+
   keycloak-db:
     image: postgres:15
     container_name: keycloak-db
@@ -109,6 +126,35 @@ services:
       - keycloak-db
     ports:
       - "8080:8080"
+    networks:
+      - microservices-network
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.0
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - microservices-network
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.0
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
     networks:
       - microservices-network
 

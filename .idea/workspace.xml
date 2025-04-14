@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="3a496380-1332-4e77-8085-39bef1815ab8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/keycloack/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/keycloack/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/keycloack/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/keycloack/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/microservices/discussion-forum-service/models/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/discussion-forum-service/models/database.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/Services_groupe/forum.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/Services_groupe/forum.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/proxy.conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/proxy.conf.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +64,9 @@
   "keyToString": {
     "Docker.Backend.annonce-service: Compose Deployment.executor": "Run",
     "Docker.Backend.keycloak: Compose Deployment.executor": "Run",
+    "Docker.Backend.zookeeper: Compose Deployment.executor": "Run",
     "Docker.Backend: Compose Deployment.executor": "Run",
+    "Docker.blog-service/Dockerfile.executor": "Run",
     "Docker.config-server/Dockerfile.executor": "Run",
     "Docker.discussion-forum-service/Dockerfile.executor": "Run",
     "Docker.eureka/Dockerfile.executor": "Run",
@@ -87,7 +92,7 @@
     "Spring Boot.KeycloackApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/zbira/OneDrive - ESPRIT/Bureau/microservice/MicroService-Project",
+    "last_opened_file_path": "C:/Users/Dell/Desktop/MicroService-Project/Backend/config-server/src/main/resources/config",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -97,6 +102,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Dell\Desktop\MicroService-Project\Backend\config-server\src\main\resources\config" />
+    </key>
+  </component>
   <component name="RunManager" selected="Spring Boot.KeycloackApplication">
     <configuration name="AnnoncesApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="annonces" />
@@ -122,6 +132,13 @@
     <configuration name="EurekaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="eureka" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.microservice.eureka.EurekaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EvaluationsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="evaluations" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.microservice.evaluations.EvaluationsApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -168,6 +185,19 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="Backend.zookeeper: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="zookeeper" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="Backend/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -180,6 +210,15 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="blog-service/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="buildOnly" value="true" />
+          <option name="sourceFilePath" value="Backend/microservices/blog-service/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration name="config-server/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
@@ -188,29 +227,13 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="discussion-forum-service/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
-      <deployment type="dockerfile">
-        <settings>
-          <option name="sourceFilePath" value="Backend/microservices/discussion-forum-service/Dockerfile" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="feedbacks/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
-      <deployment type="dockerfile">
-        <settings>
-          <option name="sourceFilePath" value="Backend/microservices/feedbacks/Dockerfile" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Docker.Backend: Compose Deployment" />
+        <item itemvalue="Docker.blog-service/Dockerfile" />
+        <item itemvalue="Docker.Backend.zookeeper: Compose Deployment" />
         <item itemvalue="Docker.Backend.keycloak: Compose Deployment" />
         <item itemvalue="Docker.config-server/Dockerfile" />
-        <item itemvalue="Docker.discussion-forum-service/Dockerfile" />
-        <item itemvalue="Docker.feedbacks/Dockerfile" />
       </list>
     </recent_temporary>
   </component>
@@ -240,7 +263,7 @@
       <workItem from="1744014088299" duration="3923000" />
       <workItem from="1744030434631" duration="2026000" />
       <workItem from="1744113012551" duration="2908000" />
-      <workItem from="1744616696848" duration="345000" />
+      <workItem from="1744616696848" duration="7885000" />
     </task>
     <servers />
   </component>
