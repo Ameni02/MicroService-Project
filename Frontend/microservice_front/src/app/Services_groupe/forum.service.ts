@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ForumService {
-  private apiUrl = 'http://localhost:3000/forum/api';  // Add the full path
+  private apiUrl = '/forum/api/threads';
   private socket: Socket | null = null;
 
   // BehaviorSubjects for real-time updates
@@ -67,16 +67,15 @@ export class ForumService {
   }
 
   // Get all threads
-// Get all threads
   getAllThreads(): Observable<Thread[]> {
-    return this.http.get<Thread[]>(`${this.apiUrl}/threads`).pipe(
+    return this.http.get<Thread[]>(this.apiUrl).pipe(
       tap(threads => this.threadsSubject.next(threads))
     );
   }
 
-// Get thread by ID
+  // Get thread by ID
   getThreadById(id: number): Observable<Thread> {
-    return this.http.get<Thread>(`${this.apiUrl}/threads/${id}`).pipe(
+    return this.http.get<Thread>(`${this.apiUrl}/${id}`).pipe(
       tap(thread => this.currentThreadSubject.next(thread))
     );
   }

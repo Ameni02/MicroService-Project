@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3a496380-1332-4e77-8085-39bef1815ab8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Controller/RestApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/java/com/esprit/annonces/Controller/RestApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/annonces/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/microservices/discussion-forum-service/models/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/microservices/discussion-forum-service/models/database.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/microservice_front/src/app/Services_groupe/forum.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/microservice_front/src/app/Services_groupe/forum.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +84,7 @@
     "Spring Boot.EurekaApplication.executor": "Run",
     "Spring Boot.FeedbacksApplication.executor": "Run",
     "Spring Boot.GatewayApplication.executor": "Run",
+    "Spring Boot.KeycloackApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/zbira/OneDrive - ESPRIT/Bureau/microservice/MicroService-Project",
@@ -97,7 +97,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Spring Boot.AnnoncesApplication">
+  <component name="RunManager" selected="Spring Boot.KeycloackApplication">
     <configuration name="AnnoncesApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="annonces" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.annonces.AnnoncesApplication" />
@@ -136,6 +136,13 @@
     <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.esprit.microservice.gateway.GatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="KeycloackApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="keycloack" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.keycloack.KeycloackApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -233,6 +240,7 @@
       <workItem from="1744014088299" duration="3923000" />
       <workItem from="1744030434631" duration="2026000" />
       <workItem from="1744113012551" duration="2908000" />
+      <workItem from="1744616696848" duration="345000" />
     </task>
     <servers />
   </component>

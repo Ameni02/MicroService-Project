@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ForumService } from '../../../Services_groupe/forum.service';
+import { ForumService } from 'src/app/Services_groupe/forum.service';
 import { Thread } from '../../../models/thread.model';
 
 @Component({

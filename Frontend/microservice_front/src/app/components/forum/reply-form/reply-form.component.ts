@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ForumService } from '../../../Services_groupe/forum.service';
+import { ForumService } from 'src/app/Services_groupe/forum.service';
 import { Reply } from '../../../models/reply.model';
 
 @Component({
